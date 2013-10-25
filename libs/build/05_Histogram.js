@@ -35,7 +35,7 @@
 
 
                         var newYEnd = _ImIn.height;
-                        var newXEnd = _ImIn.width;
+                        var newXEnd = _ImIn.width<<2;
                         var newXinit = 0;
                         var newYinit = 0;
                         var xOff = 0;
@@ -54,9 +54,11 @@
 
 
 
-                        var k = 0;
+
 
                         if(_ImIn.nChannels==1){
+
+                            var k = 0;
 
                             while(k<newYEnd){ //PARA ALTO
 
@@ -67,12 +69,14 @@
                                 //var n1 = xOff<<2;
 
                                 while(n < newXEnd){ // PARA ANCHO
+                                    _Hist.maxBins[_Hist.bins[_ImIn.imageData[_y+n]]]+=1;
 
+                                    n+=4;
 
                                 }
-                                n+=4;
-
+                                k+=1;
                             }
+
                         }
 
                         if(_ImIn.nChannels==3){}

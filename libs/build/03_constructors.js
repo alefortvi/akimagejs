@@ -390,7 +390,7 @@
                  * */
 
 
-                _Akontext.AkCreateHist = function(_bins) {
+                _Akontext.AkCreateHist = function(_bins){
 
                     if (arguments.length!=1) {AKerrors[5]= true; AKLastError=5; throw "invalid number of arguments";return false;}
                     if (!(Object.prototype.toString.apply(_bins) === '[object Array]')) {AKerrors[19]= true; throw "In Histogram array expeted" AKLastError=19; return false;}
@@ -404,6 +404,8 @@
                     var _Histogram = (new Akimage.AkHistogram()).AkHistogram;
 
 
+
+
                     if(!multi){
 
                         if(_bins[1]<_bins[0])
@@ -414,6 +416,7 @@
 
 
                             _Histogram.bins[k] = k;
+
                         }
 
                     }
@@ -433,6 +436,7 @@
 
 
                                 _Histogram.bins[_i] = p;
+
                                 _i++;
                             }
 
