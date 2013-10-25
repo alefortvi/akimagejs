@@ -253,7 +253,9 @@ Akimage.namespace('Akimage.AImage');
 		};
 
 
-
+/*
+* AKHistogram
+* */
 
 
     Akimage.AkHistogram = function(){
@@ -655,6 +657,78 @@ Akimage.namespace('Akimage.AImage');
                 };
 
 
+
+
+
+                /**	 * @function {AkCreateHist} Create a ROI rectangle
+                 *
+                 **/
+                /**
+                 * 		@param {number} _xOffset X offset
+                 * 	@param {number} _yOffset X offset
+                 * 	@param {number} _Width X offset
+                 * 	@param {number} _Height X offset
+                 *      @return {AIROI}
+                 * */
+
+
+                _Akontext.AkCreateHist = function(_bins) {
+
+                    //if (arguments.length!=4) {AKerrors[5]= true; AKLastError=5; throw "invalid number of arguments";return false;}
+
+                    //if (_xOffset < 0 || _yOffset <0|| _Width <1|| _Height<1) {AKerrors[4]= true; AKLastError=4; throw "invalid value of argument" ;return false;}
+
+
+                   var multi = false;
+                   if(_bins[0][0] != undefined) {multi = true;}
+
+
+
+
+                    var _Histogram = (new Akimage.AkHistogram()).AkHistogram;
+
+
+                    if(!multi){
+
+                        if(_bins[1]<_bins[0]){
+                            return "error";
+                        }
+
+                        for(var k = _bins[0]; k<_bins[1];k++){
+
+
+                            _Histogram.bins[k] = k;
+                        }
+
+                    }
+
+
+
+                    if(multi){
+
+                        var _i = 0;
+
+                        for(var p= 0; p<_bins.length;p++){
+
+                            if(_bins[p][1]<_bins[p][0]){
+                                return "error";}
+
+                            for(var k = _bins[p][0]; k<_bins[p][1];k++){
+
+
+                                _Histogram.bins[_i] = p;
+                                _i++;
+                            }
+
+                        }
+
+                    }
+
+
+                    return (_Histogram);
+
+                };
+
 				})(this);
 
 
@@ -708,13 +782,13 @@ Akimage.namespace('Akimage.AImage');
 
             (function (_Akontext) {
 
-            /**	 * @function AkCreateHist set a ROI in the Akimage passed by arguments
+            /**	 * @function AkCalcHist set a ROI in the Akimage passed by arguments
 				 * @param {Akimage} ImageReference Object
                 * @param  {AROI} Region of interest
 			**/
 
 
-					_Akontext.AkCreateHist = function(_ImIn, _ROI) {
+					_Akontext.AkCalcHist = function(_ImIn, _ROI) {
 
                         _ImIn.roi = _ROI;
 

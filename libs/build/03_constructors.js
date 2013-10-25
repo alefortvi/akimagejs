@@ -392,13 +392,11 @@
 
                 _Akontext.AkCreateHist = function(_bins) {
 
-                    //if (arguments.length!=4) {AKerrors[5]= true; AKLastError=5; throw "invalid number of arguments";return false;}
-
-                    //if (_xOffset < 0 || _yOffset <0|| _Width <1|| _Height<1) {AKerrors[4]= true; AKLastError=4; throw "invalid value of argument" ;return false;}
-
+                    if (arguments.length!=1) {AKerrors[5]= true; AKLastError=5; throw "invalid number of arguments";return false;}
+                    if (!(Object.prototype.toString.apply(_bins) === '[object Array]')) {AKerrors[19]= true; throw "In Histogram array expeted" AKLastError=19; return false;}
 
                    var multi = false;
-                   if(bins[0][0] != undefined) multi = true;
+                   if(_bins[0][0] != undefined) {multi = true;}
 
 
 
@@ -408,9 +406,9 @@
 
                     if(!multi){
 
-                        if(_bins[1]<_bins[0]){
-                            return "error";
-                        }
+                        if(_bins[1]<_bins[0])
+                            {AKerrors[20]= true; AKLastError=20; throw "in Histogram invalid hight value is low than low value";return false;}
+
 
                         for(var k = _bins[0]; k<_bins[1];k++){
 
@@ -428,22 +426,19 @@
 
                         for(var p= 0; p<_bins.length;p++){
 
-                            if(_bins[p][1]<_bins[p][0]){
-                                return "error";}
+                            if(_bins[p][1]<_bins[p][0])
+                                {AKerrors[20]= true; AKLastError=20; throw "in Histogram invalid hight value is low than low value";return false;}
 
                             for(var k = _bins[p][0]; k<_bins[p][1];k++){
 
 
                                 _Histogram.bins[_i] = p;
+                                _i++;
                             }
 
                         }
 
                     }
-
-
-
-
 
 
                     return (_Histogram);
