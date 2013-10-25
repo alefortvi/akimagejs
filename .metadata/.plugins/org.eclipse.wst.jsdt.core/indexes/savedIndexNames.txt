@@ -1,0 +1,2 @@
+INDEX VERSION 1.122+C:\wamp\www\Dropbox\akimage\project\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2481996896.index
