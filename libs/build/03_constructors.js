@@ -378,7 +378,7 @@
 
 
 
-                /**	 * @function {AkCreateROI} Create a ROI rectangle
+                /**	 * @function {AkCreateHist} Create a ROI rectangle
                  *
                  **/
                 /**
@@ -390,22 +390,63 @@
                  * */
 
 
-                _Akontext.AkCreateHist = function(_xOffset,_yOffset, _Width, _Height) {
+                _Akontext.AkCreateHist = function(_bins) {
 
-                    if (arguments.length!=4) {AKerrors[5]= true; AKLastError=5; throw "invalid number of arguments";return false;}
+                    //if (arguments.length!=4) {AKerrors[5]= true; AKLastError=5; throw "invalid number of arguments";return false;}
 
-                    if (_xOffset < 0 || _yOffset <0|| _Width <1|| _Height<1) {AKerrors[4]= true; AKLastError=4; throw "invalid value of argument" ;return false;}
+                    //if (_xOffset < 0 || _yOffset <0|| _Width <1|| _Height<1) {AKerrors[4]= true; AKLastError=4; throw "invalid value of argument" ;return false;}
+
+
+                   var multi = false;
+                   if(bins[0][0] != undefined) multi = true;
 
 
 
-                    var _AROI = (new Akimage.AIROI).AIROI;
 
-                    _AROI.xOffset = _xOffset;
-                    _AROI.yOffset = _yOffset;
-                    _AROI.width = _Width;
-                    _AROI.height = _Height;
+                    var _Histogram = (new Akimage.AkHistogram()).AkHistogram;
 
-                    return (_AROI);
+
+                    if(!multi){
+
+                        if(_bins[1]<_bins[0]){
+                            return "error";
+                        }
+
+                        for(var k = _bins[0]; k<_bins[1];k++){
+
+
+                            _Histogram.bins[k] = k;
+                        }
+
+                    }
+
+
+
+                    if(multi){
+
+                        var _i = 0;
+
+                        for(var p= 0; p<_bins.length;p++){
+
+                            if(_bins[p][1]<_bins[p][0]){
+                                return "error";}
+
+                            for(var k = _bins[p][0]; k<_bins[p][1];k++){
+
+
+                                _Histogram.bins[_i] = p;
+                            }
+
+                        }
+
+                    }
+
+
+
+
+
+
+                    return (_Histogram);
 
                 };
 

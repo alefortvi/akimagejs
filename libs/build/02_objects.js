@@ -142,7 +142,9 @@ Akimage.namespace('Akimage.AImage');
 		};
 
 
-
+/*
+* AKHistogram
+* */
 
 
     Akimage.AkHistogram = function(){
