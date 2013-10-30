@@ -621,7 +621,6 @@ Akimage.namespace('Akimage.Modules');
 	
 	var imageHeight = _ImE.height,
 	imageWidth = _ImE.width;
-    
 
 
 	// Creo el objeto Akimage
@@ -1071,7 +1070,7 @@ Akimage.namespace('Akimage.Modules');
 		//Magic magic
 		_AKcanvasNew.getContext("2d").drawImage(_AKcanvasOld,0,0,max,max);
 		
-		var _newTempData = new Uint8ClampedArray(H*H);
+		var _newTempData;// = new Uint8ClampedArray(H*H);
 		
 		_newTempData =_AKcanvasNew.getContext('2d').getImageData(0, 0, max,max).data;
 		

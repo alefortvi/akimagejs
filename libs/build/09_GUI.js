@@ -3,8 +3,9 @@
 				/**
 				 * 	   @GUI
 				 */
-				/**	 * AkLoadOnCanvas
-					 * @param {AkAImage}{AImageRefence} AImage reference,Canvas object reference
+				/**	 * @function AkLoadOnCanvas: Load on a CANVAS element the Akimage object
+					 * @param {Akimage} AImageRefence: Akimage reference,Canvas object reference
+                     * @param {HTMLCANVAS} AkAImage: Html Canvas object Reference
 					 *
 					 *
 					 * @return Canvas father reference object
@@ -338,5 +339,9 @@
 					};
 
 
-			})(this);
+
+
+
+
+            })(this);
 

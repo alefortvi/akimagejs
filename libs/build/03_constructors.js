@@ -393,7 +393,7 @@
                 _Akontext.AkCreateHist = function(_bins){
 
                     if (arguments.length!=1) {AKerrors[5]= true; AKLastError=5; throw "invalid number of arguments";return false;}
-                    if (!(Object.prototype.toString.apply(_bins) === '[object Array]')) {AKerrors[19]= true; throw "In Histogram array expeted" AKLastError=19; return false;}
+                    if (!(Object.prototype.toString.apply(_bins) === '[object Array]')) {AKerrors[19]= true; throw "In Histogram array expeted"; AKLastError=19; return false;}
 
                    var multi = false;
                    if(_bins[0][0] != undefined) {multi = true;}

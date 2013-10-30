@@ -74,6 +74,20 @@
         _Akontext.HSV2RGB = 55;
 
 
+
+
+        /*
+         * Constants AkHistogram
+         * */
+
+        _Akontext.HIST_IND = 1;
+        _Akontext.HIST_ALLIN1 = 0;
+
+        _Akontext.HIST_RED = 1;
+        _Akontext.HIST_GREEN = 2;
+        _Akontext.HIST_BLUE = 4;
+
+
     })(this);
 
 
