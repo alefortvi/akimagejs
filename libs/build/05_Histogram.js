@@ -196,13 +196,13 @@
 
 
                 /**	 * @function AkHist2Akimage: Prepair the Histogram to be showed in a Akimage Object
-                 * @param {Akimage} AImageRefence: Akimage reference,Canvas object reference
-                 * @param {HTMLCANVAS} AkAImage: Html Canvas object Reference
-                 * @param {number} _height: Html Canvas object Reference
-                 * @param {number} _width: Html Canvas object Reference
+                 * @param {AkHistogram} AkHist Akimage reference,Canvas object reference
+                 * @param {number} _channels Html Canvas object Reference
+                 * @param {number} _height Html Canvas object Reference
+                 * @param {number} _width Html Canvas object Reference
                  *
                  *
-                 * @return Canvas father reference object
+                 * @return Akimage object with a AkHistogram
                  **/
 
 
@@ -213,7 +213,6 @@
                     /**
                      *
                      * TODO
-                     * configurar altura y ancho
                      * configurar fill
                      //lista de colores
                      // flag de acumulacion
@@ -237,6 +236,11 @@
                     var c1=0;
                     var c2=1;
 
+                    /*
+                     * preparo las constantes para acumular
+                     *
+                     * */
+
                     switch (_channels){
                         case (1):c1 = 0;break;
                         case (2):c1 = 1;break;
@@ -247,7 +251,14 @@
                     };
 
 
+
+                    /*
+                     * acumulo
+                     *
+                     * */
+
                     switch (_channels){
+                        // R,G,B
                         case (1):case (2):case (4):
 
                             var k = AkHist.maxBins[c1].length;
@@ -261,6 +272,7 @@
 
                             break;
 
+                        //Para 2 canales RG,RB,GB
                         case (3):case (5):case (6):
 
                             var k = AkHist.maxBins[c1].length;
@@ -278,7 +290,7 @@
 
                             break;
 
-
+                        //RGB
                         case (7):
 
 
@@ -301,15 +313,68 @@
 
                     }
 
+                    /*
+                    * pinto las barras
+                    *
+                    * */
 
 
+                    /*
+                    switch (_channels){
+                        // R,G,B
+                        case (1):case (2):case (4):
+
+                        var k = AkHist.maxBins[c1].length;
+
+                        do{
+                            k-=1;
+                            //
+
+                        }while(k);
+
+                        break;
+
+                        //Para 2 canales RG,RB,GB
+                        case (3):case (5):case (6):
+
+                        var k = AkHist.maxBins[c1].length;
+
+                        do{
+                            k-=1;
+                            //
+
+
+                        }while(k);
+
+
+                        break;
+
+                        //RGB
+                        case (7):
+
+
+                            var k = AkHist.maxBins[0].length;
+
+                            do{
+                                k-=1;
+                                //
+
+
+                            }while(k);
+
+                            break;
+
+
+                    }
+
+*/
 
                     var _Q = (_height / fullMax);
 
                     var k = AkHist.maxBins[0].length;
                     var ancho = AkHist.maxBins[0].length;
 
-                    var ImS = AkCreateImage([k,_height],8,3);
+                    var ImS = AkCreateImage([k,_height],8,1);
 
                     do{
 
@@ -319,17 +384,16 @@
                         ImS.imageData[((_h*ancho)<<2) + (k<<2)] = 255;
                         //ImS.imageData[((_h*ancho)<<2) + (k<<2)+1] = 255;
                         //ImS.imageData[((_h*ancho)<<2) + (k<<2)+2] = 255;
-                        //ImS.imageData[((_h*ancho)<<2) + (k<<2)+3] = 255;
+                        ImS.imageData[((_h*ancho)<<2) + (k<<2)+3] = 255;
 
 
 
                     }while(k);
 
 
-                    return ImS;
 
-                    var _temp = new Uint8ClampedArray((ancho*_height)<<2);
-                    _temp.set(ImS.imageData);
+
+
 
                     //hasta aca el histograma tiene el ancho del Maxbines
 
@@ -341,68 +405,29 @@
                     var _AKcanvasNew = document.createElement("CANVAS");
 
 
-
-                    _AKcanvasNew.width = ancho;
-                    _AKcanvasNew.height = _height;
-
-                    // pongo el contenido en un canvas
-                    var objImageData= (_AKcanvasOld.getContext("2d")).createImageData(ancho,_height);
-
-
-                    (objImageData.data).set(_temp);
-
-
-                    (_AKcanvasOld.getContext("2d")).putImageData(objImageData,0,0);
-
-
-                    //_AKcanvasOld.getContext('2d').putImageData(objImageData, 0, 0);
-
-
-                    var ImS = AkCreateImage([ancho,_height],8,1);
-
-
-                    ImS.imageData.set(_AKcanvasNew.getContext("2d").getImageData(0, 0, ancho,_height).data);
-
-                    return ImS;
-
                     _AKcanvasNew.width = _width;
                     _AKcanvasNew.height = _height;
 
-                    //ImS.imageData.set(_AKcanvasOld.getContext('2d').getImageData(0, 0, _width,_height).data);
+                    _AKcanvasOld.width = ancho;
+                    _AKcanvasOld.height = _height;
 
-                    //extraigo imagen
+                    var objImageData= _AKcanvasOld.getContext('2d').createImageData(ancho, _height);
+
+                    objImageData.data.set(ImS.imageData);
+
+                    _AKcanvasOld.getContext('2d').putImageData(objImageData, 0, 0);
 
                     _AKcanvasNew.getContext("2d").drawImage(_AKcanvasOld,0,0,_width,_height);
 
-                    var ImS = AkCreateImage([_width,_height],8,1);
+                    _AKcanvasNew.getContext("2d").rotate(0.7);
 
-                    ImS.imageData = _AKcanvasNew.getContext('2d').getImageData(0, 0, _width,_height).data;
+                    var ImS_ = AkCreateImage([_height,_width],8,1);
 
-
-
-                    /*
-                    *
-
-                     var objImageData= _AKcanvasOld.getContext('2d').createImageData(Math.sqrt(_AKernel.length), Math.sqrt(_AKernel.length));
-
-                     objImageData.data.set(_tempData);
-
-                     _AKcanvasOld.getContext('2d').putImageData(objImageData, 0, 0);
-
-                     _AKcanvasNew.width = max;
-                     _AKcanvasNew.height = max;
-
-                     //Magic magic
-                     _AKcanvasNew.getContext("2d").drawImage(_AKcanvasOld,0,0,max,max);
-
-                     var _newTempData;// = new Uint8ClampedArray(H*H);
-
-                     _newTempData =_AKcanvasNew.getContext('2d').getImageData(0, 0, max,max).data;
-                    * */
+                    ImS_.imageData =_AKcanvasNew.getContext('2d').getImageData(0, 0, _height,_width).data;
 
 
 
-                    return ImS;
+                    return ImS_;
 
 
 
