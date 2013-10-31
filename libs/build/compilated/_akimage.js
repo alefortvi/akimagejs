@@ -1105,18 +1105,43 @@ Akimage.namespace('Akimage.AImage');
                     * */
 
 
-                    /*
+
                     switch (_channels){
                         // R,G,B
                         case (1):case (2):case (4):
 
-                        var k = AkHist.maxBins[c1].length;
+                        var _Q = (_height / fullMax);
 
-                        do{
-                            k-=1;
-                            //
+                        var ancho = AkHist.maxBins[0].length;
 
-                        }while(k);
+                        var ImS = AkCreateImage([_height,ancho],8,1);
+
+
+                       //var k = AkHist.maxBins[c1].length;
+
+                        var k =0;
+
+
+                        while(k<ancho){ //ALTO
+
+                            var _y = (k*_height)<<2;
+                            //var _y1 = (k1*_Owidth)<<2;
+
+                            var n = 0;
+                            //var n1 = xOff<<2;
+
+                            while(n < (AkHist.maxBins[c1][k]*_Q)){ // PARA ANCHO
+
+                                var p = n<<2;
+
+                                ImS.imageData[_y+(p)] = 255;
+                                ImS.imageData[_y+(p)+3] = 255;
+
+                                n++;
+
+                            }
+                            k+=1;
+                        }
 
                         break;
 
@@ -1153,8 +1178,9 @@ Akimage.namespace('Akimage.AImage');
 
                     }
 
-*/
+                    return ImS;
 
+/*
                     var _Q = (_height / fullMax);
 
                     var k = AkHist.maxBins[0].length;
@@ -1175,7 +1201,7 @@ Akimage.namespace('Akimage.AImage');
 
 
                     }while(k);
-
+*/
 
 
 
@@ -1205,9 +1231,6 @@ Akimage.namespace('Akimage.AImage');
 
                     _AKcanvasNew.getContext("2d").drawImage(_AKcanvasOld,0,0,_width,_height);
 
-                    _AKcanvasNew.getContext("2d").rotate(0.7);
-
-                    var ImS_ = AkCreateImage([_height,_width],8,1);
 
                     ImS_.imageData =_AKcanvasNew.getContext('2d').getImageData(0, 0, _height,_width).data;
 

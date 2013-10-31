@@ -200,6 +200,7 @@
                  * @param {number} _channels Html Canvas object Reference
                  * @param {number} _height Html Canvas object Reference
                  * @param {number} _width Html Canvas object Reference
+                 * @param {boolean} _fill Fill the histogram bar
                  *
                  *
                  * @return Akimage object with a AkHistogram
@@ -207,7 +208,7 @@
 
 
 
-                _Akontext.AkHist2Akimage = function(AkHist,_channels,_width,_height) {
+                _Akontext.AkHist2Akimage = function(AkHist,_channels,_width,_height,_fill) {
 
 
                     /**
@@ -319,18 +320,57 @@
                     * */
 
 
-                    /*
+
                     switch (_channels){
                         // R,G,B
                         case (1):case (2):case (4):
 
-                        var k = AkHist.maxBins[c1].length;
+                        var _Q = (_height / fullMax);
 
-                        do{
-                            k-=1;
-                            //
+                        var ancho = AkHist.maxBins[0].length;
 
-                        }while(k);
+                        var ImS = AkCreateImage([_height,ancho],8,1);
+
+
+                       //var k = AkHist.maxBins[c1].length;
+
+                        var k =0;
+
+
+                        while(k<ancho){ //ALTO
+
+                            var _y = (k*_height)<<2;
+                            //var _y1 = (k1*_Owidth)<<2;
+
+
+                            //var n1 = xOff<<2;
+
+                            if  (_fill){
+
+                                var n = 0;
+
+                                while(n < (AkHist.maxBins[c1][k]*_Q)^0){ // PARA ANCHO
+
+                                    var p = n<<2;
+
+                                    ImS.imageData[_y+(p)] = 255;
+                                    ImS.imageData[_y+(p)+3] = 255;
+
+                                    n++;
+
+                                }
+                            }
+
+                            if(!_fill){
+
+                                ImS.imageData[_y+((AkHist.maxBins[c1][k]*_Q)^0)<<2] = 255;
+                                ImS.imageData[_y+((AkHist.maxBins[c1][k]*_Q)^0)<<2] = 255;
+
+
+                            }
+
+                            k+=1;
+                        }
 
                         break;
 
@@ -367,8 +407,9 @@
 
                     }
 
-*/
+                    return ImS;
 
+/*
                     var _Q = (_height / fullMax);
 
                     var k = AkHist.maxBins[0].length;
@@ -389,7 +430,7 @@
 
 
                     }while(k);
-
+*/
 
 
 
@@ -419,9 +460,6 @@
 
                     _AKcanvasNew.getContext("2d").drawImage(_AKcanvasOld,0,0,_width,_height);
 
-                    _AKcanvasNew.getContext("2d").rotate(0.7);
-
-                    var ImS_ = AkCreateImage([_height,_width],8,1);
 
                     ImS_.imageData =_AKcanvasNew.getContext('2d').getImageData(0, 0, _height,_width).data;
 

@@ -20,7 +20,7 @@ var Ak4 = AkLoadImage(img,0);
 
 var H1 = AkCreateHist([0,256]);
 H1 = AkCalcHist(Ak4,H1,HIST_IND);
-Ak4 = AkHist2Akimage(H1,1,256,256);
+Ak4 = AkHist2Akimage(H1,1,256,256,true);
 AkLoadOnCanvas(Ak4,canvas1);
 
 
