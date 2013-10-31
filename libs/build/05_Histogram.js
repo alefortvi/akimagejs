@@ -330,7 +330,7 @@
 
                         var ancho = AkHist.maxBins[0].length;
 
-                        var ImS = AkCreateImage([_height,ancho],8,3);
+                        var ImS = AkCreateImage([ancho,_height],8,3);
 
 
                        //var k = AkHist.maxBins[c1].length;
