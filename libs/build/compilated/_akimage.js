@@ -986,6 +986,8 @@ Akimage.namespace('Akimage.AImage');
                  * @param {number} _channels Html Canvas object Reference
                  * @param {number} _height Html Canvas object Reference
                  * @param {number} _width Html Canvas object Reference
+                 * @param {boolean} _fill Fill the histogram bar
+                 * @param {array} _color 3x1 array with the color of the histogram bar
                  *
                  *
                  * @return Akimage object with a AkHistogram
@@ -993,7 +995,7 @@ Akimage.namespace('Akimage.AImage');
 
 
 
-                _Akontext.AkHist2Akimage = function(AkHist,_channels,_width,_height) {
+                _Akontext.AkHist2Akimage = function(AkHist,_channels,_width,_height,_fill,_color) {
 
 
                     /**
@@ -1030,10 +1032,10 @@ Akimage.namespace('Akimage.AImage');
                     switch (_channels){
                         case (1):c1 = 0;break;
                         case (2):c1 = 1;break;
-                        case (3):c1 = 0;c2 = 1;break;
+                       // case (3):c1 = 0;c2 = 1;break;
                         case (4):c1 = 2;break;
-                        case (5):c1 = 0;c2 = 2;break;
-                        case (6):c1 = 1;c2 = 2;break;
+                       // case (5):c1 = 0;c2 = 2;break;
+                        //case (6):c1 = 1;c2 = 2;break;
                     };
 
 
@@ -1058,7 +1060,7 @@ Akimage.namespace('Akimage.AImage');
 
                             break;
 
-                        //Para 2 canales RG,RB,GB
+             /*           //Para 2 canales RG,RB,GB
                         case (3):case (5):case (6):
 
                             var k = AkHist.maxBins[c1].length;
@@ -1096,7 +1098,7 @@ Akimage.namespace('Akimage.AImage');
 
                             break;
 
-
+*/
                     }
 
                     /*
@@ -1114,7 +1116,7 @@ Akimage.namespace('Akimage.AImage');
 
                         var ancho = AkHist.maxBins[0].length;
 
-                        var ImS = AkCreateImage([_height,ancho],8,1);
+                        var ImS = AkCreateImage([_height,ancho],8,3);
 
 
                        //var k = AkHist.maxBins[c1].length;
@@ -1127,35 +1129,118 @@ Akimage.namespace('Akimage.AImage');
                             var _y = (k*_height)<<2;
                             //var _y1 = (k1*_Owidth)<<2;
 
-                            var n = 0;
+
                             //var n1 = xOff<<2;
 
-                            while(n < (AkHist.maxBins[c1][k]*_Q)){ // PARA ANCHO
+                            if  (_fill){
 
-                                var p = n<<2;
+                                var n = 0;
 
-                                ImS.imageData[_y+(p)] = 255;
-                                ImS.imageData[_y+(p)+3] = 255;
+                                while(n < (AkHist.maxBins[c1][k]*_Q)^0){ // PARA ANCHO
 
-                                n++;
+                                    var p = n<<2;
+
+                                    ImS.imageData[_y+(p)] = _color[0];
+                                    ImS.imageData[_y+(p)+1] = _color[1];
+                                    ImS.imageData[_y+(p)+2] = _color[2];
+                                    //ImS.imageData[_y+(p)+3] = 255;
+
+                                    n++;
+
+                                }
+                            }
+
+                            if(!_fill){
+
+                                var n = (AkHist.maxBins[c1][k]*_Q)<<2;
+
+                                ImS.imageData[_y+n] = _color[0];
+                                ImS.imageData[_y+n+1] = _color[1];
+                                ImS.imageData[_y+n+2] = _color[2]
+                                //ImS.imageData[_y+n+3] = 255;
+
 
                             }
+
                             k+=1;
                         }
 
                         break;
 
+
+                        /*
                         //Para 2 canales RG,RB,GB
                         case (3):case (5):case (6):
 
-                        var k = AkHist.maxBins[c1].length;
+                        var _Q = (_height / fullMax);
 
-                        do{
-                            k-=1;
-                            //
+                        var ancho = AkHist.maxBins[0].length;
+
+                        var ImS = AkCreateImage([_height,ancho],8,3);
 
 
-                        }while(k);
+                        //var k = AkHist.maxBins[c1].length;
+
+                        var k =0;
+
+
+                        while(k<ancho){ //ALTO
+
+                            var _y = (k*_height)<<2;
+                            //var _y1 = (k1*_Owidth)<<2;
+
+
+                            //var n1 = xOff<<2;
+
+                            if  (_fill){
+
+                                var n = 0;
+
+
+                                var _may = ((AkHist.maxBins[c1][k]*_Q)^0);
+
+                                if(AkHist.maxBins[c2][k] >_may){
+                                    _may = (AkHist.maxBins[c2][k]*_Q)^0);
+                                };
+
+
+                                while(n < _may){ // PARA ANCHO
+
+                                    var p = n<<2;
+
+
+                                if(n<AkHist.maxBins[c2][k])
+
+                                    ImS.imageData[_y+(p)]   = _color[0][0];
+                                    ImS.imageData[_y+(p)+1] = _color[0][1];
+                                    ImS.imageData[_y+(p)+2] = _color[0][2];
+
+
+                                    ImS.imageData[_y+(p)]   = _color[1][0];
+                                    ImS.imageData[_y+(p)+1] = _color[1][1];
+                                    ImS.imageData[_y+(p)+2] = _color[1][2];
+
+                                    //ImS.imageData[_y+(p)+3] = 255;
+
+                                    n++;
+
+                                }
+                            }
+
+                            if(!_fill){
+
+                                var n = (AkHist.maxBins[c1][k]*_Q)<<2;
+
+                                ImS.imageData[_y+n] = _color[0][0];
+                                ImS.imageData[_y+n+1] = _color[0][1];
+                                ImS.imageData[_y+n+2] = _color[0][2]
+                                //ImS.imageData[_y+n+3] = 255;
+
+
+                            }
+
+                            k+=1;
+                        }
 
 
                         break;
@@ -1174,11 +1259,11 @@ Akimage.namespace('Akimage.AImage');
                             }while(k);
 
                             break;
-
+*/
 
                     }
 
-                    return ImS;
+
 
 /*
                     var _Q = (_height / fullMax);
@@ -1204,6 +1289,57 @@ Akimage.namespace('Akimage.AImage');
 */
 
 
+                    /**
+                     * enderezar
+                     */
+
+
+                    var ImS = AkCreateImage([ancho,_height],8,3);
+
+
+                    var k =0;
+
+
+                    while(k<ancho){ //ALTO
+
+                        var _y = (k*_height)<<2;
+                        //var _y1 = (k1*_Owidth)<<2;
+
+
+                        //var n1 = xOff<<2;
+
+                        if  (_fill){
+
+                            var n = 0;
+
+                            while(n < (AkHist.maxBins[c1][k]*_Q)^0){ // PARA ANCHO
+
+                                var p = n<<2;
+
+                                ImS.imageData[_y+(p)] = _color[0];
+                                ImS.imageData[_y+(p)+1] = _color[1];
+                                ImS.imageData[_y+(p)+2] = _color[2];
+                                //ImS.imageData[_y+(p)+3] = 255;
+
+                                n++;
+
+                            }
+                        }
+
+                        if(!_fill){
+
+                            var n = (AkHist.maxBins[c1][k]*_Q)<<2;
+
+                            ImS.imageData[_y+n] = _color[0];
+                            ImS.imageData[_y+n+1] = _color[1];
+                            ImS.imageData[_y+n+2] = _color[2]
+                            //ImS.imageData[_y+n+3] = 255;
+
+
+                        }
+
+                        k+=1;
+                    }
 
 
 
