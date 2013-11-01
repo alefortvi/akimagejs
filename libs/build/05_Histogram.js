@@ -335,226 +335,83 @@
 
                        //var k = AkHist.maxBins[c1].length;
 
-                        var k =0;
 
 
-                        while(k<ancho){ //ALTO
-
-                            var _y = (k*_height)<<2;
-                            //var _y1 = (k1*_Owidth)<<2;
-
-
-                            //var n1 = xOff<<2;
 
                             if  (_fill){
 
-                                var n = 0;
 
-                                while(n < (AkHist.maxBins[c1][k]*_Q)^0){ // PARA ANCHO
+                                var k =0;
 
-                                    var p = n<<2;
+                                while(k<ancho){ //ALTO
 
-                                    ImS.imageData[_y+(p)] = _color[0];
-                                    ImS.imageData[_y+(p)+1] = _color[1];
-                                    ImS.imageData[_y+(p)+2] = _color[2];
-                                    //ImS.imageData[_y+(p)+3] = 255;
 
-                                    n++;
+                                    //var _y = (k*_height)<<2;
+                                    var _esquina = (_height-1)*ancho<<2;
 
+                                    //var _y1 = (k1*_Owidth)<<2;
+
+
+                                    //var n1 = xOff<<2;
+
+                                    var n = 0;
+
+                                    var p = (k<<2);
+
+                                    var _max = (AkHist.maxBins[c1][k]*_Q)^0;
+
+                                    while(n < _max){ // PARA ANCHO
+
+
+                                        ImS.imageData[_esquina+p] = _color[0];
+                                        ImS.imageData[_esquina+p+1] = _color[1];
+                                        ImS.imageData[_esquina+p+2] = _color[2];
+
+
+                                        n++;
+                                        _esquina-=(ancho<<2);
+
+                                    }
+                                    k+=1;
                                 }
                             }
 
                             if(!_fill){
 
-                                var n = (AkHist.maxBins[c1][k]*_Q)<<2;
 
-                                ImS.imageData[_y+n] = _color[0];
-                                ImS.imageData[_y+n+1] = _color[1];
-                                ImS.imageData[_y+n+2] = _color[2]
-                                //ImS.imageData[_y+n+3] = 255;
+                                var p = AkHist.maxBins[0].length-1;
+                                var k = 0;
 
 
-                            }
+                                do{
 
-                            k+=1;
-                        }
+                                    var _h =  (_height - (AkHist.maxBins[c1][k] *_Q))^0;
 
-                        break;
-
-
-                        /*
-                        //Para 2 canales RG,RB,GB
-                        case (3):case (5):case (6):
-
-                        var _Q = (_height / fullMax);
-
-                        var ancho = AkHist.maxBins[0].length;
-
-                        var ImS = AkCreateImage([_height,ancho],8,3);
+                                    p--;
+                                    ImS.imageData[((_h*ancho)<<2) + (k<<2)] = 255;
+                                    //ImS.imageData[((_h*ancho)<<2) + (k<<2)+1] = 255;
+                                    //ImS.imageData[((_h*ancho)<<2) + (k<<2)+2] = 255;
+                                    ImS.imageData[((_h*ancho)<<2) + (k<<2)+3] = 255;
+                                    k++;
 
 
-                        //var k = AkHist.maxBins[c1].length;
-
-                        var k =0;
-
-
-                        while(k<ancho){ //ALTO
-
-                            var _y = (k*_height)<<2;
-                            //var _y1 = (k1*_Owidth)<<2;
-
-
-                            //var n1 = xOff<<2;
-
-                            if  (_fill){
-
-                                var n = 0;
-
-
-                                var _may = ((AkHist.maxBins[c1][k]*_Q)^0);
-
-                                if(AkHist.maxBins[c2][k] >_may){
-                                    _may = (AkHist.maxBins[c2][k]*_Q)^0);
-                                };
-
-
-                                while(n < _may){ // PARA ANCHO
-
-                                    var p = n<<2;
-
-
-                                if(n<AkHist.maxBins[c2][k])
-
-                                    ImS.imageData[_y+(p)]   = _color[0][0];
-                                    ImS.imageData[_y+(p)+1] = _color[0][1];
-                                    ImS.imageData[_y+(p)+2] = _color[0][2];
-
-
-                                    ImS.imageData[_y+(p)]   = _color[1][0];
-                                    ImS.imageData[_y+(p)+1] = _color[1][1];
-                                    ImS.imageData[_y+(p)+2] = _color[1][2];
-
-                                    //ImS.imageData[_y+(p)+3] = 255;
-
-                                    n++;
-
-                                }
-                            }
-
-                            if(!_fill){
-
-                                var n = (AkHist.maxBins[c1][k]*_Q)<<2;
-
-                                ImS.imageData[_y+n] = _color[0][0];
-                                ImS.imageData[_y+n+1] = _color[0][1];
-                                ImS.imageData[_y+n+2] = _color[0][2]
-                                //ImS.imageData[_y+n+3] = 255;
+                                }while(p);
 
 
                             }
 
-                            k+=1;
-                        }
 
 
                         break;
-
-                        //RGB
-                        case (7):
-
-
-                            var k = AkHist.maxBins[0].length;
-
-                            do{
-                                k-=1;
-                                //
-
-
-                            }while(k);
-
-                            break;
-*/
-
-                    }
-
-
-
-/*
-                    var _Q = (_height / fullMax);
-
-                    var k = AkHist.maxBins[0].length;
-                    var ancho = AkHist.maxBins[0].length;
-
-                    var ImS = AkCreateImage([k,_height],8,1);
-
-                    do{
-
-                        var _h =  (_height - (AkHist.maxBins[0][k] *_Q))^0;
-
-                        k--;
-                        ImS.imageData[((_h*ancho)<<2) + (k<<2)] = 255;
-                        //ImS.imageData[((_h*ancho)<<2) + (k<<2)+1] = 255;
-                        //ImS.imageData[((_h*ancho)<<2) + (k<<2)+2] = 255;
-                        ImS.imageData[((_h*ancho)<<2) + (k<<2)+3] = 255;
-
-
-
-                    }while(k);
-*/
-
-
-                    /**
-                     * enderezar
-                     */
-
-
-                    var ImS = AkCreateImage([ancho,_height],8,3);
-
-
-                    var k =0;
-
-
-                    while(k<ancho){ //ALTO
-
-                        var _y = (k*_height)<<2;
-                        //var _y1 = (k1*_Owidth)<<2;
-
-
-                        //var n1 = xOff<<2;
-
-                        if  (_fill){
-
-                            var n = 0;
-
-                            while(n < (AkHist.maxBins[c1][k]*_Q)^0){ // PARA ANCHO
-
-                                var p = n<<2;
-
-                                ImS.imageData[_y+(p)] = _color[0];
-                                ImS.imageData[_y+(p)+1] = _color[1];
-                                ImS.imageData[_y+(p)+2] = _color[2];
-                                //ImS.imageData[_y+(p)+3] = 255;
-
-                                n++;
-
-                            }
                         }
 
-                        if(!_fill){
-
-                            var n = (AkHist.maxBins[c1][k]*_Q)<<2;
-
-                            ImS.imageData[_y+n] = _color[0];
-                            ImS.imageData[_y+n+1] = _color[1];
-                            ImS.imageData[_y+n+2] = _color[2]
-                            //ImS.imageData[_y+n+3] = 255;
 
 
-                        }
 
-                        k+=1;
-                    }
 
+
+
+                    return ImS;
 
 
                     //hasta aca el histograma tiene el ancho del Maxbines

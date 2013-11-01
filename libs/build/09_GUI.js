@@ -4,8 +4,9 @@
 				 * 	   @GUI
 				 */
 				/**	 * @function AkLoadOnCanvas: Load on a CANVAS element the Akimage object
-					 * @param {Akimage} AImageRefence: Akimage reference,Canvas object reference
-                     * @param {HTMLCANVAS} AkAImage: Html Canvas object Reference
+                     * @param {Akimage} AkAImage Akimage reference
+					 * @param {CANVAS} CANVASReference Canvas object reference
+
 					 *
 					 *
 					 * @return Canvas father reference object
@@ -16,14 +17,14 @@
 			(function (_Akontext) {
 
 
-					_Akontext.AkLoadOnCanvas = function(AkAImage,AImageRefence) {
+					_Akontext.AkLoadOnCanvas = function(AkAImage,CANVASReference) {
 
-						if(!(AImageRefence.nodeName == "CANVAS" || document.getElementById(AImageRefence).nodeName == "CANVAS")){
+						if(!(CANVASReference.nodeName == "CANVAS" || document.getElementById(CANVASReference).nodeName == "CANVAS")){
 							{AKerrors[4]= true; AKLastError=4;return false;}
 						}
 
 						try{
-							if(document.getElementById(AImageRefence).nodeName == "CANVAS")AImageRefence = document.getElementById(AImageRefence);
+							if(document.getElementById(CANVASReference).nodeName == "CANVAS")CANVASReference = document.getElementById(CANVASReference);
 						}
 						catch(e){}
 
@@ -327,15 +328,15 @@
 
 
 
-						AImageRefence.width = AkAImage.width;
-						AImageRefence.height = AkAImage.height;
+						CANVASReference.width = AkAImage.width;
+						CANVASReference.height = AkAImage.height;
 
-						var objImageData= AImageRefence.getContext('2d').createImageData(AkAImage.width, AkAImage.height);
+						var objImageData= CANVASReference.getContext('2d').createImageData(AkAImage.width, AkAImage.height);
 
 						objImageData.data.set(_tempData);
-						 AImageRefence.getContext('2d').putImageData(objImageData, 0, 0);
+						 CANVASReference.getContext('2d').putImageData(objImageData, 0, 0);
 
-						return  AImageRefence;
+						return  CANVASReference;
 					};
 
 
