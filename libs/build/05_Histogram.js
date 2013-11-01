@@ -51,19 +51,20 @@
                         var xOff = 0;
 
 
-            /*
-                        if(AImageRefence.roi != null){
 
-                            ImS.imageData.set(AImageRefence.imageData);
-                            newYEnd = AImageRefence.roi.height+AImageRefence.roi.yOffset+_KernelWidth;
-                            newXEnd = AImageRefence.roi.width+AImageRefence.roi.xOffset+_KernelWidth<<2;
-                            newXinit = (AImageRefence.roi.xOffset+_KernelWidth)<<2;
-                            newYinit = AImageRefence.roi.yOffset+_KernelWidth;
-                            xOff = AImageRefence.roi.xOffset;
+                        if(_ImIn.roi != null){
+
+
+                            newYEnd = _ImIn.roi.height+_ImIn.roi.yOffset;
+                            newXEnd = (_ImIn.roi.width+_ImIn.roi.xOffset)<<2;
+                            newXinit = (_ImIn.roi.xOffset)<<2;
+                            newYinit = _ImIn.roi.yOffset;
+                            //xOff = AImageRefence.roi.xOffset;
+
 
 
                         }
-            */
+
 
 
                         _Hist.maxBins[0] = [];
@@ -80,7 +81,7 @@
 
                             }
 
-                            var k = 0;
+                            var k = newYinit;
 
                             while(k<newYEnd){ //PARA ALTO
 
