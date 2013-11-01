@@ -215,9 +215,8 @@
                     /**
                      *
                      * TODO
-                     * configurar fill
-                     //lista de colores
-                     // flag de acumulacion
+                    salidas rapidas
+
                      *
                      * */
 
@@ -388,10 +387,10 @@
                                     var _h =  (_height - (AkHist.maxBins[c1][k] *_Q))^0;
 
                                     p--;
-                                    ImS.imageData[((_h*ancho)<<2) + (k<<2)] = 255;
-                                    //ImS.imageData[((_h*ancho)<<2) + (k<<2)+1] = 255;
-                                    //ImS.imageData[((_h*ancho)<<2) + (k<<2)+2] = 255;
-                                    ImS.imageData[((_h*ancho)<<2) + (k<<2)+3] = 255;
+                                    ImS.imageData[((_h*ancho)<<2) + (k<<2)] = _color[0];
+                                    ImS.imageData[((_h*ancho)<<2) + (k<<2)+1] = _color[1];
+                                    ImS.imageData[((_h*ancho)<<2) + (k<<2)+2] = _color[2];
+                                    //ImS.imageData[((_h*ancho)<<2) + (k<<2)+3] = 255;
                                     k++;
 
 
