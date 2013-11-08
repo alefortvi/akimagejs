@@ -3,19 +3,58 @@
 				/**
 				 * 	   @GUI
 				 */
-				/**	 * @function AkLoadOnCanvas: Load on a CANVAS element the Akimage object
-                     * @param {Akimage} AkAImage Akimage reference
-					 * @param {CANVAS} CANVASReference Canvas object reference
 
-					 *
-					 *
-					 * @return Canvas father reference object
-				**/
 
 
 
 			(function (_Akontext) {
 
+
+                /**@function AkGet: Return a pixel value from the Akimage object
+
+                 * @param {Akimage} AkAImage Akimage reference
+                 * @param {number} _x X value
+                 * @param {number} _y Y value
+                 * @param {number} _c Channel value
+
+                 *
+                 * @return Return a pixel value from the Akimage object
+                 **/
+
+                _Akontext.AkGet = function(AkAImage,_x,_y,_c) {
+
+                    //if (arguments.length!=4){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
+                    //if(!AkAImage.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
+                    //if(_x<0 || _x > AkAImage.width){AKerrors[21]= true; AKLastError=21;throw "In AkGet arguments out of range"; return false;}
+                    //if(_y<0 || _y > AkAImage.height){AKerrors[21]= true; AKLastError=21;throw "In AkGet arguments out of range"; return false;}
+                    //if(_c<0 && _c > 4){AKerrors[21]= true; AKLastError=21;throw "In AkGet arguments out of range"; return false;}
+
+                    return (AkAImage.imageData[(((AkAImage.width * _y)+(_x))<<2)+_c])
+
+                };
+
+
+                /**	 * @function AkSet: Set a value to the pixel coordinate
+                 * @param {Akimage} AkAImage Akimage reference
+                 * @param {number} _x X value
+                 * @param {number} _y Y value
+                 * @param {number} _c Channel value
+                 * @param {number} _value Value to set
+
+                 *
+                 * @return Return a pixel value from the Akimage object
+                 **/
+
+                _Akontext.AkSet = function(AkAImage,_x,_y,_c,_value) {
+                    AkAImage.imageData[(((AkAImage.width * _y)+(_x))<<2)+_c] = _value;
+                };
+
+
+                    /**	 * @function AkLoadOnCanvas: Load on a CANVAS element the Akimage object
+                 * @param {Akimage} AkAImage Akimage reference
+                 * @param {CANVAS} CANVASReference Canvas object reference
+                 * @return Canvas father reference object
+                 **/
 
 					_Akontext.AkLoadOnCanvas = function(AkAImage,CANVASReference) {
 

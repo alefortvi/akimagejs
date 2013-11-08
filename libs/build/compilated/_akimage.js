@@ -681,7 +681,7 @@ Akimage.namespace('Akimage.AImage');
                  *
                  **/
                 /**
-                 * 		@param {number} _xOffset X offset
+                 *  @param {number} _xOffset X offset
                  * 	@param {number} _yOffset X offset
                  * 	@param {number} _Width X offset
                  * 	@param {number} _Height X offset
@@ -811,12 +811,11 @@ Akimage.namespace('Akimage.AImage');
 
 					_Akontext.AkCalcHist = function(_ImIn, _Hist,_Hcode) {
 
-                        /*
-                        *
-                        * TODO Salidas rapidas
-                        * ROI
-                        *
-                        * **/
+
+                        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
+                        if(!_ImIn.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
+                        if(!_Hist.bins){AKerrors[22]= true; AKLastError=22;throw "expeted AkHistogram object in arguments"; return false;}
+
 
 
                         _Hcode = _Hcode | 0;
@@ -835,7 +834,7 @@ Akimage.namespace('Akimage.AImage');
                         var newXEnd = _ImIn.width<<2;
                         var newXinit = 0;
                         var newYinit = 0;
-                        var xOff = 0;
+                        //var xOff = 0;
 
 
 
@@ -1000,13 +999,9 @@ Akimage.namespace('Akimage.AImage');
                 _Akontext.AkHist2Akimage = function(AkHist,_channels,_width,_height,_fill,_color) {
 
 
-                    /**
-                     *
-                     * TODO
-                    salidas rapidas
+                    if (arguments.length!=6){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
+                    if(!AkHist.bins){AKerrors[22]= true; AKLastError=22;throw "expeted AkHistogram object in arguments"; return false;}
 
-                     *
-                     * */
 
 
 
@@ -1023,7 +1018,7 @@ Akimage.namespace('Akimage.AImage');
 
 
                     var c1=0;
-                    var c2=1;
+                    //var c2=1;
 
                     /*
                      * preparo las constantes para acumular
@@ -3420,6 +3415,159 @@ Akimage.namespace('Akimage.Modules');
 
 
 
+                    /**
+                     * @function {AkAddWeighted} Weighted addition between 2 images
+                     * @param {Akimage} _Im_1 Source image 1
+                     * @param {number} Weight_1 Weight of the first source
+                     * @param {Akimage} _Im_2 Source image 2
+                     * @param {number} Weight_2 Weight of the first source
+                     * @param {number} Cst Constant for the addition
+
+                     * @return {Akimage} return a new Akimage object result of the addition
+                     *
+                     * The both source must have the same depth, size and channel. If the two image have ROI, both of then must have
+                     * the same size, in this case, the rest of the image is the same of the first source
+                     *
+                     * The algebraic operation is
+                     *
+                     * (Im1 * W1) + (Im2 * W2) + Cst
+
+                     *
+                     **/
+
+                _Akontext.AkAddWeighted = function(_Im_1, Weight_1, _Im_2, Weight_2,Cst){
+
+                    //if (arguments.length!=1){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
+                    //if(!_ImIn.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
+                    //if(!_ImIn.roi == null){AKerrors[18]= true; AKLastError=18;throw "No ROI defined"; return false;}
+
+
+
+                        var _Dst = AkCreateImage([_Im_1.width,_Im_1.height],_Im_1.depth,_Im_1.nChannels);
+
+                        var newYEnd = _Im_1.height;
+                        var newXEnd = _Im_1.width<<2;
+                        var newXinit = 0;
+                        var newYinit = 0;
+                        //var newYEnd2 = _Im_2.height;
+                        //var newXEnd2 = _Im_2.width<<2;
+                        var newXinit2 = 0;
+                        var newYinit2 = 0;
+                        //var xOff = 0;
+
+
+
+                        if(_Im_1.roi != null){
+
+
+                            newYEnd = _Im_1.roi.height+_Im_1.roi.yOffset;
+                            newXEnd = (_Im_1.roi.width+_Im_1.roi.xOffset)<<2;
+                            newXinit = (_Im_1.roi.xOffset)<<2;
+                            newYinit = _Im_1.roi.yOffset;
+                            //newYEnd2 = _Im_2.roi.height+_Im_2.roi.yOffset;
+                            //newXEnd2 = (_Im_2.roi.width+_Im_2.roi.xOffset)<<2;
+                            newXinit2 = (_Im_2.roi.xOffset)<<2;
+                            newYinit2 = _Im_2.roi.yOffset;
+                            _Dst.imageData.set(_Im_1.imageData);
+                            //xOff = AImageRefence.roi.xOffset;
+                        }
+
+
+                    // GREY
+
+                    if(_Im_1.nChannels==1){
+
+                        var k = newYinit;
+                        var k2 = newYinit2;
+
+                        while(k<newYEnd){ //PARA ALTO
+
+                            var _y = (k*_Im_1.width)<<2;
+                            var _y2 = (k2*_Im_1.width)<<2;
+                            var n = newXinit;
+                            var n2 = newXinit2;
+
+                            while(n < newXEnd){ // PARA ANCHO
+
+                                var _p = _y+n;
+                                var _p2 = _y2+n2;
+                                _Dst.imageData[_p] = (_Im_1.imageData[_p] * Weight_1) + (_Im_1.imageData[_p2] * Weight_2) + Cst;
+                                n+=4;
+
+                            }
+                            k+=1;
+                        }
+
+                    }
+
+                    // RGB
+
+                    if(_Im_1.nChannels==3){
+
+                        var k = newYinit;
+                        var k2 = newYinit2;
+
+                        while(k<newYEnd){ //PARA ALTO
+
+                            var _y = (k*_Im_1.width)<<2;
+                            var _y2 = (k2*_Im_1.width)<<2;
+                            var n = newXinit;
+                            var n2 = newXinit2;
+
+                            while(n < newXEnd){ // PARA ANCHO
+
+                                var _p = _y+n;
+                                var _p2 = _y2+n2;
+                                _Dst.imageData[_p] = (_Im_1.imageData[_p] * Weight_1) + (_Im_1.imageData[_p2] * Weight_2) + Cst;
+                                _Dst.imageData[_p] = (_Im_1.imageData[_p+1] * Weight_1) + (_Im_1.imageData[_p2+1] * Weight_2) + Cst;
+                                _Dst.imageData[_p] = (_Im_1.imageData[_p+2] * Weight_1) + (_Im_1.imageData[_p2+2] * Weight_2) + Cst;
+
+                                n+=4;
+
+                            }
+                            k+=1;
+                        }
+
+                    }
+
+                    //RGBA
+
+                    if(_Im_1.nChannels==4){
+
+                        var k = newYinit;
+                        var k2 = newYinit2;
+
+                        while(k<newYEnd){ //PARA ALTO
+
+                            var _y = (k*_Im_1.width)<<2;
+                            var _y2 = (k2*_Im_1.width)<<2;
+                            var n = newXinit;
+                            var n2 = newXinit2;
+
+                            while(n < newXEnd){ // PARA ANCHO
+
+                                var _p = _y+n;
+                                var _p2 = _y2+n2;
+                                _Dst.imageData[_p] = (_Im_1.imageData[_p] * Weight_1) + (_Im_1.imageData[_p2] * Weight_2) + Cst;
+                                _Dst.imageData[_p] = (_Im_1.imageData[_p+1] * Weight_1) + (_Im_1.imageData[_p2+1] * Weight_2) + Cst;
+                                _Dst.imageData[_p] = (_Im_1.imageData[_p+2] * Weight_1) + (_Im_1.imageData[_p2+2] * Weight_2) + Cst;
+                                _Dst.imageData[_p] = (_Im_1.imageData[_p+3] * Weight_1) + (_Im_1.imageData[_p2+3] * Weight_2) + Cst;
+
+
+                                n+=4;
+
+                            }
+                            k+=1;
+                        }
+                    }
+
+                    return (_Dst);
+
+                };// end AkAddWeighted
+
+
+
+
 
 
                     // END CONTEXT
@@ -3681,19 +3829,58 @@ Akimage.namespace('Akimage.Modules');
 				/**
 				 * 	   @GUI
 				 */
-				/**	 * @function AkLoadOnCanvas: Load on a CANVAS element the Akimage object
-                     * @param {Akimage} AkAImage Akimage reference
-					 * @param {CANVAS} CANVASReference Canvas object reference
 
-					 *
-					 *
-					 * @return Canvas father reference object
-				**/
 
 
 
 			(function (_Akontext) {
 
+
+                /**@function AkGet: Return a pixel value from the Akimage object
+
+                 * @param {Akimage} AkAImage Akimage reference
+                 * @param {number} _x X value
+                 * @param {number} _y Y value
+                 * @param {number} _c Channel value
+
+                 *
+                 * @return Return a pixel value from the Akimage object
+                 **/
+
+                _Akontext.AkGet = function(AkAImage,_x,_y,_c) {
+
+                    //if (arguments.length!=4){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
+                    //if(!AkAImage.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
+                    //if(_x<0 || _x > AkAImage.width){AKerrors[21]= true; AKLastError=21;throw "In AkGet arguments out of range"; return false;}
+                    //if(_y<0 || _y > AkAImage.height){AKerrors[21]= true; AKLastError=21;throw "In AkGet arguments out of range"; return false;}
+                    //if(_c<0 && _c > 4){AKerrors[21]= true; AKLastError=21;throw "In AkGet arguments out of range"; return false;}
+
+                    return (AkAImage.imageData[(((AkAImage.width * _y)+(_x))<<2)+_c])
+
+                };
+
+
+                /**	 * @function AkSet: Set a value to the pixel coordinate
+                 * @param {Akimage} AkAImage Akimage reference
+                 * @param {number} _x X value
+                 * @param {number} _y Y value
+                 * @param {number} _c Channel value
+                 * @param {number} _value Value to set
+
+                 *
+                 * @return Return a pixel value from the Akimage object
+                 **/
+
+                _Akontext.AkSet = function(AkAImage,_x,_y,_c,_value) {
+                    AkAImage.imageData[(((AkAImage.width * _y)+(_x))<<2)+_c] = _value;
+                };
+
+
+                    /**	 * @function AkLoadOnCanvas: Load on a CANVAS element the Akimage object
+                 * @param {Akimage} AkAImage Akimage reference
+                 * @param {CANVAS} CANVASReference Canvas object reference
+                 * @return Canvas father reference object
+                 **/
 
 					_Akontext.AkLoadOnCanvas = function(AkAImage,CANVASReference) {
 

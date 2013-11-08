@@ -24,12 +24,11 @@
 
 					_Akontext.AkCalcHist = function(_ImIn, _Hist,_Hcode) {
 
-                        /*
-                        *
-                        * TODO Salidas rapidas
-                        * ROI
-                        *
-                        * **/
+
+                        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
+                        if(!_ImIn.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
+                        if(!_Hist.bins){AKerrors[22]= true; AKLastError=22;throw "expeted AkHistogram object in arguments"; return false;}
+
 
 
                         _Hcode = _Hcode | 0;
@@ -48,7 +47,7 @@
                         var newXEnd = _ImIn.width<<2;
                         var newXinit = 0;
                         var newYinit = 0;
-                        var xOff = 0;
+                        //var xOff = 0;
 
 
 
@@ -213,13 +212,9 @@
                 _Akontext.AkHist2Akimage = function(AkHist,_channels,_width,_height,_fill,_color) {
 
 
-                    /**
-                     *
-                     * TODO
-                    salidas rapidas
+                    if (arguments.length!=6){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
+                    if(!AkHist.bins){AKerrors[22]= true; AKLastError=22;throw "expeted AkHistogram object in arguments"; return false;}
 
-                     *
-                     * */
 
 
 
@@ -236,7 +231,7 @@
 
 
                     var c1=0;
-                    var c2=1;
+                    //var c2=1;
 
                     /*
                      * preparo las constantes para acumular
