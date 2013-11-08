@@ -115,7 +115,7 @@
         _Akontext.HIST_IND = 1;
         _Akontext.HIST_ALLIN1 = 0;
 
-        _Akontext.HIST_CHANNEL = 1;
+        _Akontext.HIST_CHANNEL = 1; 
         _Akontext.HIST_RED = 1;
         _Akontext.HIST_GREEN = 2;
         _Akontext.HIST_BLUE = 4;
