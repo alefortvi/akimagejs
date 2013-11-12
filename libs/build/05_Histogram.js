@@ -32,15 +32,9 @@
 
 
         _Hcode = _Hcode | 0;
-        var ROI = false;
 
-        if(_ImIn.roi){
-            ROI = true;
-        }
 
-        if(ROI){
 
-        }
 
 
         var newYEnd = _ImIn.height;
@@ -74,7 +68,9 @@
 
             var k = 0;
 
-            while(k<_Hist.bins.length){ // relleno con ceros
+
+
+            while(k<_Hist.intervals){ // relleno con ceros
 
                 _Hist.maxBins[0][k++]=0;
 
@@ -111,7 +107,7 @@
 
             var k = 0;
 
-            while(k<_Hist.bins.length){ // relleno con ceros
+            while(k<_Hist.intervals){ // relleno con ceros
 
                 _Hist.maxBins[0][k]   = 0;
                 _Hist.maxBins[1][k]   = 0;
@@ -250,7 +246,7 @@
 
 
         /*
-         * acumulo
+         * busco mayor
          *
          * */
 
@@ -353,6 +349,8 @@
 
                     var p = (k<<2);
 
+                    //El bins contiene el mayor, de ahi completo para abajo
+
                     var _max = (AkHist.maxBins[c1][k]*_Q)^0;
 
                     while(n < _max){ // PARA ANCHO
@@ -361,6 +359,8 @@
                         ImS.imageData[_esquina+p] = _color[0];
                         ImS.imageData[_esquina+p+1] = _color[1];
                         ImS.imageData[_esquina+p+2] = _color[2];
+                        ImS.imageData[_esquina+p+3] = 255;
+
 
 
                         n++;
@@ -386,7 +386,8 @@
                     ImS.imageData[((_h*ancho)<<2) + (k<<2)] = _color[0];
                     ImS.imageData[((_h*ancho)<<2) + (k<<2)+1] = _color[1];
                     ImS.imageData[((_h*ancho)<<2) + (k<<2)+2] = _color[2];
-                    //ImS.imageData[((_h*ancho)<<2) + (k<<2)+3] = 255;
+                    ImS.imageData[((_h*ancho)<<2) + (k<<2)+3] = 255;
+
                     k++;
 
 
@@ -406,10 +407,10 @@
 
 
 
-        return ImS;
 
 
-        //hasta aca el histograma tiene el ancho del Maxbines
+
+        //hasta aca el histograma tiene el ancho del Maxbins
 
         //escalar y rotar
 
@@ -433,8 +434,8 @@
 
         _AKcanvasNew.getContext("2d").drawImage(_AKcanvasOld,0,0,_width,_height);
 
-
-        ImS_.imageData =_AKcanvasNew.getContext('2d').getImageData(0, 0, _height,_width).data;
+        var ImS_ = AkCreateImage([_width,_height],8,3);
+        ImS_.imageData =_AKcanvasNew.getContext('2d').getImageData(0, 0,_width,_height).data;
 
 
 

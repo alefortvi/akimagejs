@@ -163,7 +163,9 @@ Akimage.namespace('Akimage.AImage');
 
             widthBins:1,
 
-            fullMax : 0
+            fullMax : 0,
+
+            intervals : 0
         };
     };
 

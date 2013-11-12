@@ -21,11 +21,16 @@
     AkLoadOnCanvas(Ak1,canvas1);
     AkLoadOnCanvas(Ak2,canvas2);
 
+var R1 = AkCreateROI(100,100,100,100);
+
+var R2 = AkCreateROI(50,150,100,100);
+
     //var R1 = AkCreateROI(50,50,100,100);
 
-    //Ak1 = AkSetImageROI(Ak1,R1);
+    Ak1 = AkSetImageROI(Ak1,R1);
+    Ak2 = AkSetImageROI(Ak2,R2);
 
-    var Ak3 = AkAddWeighted(Ak1,0.5,Ak2,0.5,0);
+    var Ak3 = AkAddWeighted(Ak2,0,Ak1,1,0);
 
 
 	AkLoadOnCanvas(Ak3,canvas3);

@@ -412,12 +412,16 @@
             {AKerrors[20]= true; AKLastError=20; throw "in Histogram invalid hight value is low than low value";return false;}
 
 
+            // desde primer valor hasta segundo
+
             for(var k = _bins[0]; k<_bins[1];k++){
 
 
                 _Histogram.bins[k] = k;
 
             }
+
+            _Histogram.intervals = _bins[1];
 
         }
 
@@ -427,11 +431,17 @@
 
             var _i = 0;
 
+            _Histogram.intervals = _bins.length;
+
+            // por la cantidad de invervalos
+
             for(var p= 0; p<_bins.length;p++){
+
 
                 if(_bins[p][1]<_bins[p][0])
                 {AKerrors[20]= true; AKLastError=20; throw "in Histogram invalid hight value is low than low value";return false;}
 
+                //dentro del invervalor, desde el primer valor hasta el segundo
                 for(var k = _bins[p][0]; k<_bins[p][1];k++){
 
 

@@ -185,7 +185,7 @@
      * @function {AkConvertScale} Change the depth from an object to other depth value
      * @param {Akimage} _ImIn Imput Akimage object
      * @param {number} _newDepth new depth
-     * @param {boolean} _scale  mapping the old value to the new scale
+     * @param {boolean} _scale mapping the old value to the new scale
      * @return {Akimage} return a new Akimage object with the new depth
      **/
 
@@ -346,6 +346,7 @@
 
 
 
+
     /**
      * @function {AkAddWeighted} Weighted addition between 2 images
      * @param {Akimage} _Im_1 Source image 1
@@ -368,11 +369,12 @@
 
     _Akontext.AkAddWeighted = function(_Im_1, Weight_1, _Im_2, Weight_2,Cst){
 
-        //if (arguments.length!=1){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
-        //if(!_ImIn.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
-        //if(!_ImIn.roi == null){AKerrors[18]= true; AKLastError=18;throw "No ROI defined"; return false;}
 
+        if (arguments.length<4 || arguments.length>5){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
+        if(!_Im_1.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
+        if(!_Im_2.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
 
+        Cst = Cst || 0;
 
         var _Dst = AkCreateImage([_Im_1.width,_Im_1.height],_Im_1.depth,_Im_1.nChannels);
 
@@ -424,9 +426,12 @@
                     var _p2 = _y2+n2;
                     _Dst.imageData[_p] = (_Im_1.imageData[_p] * Weight_1) + (_Im_2.imageData[_p2] * Weight_2) + Cst;
                     n+=4;
+                    n2+=4;
+
 
                 }
                 k+=1;
+                k2+=1;
             }
 
         }
@@ -454,9 +459,11 @@
                     _Dst.imageData[_p+2] = (_Im_1.imageData[_p+2] * Weight_1) + (_Im_2.imageData[_p2+2] * Weight_2) + Cst;
 
                     n+=4;
+                    n2+=4;
 
                 }
                 k+=1;
+                k2+=1;
             }
 
         }
@@ -486,9 +493,11 @@
 
 
                     n+=4;
+                    n2+=4;
 
                 }
                 k+=1;
+                k2+=1;
             }
         }
 

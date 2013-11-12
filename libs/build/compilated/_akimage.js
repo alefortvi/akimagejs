@@ -289,7 +289,9 @@ Akimage.namespace('Akimage.AImage');
 
             widthBins:1,
 
-            fullMax : 0
+            fullMax : 0,
+
+            intervals : 0
         };
     };
 
@@ -711,12 +713,16 @@ Akimage.namespace('Akimage.AImage');
             {AKerrors[20]= true; AKLastError=20; throw "in Histogram invalid hight value is low than low value";return false;}
 
 
+            // desde primer valor hasta segundo
+
             for(var k = _bins[0]; k<_bins[1];k++){
 
 
                 _Histogram.bins[k] = k;
 
             }
+
+            _Histogram.intervals = _bins[1];
 
         }
 
@@ -726,11 +732,17 @@ Akimage.namespace('Akimage.AImage');
 
             var _i = 0;
 
+            _Histogram.intervals = _bins.length;
+
+            // por la cantidad de invervalos
+
             for(var p= 0; p<_bins.length;p++){
+
 
                 if(_bins[p][1]<_bins[p][0])
                 {AKerrors[20]= true; AKLastError=20; throw "in Histogram invalid hight value is low than low value";return false;}
 
+                //dentro del invervalor, desde el primer valor hasta el segundo
                 for(var k = _bins[p][0]; k<_bins[p][1];k++){
 
 
@@ -819,15 +831,9 @@ Akimage.namespace('Akimage.AImage');
 
 
         _Hcode = _Hcode | 0;
-        var ROI = false;
 
-        if(_ImIn.roi){
-            ROI = true;
-        }
 
-        if(ROI){
 
-        }
 
 
         var newYEnd = _ImIn.height;
@@ -861,7 +867,9 @@ Akimage.namespace('Akimage.AImage');
 
             var k = 0;
 
-            while(k<_Hist.bins.length){ // relleno con ceros
+
+
+            while(k<_Hist.intervals){ // relleno con ceros
 
                 _Hist.maxBins[0][k++]=0;
 
@@ -898,7 +906,7 @@ Akimage.namespace('Akimage.AImage');
 
             var k = 0;
 
-            while(k<_Hist.bins.length){ // relleno con ceros
+            while(k<_Hist.intervals){ // relleno con ceros
 
                 _Hist.maxBins[0][k]   = 0;
                 _Hist.maxBins[1][k]   = 0;
@@ -1037,7 +1045,7 @@ Akimage.namespace('Akimage.AImage');
 
 
         /*
-         * acumulo
+         * busco mayor
          *
          * */
 
@@ -1140,6 +1148,8 @@ Akimage.namespace('Akimage.AImage');
 
                     var p = (k<<2);
 
+                    //El bins contiene el mayor, de ahi completo para abajo
+
                     var _max = (AkHist.maxBins[c1][k]*_Q)^0;
 
                     while(n < _max){ // PARA ANCHO
@@ -1148,6 +1158,8 @@ Akimage.namespace('Akimage.AImage');
                         ImS.imageData[_esquina+p] = _color[0];
                         ImS.imageData[_esquina+p+1] = _color[1];
                         ImS.imageData[_esquina+p+2] = _color[2];
+                        ImS.imageData[_esquina+p+3] = 255;
+
 
 
                         n++;
@@ -1173,7 +1185,8 @@ Akimage.namespace('Akimage.AImage');
                     ImS.imageData[((_h*ancho)<<2) + (k<<2)] = _color[0];
                     ImS.imageData[((_h*ancho)<<2) + (k<<2)+1] = _color[1];
                     ImS.imageData[((_h*ancho)<<2) + (k<<2)+2] = _color[2];
-                    //ImS.imageData[((_h*ancho)<<2) + (k<<2)+3] = 255;
+                    ImS.imageData[((_h*ancho)<<2) + (k<<2)+3] = 255;
+
                     k++;
 
 
@@ -1193,10 +1206,10 @@ Akimage.namespace('Akimage.AImage');
 
 
 
-        return ImS;
 
 
-        //hasta aca el histograma tiene el ancho del Maxbines
+
+        //hasta aca el histograma tiene el ancho del Maxbins
 
         //escalar y rotar
 
@@ -1220,8 +1233,8 @@ Akimage.namespace('Akimage.AImage');
 
         _AKcanvasNew.getContext("2d").drawImage(_AKcanvasOld,0,0,_width,_height);
 
-
-        ImS_.imageData =_AKcanvasNew.getContext('2d').getImageData(0, 0, _height,_width).data;
+        var ImS_ = AkCreateImage([_width,_height],8,3);
+        ImS_.imageData =_AKcanvasNew.getContext('2d').getImageData(0, 0,_width,_height).data;
 
 
 
@@ -3254,7 +3267,7 @@ Akimage.namespace('Akimage.Modules');
      * @function {AkConvertScale} Change the depth from an object to other depth value
      * @param {Akimage} _ImIn Imput Akimage object
      * @param {number} _newDepth new depth
-     * @param {boolean} _scale  mapping the old value to the new scale
+     * @param {boolean} _scale mapping the old value to the new scale
      * @return {Akimage} return a new Akimage object with the new depth
      **/
 
@@ -3415,6 +3428,7 @@ Akimage.namespace('Akimage.Modules');
 
 
 
+
     /**
      * @function {AkAddWeighted} Weighted addition between 2 images
      * @param {Akimage} _Im_1 Source image 1
@@ -3437,11 +3451,12 @@ Akimage.namespace('Akimage.Modules');
 
     _Akontext.AkAddWeighted = function(_Im_1, Weight_1, _Im_2, Weight_2,Cst){
 
-        //if (arguments.length!=1){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
-        //if(!_ImIn.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
-        //if(!_ImIn.roi == null){AKerrors[18]= true; AKLastError=18;throw "No ROI defined"; return false;}
 
+        if (arguments.length<4 || arguments.length>5){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
+        if(!_Im_1.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
+        if(!_Im_2.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
 
+        Cst = Cst || 0;
 
         var _Dst = AkCreateImage([_Im_1.width,_Im_1.height],_Im_1.depth,_Im_1.nChannels);
 
@@ -3493,9 +3508,12 @@ Akimage.namespace('Akimage.Modules');
                     var _p2 = _y2+n2;
                     _Dst.imageData[_p] = (_Im_1.imageData[_p] * Weight_1) + (_Im_2.imageData[_p2] * Weight_2) + Cst;
                     n+=4;
+                    n2+=4;
+
 
                 }
                 k+=1;
+                k2+=1;
             }
 
         }
@@ -3523,9 +3541,11 @@ Akimage.namespace('Akimage.Modules');
                     _Dst.imageData[_p+2] = (_Im_1.imageData[_p+2] * Weight_1) + (_Im_2.imageData[_p2+2] * Weight_2) + Cst;
 
                     n+=4;
+                    n2+=4;
 
                 }
                 k+=1;
+                k2+=1;
             }
 
         }
@@ -3555,9 +3575,11 @@ Akimage.namespace('Akimage.Modules');
 
 
                     n+=4;
+                    n2+=4;
 
                 }
                 k+=1;
+                k2+=1;
             }
         }
 

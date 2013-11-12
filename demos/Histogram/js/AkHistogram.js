@@ -48,19 +48,19 @@ AkSetImageROI(Ak4,R1);
 
 
 
-var H1 = AkCreateHist([0,256]);
-H1 = AkCalcHist(Ak4,H1,HIST_IND);
-var color = [0,255,0];
-Ak4 = AkHist2Akimage(H1,4,256,256,true,color);
-AkLoadOnCanvas(Ak4,canvas2);
+//var H1 = AkCreateHist([0,256]);
+//H1 = AkCalcHist(Ak4,H1,HIST_IND);
+var color = [255,255,255];
+//Ak4 = AkHist2Akimage(H1,4,300,256,true,color);
+//AkLoadOnCanvas(Ak4,canvas2);
 
 
-var H2 = AkCreateHist([0,256]);
+var H2 = AkCreateHist([[0,63],[64,128],[128,192],[192,255]]);
 H2 = AkCalcHist(Ak5,H2,HIST_IND);
-var color = [0,255,0];
-Ak5 = AkHist2Akimage(H2,4,256,256,true,color);
 
+Ak5 = AkHist2Akimage(H2,HIST_RED,400,256,true,color);
 AkLoadOnCanvas(Ak5,canvas4);
+
 
 
 
