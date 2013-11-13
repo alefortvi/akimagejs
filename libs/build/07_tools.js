@@ -506,8 +506,23 @@
     };// end AkAddWeighted
 
 
+    /**
+     * @function {AkClone} Clone the object Akimage to another one
 
+     * @return {Akimage} return a new Akimage cloned by the argument object
+     *
+     *
+     **/
 
+    _Akontext.AkClone = function(AImageRefence) {
+
+        if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
+
+        var _ImS = AkCreateImage([AImageRefence.width,AImageRefence.height],AImageRefence.depth,AImageRefence.nChannels);
+        ImS.imageData.set(AImageRefence.imageData);
+
+        return _ImS;
+    };
 
 
     // END CONTEXT

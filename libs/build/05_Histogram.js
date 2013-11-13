@@ -403,13 +403,6 @@
 
 
 
-
-
-
-
-
-
-
         //hasta aca el histograma tiene el ancho del Maxbins
 
         //escalar y rotar
