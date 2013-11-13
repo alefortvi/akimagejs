@@ -1822,5 +1822,192 @@ Akimage.namespace('Akimage.Modules');
     }; // END FUNCTION
 
 
+
+
+
+    /**	 @function AkLUT Return the convolution of the input image by the kernel (ROI supported)
+     *
+     * @param {Akimage} ImIn Input Akimage
+     * @param {Array} _lut Lut array, with 256 value
+     * @param {Boolean} _scaled If true LUT is scaled to 0-255, if false LUT keep the originals values
+     * @return {Akimage} ImS Resulting Akimage object
+     **/
+    _Akontext.AkLUT = function(ImIn,_lut,_scaled) {
+
+
+        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
+        // si el arreglo no tiene 256
+        // si imagen no tiene depth 8
+        /*if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters"; return false;}
+        if(_KernelWidth != (_KernelWidth^0)){AKerrors[10]= true; AKLastError=10;throw "Kernel must be square"; return false;};
+        if((Object.prototype.toString.apply(_Anchor) != '[object Array]') || (_Anchor.length != 2)){AKerrors[11]= true;throw "Anchor must be a 2 elements array"; AKLastError=11;return false;}
+        if(_Anchor[0] * _Anchor[0] >= _KernelWidth*_KernelWidth || _Anchor[1] * _Anchor[1] >= _KernelWidth*_KernelWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel"; return false;};
+*/
+
+        //if scaled
+
+        //if ROI
+
+        var ImI;
+        var ImS;
+
+        var _AKcanvasOld
+        var _AKcanvasNew
+
+        if (ImIn.roi){
+
+            //Saco esa partecita
+
+            _AKcanvasOld = document.createElement("CANVAS");
+            _AKcanvasNew = document.createElement("CANVAS");
+            _AKcanvasNew.width = ImIn.roi.width;
+            _AKcanvasNew.height = ImIn.roi.height;
+            _AKcanvasOld.width = ImIn.width;
+            _AKcanvasOld.height = ImIn.height;
+            var objImageData= _AKcanvasOld.getContext('2d').createImageData(ImIn.width, ImIn.height);
+            objImageData.data.set(ImIn.imageData);
+            _AKcanvasOld.getContext('2d').putImageData(objImageData, 0, 0);
+            _AKcanvasNew.getContext("2d").drawImage(_AKcanvasOld,ImIn.roi.xOffset,ImIn.roi.yOffset,_AKcanvasNew.width,_AKcanvasNew.height,0,0,_AKcanvasNew.width,_AKcanvasNew.height)
+            ImI = AkCreateImage([_AKcanvasNew.width,_AKcanvasNew.height],8,ImIn.nChannels);
+            ImS = AkCreateImage([_AKcanvasNew.width,_AKcanvasNew.height],8,ImIn.nChannels);
+            ImI.imageData =_AKcanvasNew.getContext('2d').getImageData(0, 0,_AKcanvasNew.width,_AKcanvasNew.height).data;
+
+        }
+
+        if(!ImIn.roi){
+
+            //Sino creo una imagen de salida y una copia de la entrada (la necesito para seguir con el procedimiento del ROI)
+
+            ImI = AkCreateImage([ImIn.width, ImIn.height],8,ImIn.nChannels);
+            ImS = AkCreateImage([_AKcanvasNew.width,_AKcanvasNew.height],8,ImIn.nChannels);
+            ImI.imageData.set(ImIn.imageData);
+        }
+
+
+        // val[i] = [(val[i-1] - MinOld) * (MaxNew - minNew)/(MaxOld - minOld)] + minNew
+
+
+
+
+            // si esta escalado, normalizo
+        if(_scaled){
+
+
+            var _M = _lut.max();
+            var _m = _lut.min();
+
+            var C1 = 255 /(_M - _m);
+            var C0 = _m*C1;
+
+
+            var k = ImS.imageData.length;
+
+
+            // GRAY
+
+            if(ImIn.nChannels == 1){
+
+                do{
+                    ImS.imageData[k-=4]=(_lut[ImI.imageData[k]]*C1)-C0;
+                }
+                while (k);
+
+            }
+
+            // RGB
+
+            if(ImIn.nChannels == 3){
+                do{
+                    ImS.imageData[k-=4]=    (_lut[ImI.imageData[k]]*C1)-C0;
+                    ImS.imageData[k+1] =    (_lut[ImI.imageData[k+1]]*C1)-C0;
+                    ImS.imageData[k+2] =    (_lut[ImI.imageData[k+2]]*C1)-C0;
+
+
+                }
+                while (k);
+            }
+
+            // RGBA
+            if(ImIn.nChannels == 4){
+                do{
+                    ImS.imageData[k-=4]=    (_lut[ImI.imageData[k]]*C1)-C0;
+                    ImS.imageData[k+1] =    (_lut[ImI.imageData[k+1]]*C1)-C0;
+                    ImS.imageData[k+2] =    (_lut[ImI.imageData[k+2]]*C1)-C0;
+                    ImS.imageData[k+3] =    ImI.imageData[k+3];
+
+                }
+                while (k>0);
+            }
+
+
+
+
+        }
+
+        // si no hace falta escalar
+        if(!_scaled){
+
+            // GRAY
+
+            var k = ImS.imageData.length;
+
+            if(ImIn.nChannels == 1){
+
+                do{
+                    ImS.imageData[k-=4]=(_lut[ImI.imageData[k]]);
+                }
+                while (k>0);
+
+            }
+
+            // RGB
+
+            if(ImIn.nChannels == 3){
+                do{
+                    ImS.imageData[k-=4]=    _lut[ImI.imageData[k]];
+                    ImS.imageData[k+1] =    _lut[ImI.imageData[k+1]];
+                    ImS.imageData[k+2] =    _lut[ImI.imageData[k+2]];
+
+                }
+                while (k>0);
+            }
+
+            // RGBA
+            if(ImIn.nChannels == 4){
+                do{
+                    ImS.imageData[k-=4]=    _lut[ImI.imageData[k]];
+                    ImS.imageData[k+1] =    _lut[ImI.imageData[k+1]];
+                    ImS.imageData[k+2] =    _lut[ImI.imageData[k+2]];
+                    ImS.imageData[k+3] =    ImI.imageData[k+3];
+
+                }
+                while (k>0);
+            }
+        }
+
+
+        if (ImIn.roi){
+
+            //Vuelvo a poner
+
+            (_AKcanvasNew.getContext('2d').getImageData(0, 0,_AKcanvasNew.width,_AKcanvasNew.height).data).set(ImS.imageData);
+            _AKcanvasOld.getContext("2d").drawImage(_AKcanvasNew,0,0,_AKcanvasNew.width,_AKcanvasNew.height,ImIn.roi.xOffset,ImIn.roi.yOffset,ImIn.roi.width,ImIn.roi.height);
+            var ImS = AkCreateImage([_AKcanvasOld.width,_AKcanvasOld.height],8,3);
+            ImS.imageData =_AKcanvasOld.getContext('2d').getImageData(0, 0,_AKcanvasOld.width,_AKcanvasOld.height).data;
+
+        }
+
+
+
+        //context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+
+        return  (ImS);
+
+
+    }; // END FUNCTION
+
+
+
+
 // END MODULES	
 })(this);	
