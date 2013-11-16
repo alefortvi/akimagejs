@@ -35,7 +35,11 @@ function init(){
     var canvas26 = document.getElementById('canvas26');
     var canvas27 = document.getElementById('canvas27');
     var canvas28 = document.getElementById('canvas28');
-//    var canvas23 = document.getElementById('canvas23');
+    var canvas29 = document.getElementById('canvas29');
+    var canvas30 = document.getElementById('canvas30');
+    var canvas31 = document.getElementById('canvas31');
+    var canvas32 = document.getElementById('canvas32');
+    var canvas33 = document.getElementById('canvas33');
 
 
 
@@ -360,11 +364,11 @@ function init(){
     AkLoadOnCanvas(Ak23,canvas23);
 
 
-    // LUT (quatificado 5 niveles)
+    // LUT (quatificado 4 niveles)
 
 
-    L = [];
-    var Q = 32; // 5 niveles
+    var L = [];
+    var Q = 64; // 4 niveles
 
     for(var t=0;t<256;t++){
 
@@ -372,9 +376,78 @@ function init(){
         //L[t] = 255-t;
     }
 
-    var Ak24 = AkLUT(GRAY,L,true);
+    var Ak24 = AkLUT(Original,L,true);
 
     AkLoadOnCanvas(Ak24,canvas24);
+
+    // LUT (invertir)
+
+
+    var L = [];
+
+    var R1 = AkCreateROI(50,50,100,100);
+    var Ak25 = AkClone(Original);
+    Ak25 = AkSetImageROI(Ak25,R1);
+
+    for(var t=0;t<256;t++){
+
+        L[t] = 255-t;
+        //L[t] = 255-t;
+    }
+
+    var Ak25 = AkLUT(Ak25,L,false);
+
+    AkLoadOnCanvas(Ak25,canvas25);
+
+
+    // LUT (Resalto de Rango)
+
+
+    var L = [];
+
+    for(var t=0;t<256;t++){
+
+        if(t<50 || t>200)
+            L[t] = 0;
+        else
+            L[t] = t;
+
+    }
+
+    var Ak26 = AkLUT(GRAY,L,false);
+
+    AkLoadOnCanvas(Ak26,canvas26);
+
+    // LUT (Correccion gama)
+
+    var L = [];
+    var gama = 2.5;
+    for(var t=0;t<256;t++){
+        L[t] = Math.pow(t,gama);
+
+    }
+    var Ak27 = AkLUT(GRAY,L,true);
+    AkLoadOnCanvas(Ak27,canvas27);
+
+    // Filter no lineal moda
+
+    var Ak28 = AkNonLinealFilter(Original,5,[-2,-2],MAXFILTER);
+    AkLoadOnCanvas(Ak28,canvas28);
+
+    // Filter no lineal moda con ROI
+
+    var R1 = AkCreateROI(100,100,100,100);
+    var Ak29 = AkClone(GRAY);
+    Ak29 = AkSetImageROI(Ak29,R1);
+    Ak29 = AkNonLinealFilter(Ak29,5,[-2,-2],MODEFILTER);
+    AkLoadOnCanvas(Ak29,canvas29);
+
+
+    // Filter no lineal mediana
+
+    var Ak30 = AkNonLinealFilter(Original,7,[-3,-3],MEDIANFILTER);
+    AkLoadOnCanvas(Ak30,canvas30);
+
 
 
 }

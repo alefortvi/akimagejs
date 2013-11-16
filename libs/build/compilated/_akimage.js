@@ -114,7 +114,7 @@ Akimage.namespace('Akimage.Constants');
     _Akontext.MAXFILTER = 1;
     _Akontext.MINFILTER = 2;
     _Akontext.MODEFILTER = 4;
-    _Akontext.MEDIAN = 8;
+    _Akontext.MEDIANFILTER = 8;
 
 
     /*
@@ -1314,7 +1314,8 @@ Akimage.namespace('Akimage.Modules');
     };
 
     var _medianF = function (Arr){
-        return Arr[(Arr.length *.5)^0];
+        Arr.sort();
+        return (Arr[(Arr.length*.5)^0]);
 
     };
 
@@ -3134,31 +3135,20 @@ Akimage.namespace('Akimage.Modules');
     /**	 @function AkNonLinealFilter Return the convolution of the input image by the kernel (ROI supported)
      *
      * @param {Akimage} AImageRefence Input Akimage
-     * @param {Array} _AKernel Kernel
+     * @param {Array} _MaskWidth Kernel width (Mask is square)
      * @param {Array} _Anchor Array Coordenades anchor
      * @param {number} ToFilter Type of Filter
      * @return {Akimage} ImS Filtered image
      **/
-    _Akontext.AkNonLinealFilter = function(AImageRefence,_AKernel,_Anchor,ToFilter) {
+    _Akontext.AkNonLinealFilter = function(AImageRefence,_MaskWidth,_Anchor,ToFilter) {
 
-
-
-        /*
-         *
-         * Salidas rapidas
-         *
-         * */
-
-        var _KernelWidth = Math.sqrt(_AKernel.length);
+        var _KernelWidth = _MaskWidth;
 
         if (arguments.length!=4){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
         if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters"; return false;}
         if(_KernelWidth != (_KernelWidth^0)){AKerrors[10]= true; AKLastError=10;throw "Kernel must be square"; return false;};
         if((Object.prototype.toString.apply(_Anchor) != '[object Array]') || (_Anchor.length != 2)){AKerrors[11]= true;throw "Anchor must be a 2 elements array"; AKLastError=11;return false;}
         if(_Anchor[0] * _Anchor[0] >= _KernelWidth*_KernelWidth || _Anchor[1] * _Anchor[1] >= _KernelWidth*_KernelWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel"; return false;};
-
-        //SI EL ANCLA SE VA DEL KERNEL
-
 
 
         var _filter;
@@ -3168,11 +3158,8 @@ Akimage.namespace('Akimage.Modules');
             case MAXFILTER :_filter = _maxF; break;
             case MINFILTER : _filter = _minF; break;
             case MODEFILTER : _filter = _modeF; break;
-            case MEDIAN : _filter = _medianF; break;
-            default :
-                //error
-                return
-            break;
+            case MEDIANFILTER : _filter = _medianF; break;
+            default :AKerrors[24]= true; AKLastError=24;throw "AkNon Lineal Filter:  Invalid Filter Code"; return false; break;
 
         }
 
@@ -3197,8 +3184,7 @@ Akimage.namespace('Akimage.Modules');
         // Get the global positions of the kernel values in the image
         var _GlobalPostions = [];
 
-        while(k<_AKernel.length){
-            //for(var k = 0; k<_AKernel.length;k++){
+        while(k<(_KernelWidth<<1)){
 
             _GlobalPostions[_GlobalPostions.length] =
                 ((Math.floor(k/_KernelWidth)*_Nwidth)+(k%_KernelWidth))<<2;
@@ -4371,7 +4357,7 @@ Akimage.namespace('Akimage.Modules');
         if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
 
         var _ImS = AkCreateImage([AImageRefence.width,AImageRefence.height],AImageRefence.depth,AImageRefence.nChannels);
-        ImS.imageData.set(AImageRefence.imageData);
+        _ImS.imageData.set(AImageRefence.imageData);
 
         return _ImS;
     };

@@ -519,7 +519,7 @@
         if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
 
         var _ImS = AkCreateImage([AImageRefence.width,AImageRefence.height],AImageRefence.depth,AImageRefence.nChannels);
-        ImS.imageData.set(AImageRefence.imageData);
+        _ImS.imageData.set(AImageRefence.imageData);
 
         return _ImS;
     };

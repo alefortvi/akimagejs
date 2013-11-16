@@ -108,7 +108,7 @@ var Kernel=[-1,-1,-1,0,0,0,1,1,1];
 //console.profile("t1");
 //console.time("Lineal");
 
-var Ak5a = AkNonLinealFilter(Ak4,Kernel,[-1,-1],MODEFILTER);
+var Ak5a = AkNonLinealFilter(Ak4,3,[-1,-1],MODEFILTER);
 
 //console.timeEnd("Lineal");
 
