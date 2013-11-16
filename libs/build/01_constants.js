@@ -74,6 +74,15 @@ Akimage.namespace('Akimage.Constants');
     _Akontext.HSV2RGB = 55;
 
 
+    /*
+     * Constants AkNonLinealFilter
+     * */
+
+
+    _Akontext.MAXFILTER = 1;
+    _Akontext.MINFILTER = 2;
+    _Akontext.MODEFILTER = 4;
+    _Akontext.MEDIAN = 8;
 
 
     /*

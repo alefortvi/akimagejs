@@ -30,6 +30,12 @@ function init(){
     var canvas21 = document.getElementById('canvas21');
     var canvas22 = document.getElementById('canvas22');
     var canvas23 = document.getElementById('canvas23');
+    var canvas24 = document.getElementById('canvas24');
+    var canvas25 = document.getElementById('canvas25');
+    var canvas26 = document.getElementById('canvas26');
+    var canvas27 = document.getElementById('canvas27');
+    var canvas28 = document.getElementById('canvas28');
+//    var canvas23 = document.getElementById('canvas23');
 
 
 
@@ -352,6 +358,23 @@ function init(){
     var Ak23 = AkAddWeighted(Ak23_,0.3,Ak24_,.7,0);
 
     AkLoadOnCanvas(Ak23,canvas23);
+
+
+    // LUT (quatificado 5 niveles)
+
+
+    L = [];
+    var Q = 32; // 5 niveles
+
+    for(var t=0;t<256;t++){
+
+        L[t] = ((t/Q)^0);
+        //L[t] = 255-t;
+    }
+
+    var Ak24 = AkLUT(GRAY,L,true);
+
+    AkLoadOnCanvas(Ak24,canvas24);
 
 
 }
