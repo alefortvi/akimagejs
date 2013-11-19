@@ -427,12 +427,12 @@
 
         _AKcanvasNew.getContext("2d").drawImage(_AKcanvasOld,0,0,_width,_height);
 
-        var ImS_ = AkCreateImage([_width,_height],8,3);
-        ImS_.imageData =_AKcanvasNew.getContext('2d').getImageData(0, 0,_width,_height).data;
+        var _ImS = AkCreateImage([_width,_height],8,3);
+        _ImS.imageData =_AKcanvasNew.getContext('2d').getImageData(0, 0,_width,_height).data;
 
 
 
-        return ImS_;
+        return _ImS;
 
 
 

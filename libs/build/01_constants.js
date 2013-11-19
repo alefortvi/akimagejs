@@ -83,6 +83,8 @@ Akimage.namespace('Akimage.Constants');
     _Akontext.MINFILTER = 2;
     _Akontext.MODEFILTER = 4;
     _Akontext.MEDIANFILTER = 8;
+    _Akontext.ERODEFILTER = 16;
+    _Akontext.DILATEFILTER = 17;
 
 
     /*

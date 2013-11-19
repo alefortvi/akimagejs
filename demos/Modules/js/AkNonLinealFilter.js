@@ -60,6 +60,8 @@ function mode(arr){
 
 
 var canvas1 = document.getElementById('canvas1');
+var canvas2 = document.getElementById('canvas2');
+var canvas3 = document.getElementById('canvas3');
 
 var img = new Image();
 img.src = './../../images/lenna256.jpg';
@@ -70,51 +72,10 @@ img.src = './../../images/lenna256.jpg';
 //
 var Ak4 = AkLoadImage(img,0);
 
-//var Ak4 = AkCreateImage([4,5],8,1);
+AkLoadOnCanvas(Ak4,canvas1);
 
 
 
-/*for (var k =0;k<80;k++){
+var Ak5a = AkNonLinealFilter(Ak4,7,[-3,-3],MEDIANFILTER);
 
-    Ak4.imageData[k] = k;
-
-}
-*/
-
-
-
-//AkLoadOnCanvas(Ak4,canvas1);
-
-
-var a = 1/9;
-
-
-/*var Kernel=[a,a,a,a,a,
-            a,a,a,a,a,
-            a,a,a,a,a,
-            a,a,a,a,a,
-            a,a,a,a,a];
-*/
-
-var Kernel=[a,a,a,
-            a,a,a,
-            a,a,a];
-
-
-
-
-var Kernel=[-1,-1,-1,0,0,0,1,1,1];
-
-//console.profile("t1");
-//console.time("Lineal");
-
-var Ak5a = AkNonLinealFilter(Ak4,3,[-1,-1],MODEFILTER);
-
-//console.timeEnd("Lineal");
-
-
-
-//var Ak5b = AkFilter2D(Ak4,Kernel,[-2,-2]);
-
-
-AkLoadOnCanvas(Ak5a,canvas1);
+AkLoadOnCanvas(Ak5a,canvas2);

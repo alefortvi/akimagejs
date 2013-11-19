@@ -60,6 +60,512 @@ Akimage.namespace('Akimage.Modules');
 
     };
 
+    var _dilateF = function (Arr,_K){
+
+        var _Max = Number.MIN_VALUE;
+        var k = 0;
+        while(k<Arr.length){
+            if((_K[k] && Arr[k])>_Max){
+                _Max = Arr[k];
+            }
+            k++;
+        }
+
+        return (_Max);
+
+    };
+
+    var _erodeF = function (Arr,_K){
+
+        var _min = Number.MAX_VALUE;
+        var k = 0;
+        while(k<Arr.length){
+            if((_K[k] && Arr[k])<_min){
+                _min = Arr[k];
+            }
+            k++;
+        }
+
+        return (_min);
+
+    };
+
+
+
+    /*Generic filter*/
+
+    var _genericFilter = function(AImageRefence,_KernelWidth,_KernelHeight,_Anchor,ToFilter,_kernel){
+
+        var _filter;
+
+        switch(ToFilter){
+
+            case MAXFILTER :_filter = _maxF; break;
+            case MINFILTER : _filter = _minF; break;
+            case MODEFILTER : _filter = _modeF; break;
+            case MEDIANFILTER : _filter = _medianF; break;
+            case DILATEFILTER : _filter = _dilateF; break;
+            case ERODEFILTER : _filter = _erodeF; break;
+            default :AKerrors[24]= true; AKLastError=24;throw "AkNon Lineal Filter:  Invalid Filter Code"; return false; break;
+
+        }
+
+
+        var ImS = AkCreateImage([AImageRefence.width, AImageRefence.height], AImageRefence.depth, AImageRefence.nChannels);
+        var ImP = AkCreateImage([AImageRefence.width+(_KernelWidth<<1), AImageRefence.height+(_KernelWidth<<1)], AImageRefence.depth, AImageRefence.nChannels);
+
+        var _Nwidth =  AImageRefence.width+(_KernelWidth<<1);
+        var _Nheight = AImageRefence.height+(_KernelHeight<<1);
+        var _Owidth =  AImageRefence.width;
+        var _Oheight = AImageRefence.height;
+
+        //ancla incluye la multiplicacion por 4
+
+        var _ancla = ((_Nwidth*_Anchor[0])+_Anchor[1])<<2;
+
+
+        var k = 0;
+
+
+
+        // Get the global positions of the kernel values in the image
+        var _GlobalPostions = [];
+
+        while(k<(_KernelWidth*_KernelHeight)){
+
+            _GlobalPostions[_GlobalPostions.length] =
+                ((Math.floor(k/_KernelWidth)*_Nwidth)+(k%_KernelWidth))<<2;
+
+
+            k++;
+        }
+        // variables x4
+
+        var _b = ((_Nwidth+1)*_KernelWidth<<2);
+
+        var _Ow = _Owidth<<2;
+        var _Nw = _Nwidth<<2;
+        var _Kw = _KernelWidth<<2;
+        var _c =  _Owidth*(_Oheight-_KernelHeight)<<2;
+        var _d =  _c + _Ow;
+        var _e = (((_Nheight - 1) * _Nwidth) + _KernelWidth)<<2;
+        var _f = _Kw + _Ow;
+
+
+        //lets convolve
+
+        //detectar canales
+
+
+        var _ind = 0;
+
+        if(AImageRefence.nChannels==1){ // SI CANAL 1
+
+
+            // Periodic boundary conditions
+            /* PADDING */
+
+
+            //padding
+
+            for(var k=0;k<_Oheight;k++){
+
+                ImP.imageData.set(AImageRefence.imageData.subarray(_Ow * k, _Ow * (k + 1)), _b + (_Nw * k));
+            }
+
+            // ARRIBA Y ABAJO
+
+
+            for(var k=0;k<_KernelHeight;k++){
+
+
+                ImP.imageData.set(AImageRefence.imageData.subarray(k * _Ow, (k * _Ow) + _Ow),_Nw*(_KernelWidth-1-k)+_Kw);
+                ImP.imageData.set(AImageRefence.imageData.subarray((k * _Ow)+_c, (k * _Ow)+_d),_e - _Nw*k);
+            }
+
+            // DERECHA IZQUIERDA
+
+            for(var k=0;k<_Nheight;k++){
+
+                for(var j = 0; j<_Kw;j+=4){
+
+                    // RED
+                    ImP.imageData[(k*_Nw)+_Kw - j - 4] = ImP.imageData[(k*_Nw)+_Kw + j];
+                    ImP.imageData[(k*_Nw)+(_f) + j] = ImP.imageData[(k*_Nw)+(_f) - j-4];
+
+                }
+
+
+            }
+
+
+            var newYEnd = _Oheight+_KernelHeight;
+            var newXEnd = (_KernelWidth+ _Owidth)<<2;
+            var newXinit = _KernelWidth<<2;
+            var newYinit = _KernelHeight;
+            var xOff = 0;
+
+
+
+            if(AImageRefence.roi != null){
+
+                ImS.imageData.set(AImageRefence.imageData);
+                newYEnd = AImageRefence.roi.height+AImageRefence.roi.yOffset+_KernelHeight;
+                newXEnd = AImageRefence.roi.width+AImageRefence.roi.xOffset+_KernelWidth<<2;
+                newXinit = (AImageRefence.roi.xOffset+_KernelWidth)<<2;
+                newYinit = AImageRefence.roi.yOffset+_KernelHeight;
+                xOff = AImageRefence.roi.xOffset;
+
+            }
+
+
+            //Recorrida global
+
+            var k = newYinit;
+            var k1 = newYinit-_KernelHeight;
+
+            //for(var k = _KernelWidth; k<_Oheight+_KernelWidth; k++){
+
+            while(k<newYEnd){ //PARA ALTO
+                //Suma global
+
+                var _y = (k*_Nwidth)<<2;
+                var _y1 = (k1*_Owidth)<<2;
+
+
+                var n = newXinit;
+                var n1 = xOff<<2;
+
+                while(n < newXEnd){ // PARA ANCHO
+
+                    //arreglo de elemetos de la mascara
+                    var _temp = [];
+
+                    var m = 0;
+
+
+                    // push in _temp the local value for the mask
+
+                    while(m < _GlobalPostions.length){ //Local mask
+
+                        _temp.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m++]]);
+                    }
+
+                    //filter conditions
+
+                    //////// HERE IS THE STATISTICAL FUNCTION ////////
+
+                    var _M = _filter(_temp,_kernel);
+
+                    // TO HERE
+
+
+                    if(AImageRefence.roi != null){
+                        ImS.imageData[_y1+n1] = _M;
+                    }
+
+                    if(AImageRefence.roi == null){
+                        ImS.imageData[_ind] = _M;
+                    }
+
+                    _ind+=4;
+                    n+=4;
+                    n1+=4;
+
+                } // FIN PARA ANCHO
+
+
+                k++;
+                k1++;
+
+            } // FIN PARA ALTO
+
+
+
+        } // FIN SI CANAL 1
+
+        if(AImageRefence.nChannels == 3){ // SI RGB
+
+
+
+            /* PADDING */
+
+            // Periodic boundary conditions
+            //padding
+
+            for(var k=0;k<_Oheight;k++){
+
+                ImP.imageData.set(AImageRefence.imageData.subarray(_Ow * k, _Ow * (k + 1)), _b + (_Nw * k));
+
+            }
+
+            // ARRIBA Y ABAJO
+
+
+            for(var k=0;k<_KernelHeight;k++){
+
+
+                ImP.imageData.set(AImageRefence.imageData.subarray(k * _Ow, (k * _Ow) + _Ow),_Nw*(_KernelWidth-1-k)+_Kw);
+                ImP.imageData.set(AImageRefence.imageData.subarray((k * _Ow)+_c, (k * _Ow)+_d),_e - _Nw*k);
+
+
+            }
+
+            // DERECHA IZQUIERDA
+
+
+            for(var k=0;k<_Nheight;k++){
+
+                for(var j = 0; j<_Kw;j+=4){
+
+                    // RED
+                    ImP.imageData[(k*_Nw)+_Kw - j - 4] = ImP.imageData[(k*_Nw)+_Kw + j];
+                    ImP.imageData[(k*_Nw)+(_f) + j] = ImP.imageData[(k*_Nw)+(_f) - j-4];
+
+                    //GREEN
+                    ImP.imageData[(k*_Nw)+_Kw - j - 3] = ImP.imageData[(k*_Nw)+_Kw + j +1];
+                    ImP.imageData[(k*_Nw)+(_f) + j+ 1] = ImP.imageData[(k*_Nw)+(_f) - j-3];
+
+                    //BLUE
+                    ImP.imageData[(k*_Nw)+_Kw - j - 2] = ImP.imageData[(k*_Nw)+_Kw + j +2];
+                    ImP.imageData[(k*_Nw)+(_f) + j+ 2] = ImP.imageData[(k*_Nw)+(_f) - j-2];
+
+                }
+
+
+            }
+
+            var newYEnd = _Oheight+_KernelHeight;
+            var newXEnd = (_KernelWidth+ _Owidth)<<2;
+            var newXinit = _KernelWidth<<2;
+            var newYinit = _KernelHeight;
+            var xOff = 0;
+
+            if(AImageRefence.roi != null){
+
+                ImS.imageData.set(AImageRefence.imageData);
+                newYEnd = AImageRefence.roi.height+AImageRefence.roi.yOffset+_KernelHeight;
+                newXEnd = AImageRefence.roi.width+AImageRefence.roi.xOffset+_KernelWidth<<2;
+                newXinit = (AImageRefence.roi.xOffset+_KernelWidth)<<2;
+                newYinit = AImageRefence.roi.yOffset+_KernelHeight;
+                xOff = AImageRefence.roi.xOffset;
+
+
+            }
+
+            //Recorrida global
+
+            var k = newYinit;
+            var k1 = newYinit-_KernelHeight;
+
+            while(k<newYEnd){ //PARA ALTO
+
+                var _y = (k*_Nwidth)<<2;
+                var _y1 = (k1*_Owidth)<<2;
+
+                var n = newXinit;
+                var n1 = xOff<<2;
+
+                while(n < newXEnd){ // PARA ANCHO
+
+                    var _tempR = [];
+                    var _tempG = [];
+                    var _tempB = [];
+
+                    var m = 0;
+
+                    while(m < _GlobalPostions.length){ //Local mask
+
+                        _tempR.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m]]);
+                        _tempG.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m]+1]);
+                        _tempB.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m++]+2]);
+
+                    }
+
+                    //filter conditions
+
+                    //////// HERE IS THE STATISTICAL FUNCTION ////////
+
+                    var _MR = _filter(_tempR);
+                    var _MG = _filter(_tempG);
+                    var _MB = _filter(_tempB);
+
+
+                    // TO HERE
+
+                    if(AImageRefence.roi != null){
+
+                        ImS.imageData[_y1+n1] = _MR;
+                        ImS.imageData[_y1+n1+1] = _MG;
+                        ImS.imageData[_y1+n1+2] = _MB;
+                    }
+
+
+                    if(AImageRefence.roi == null){
+                        //asignacion de pixel
+                        ImS.imageData[_ind]     = _MR;
+                        ImS.imageData[_ind+1]   = _MG;
+                        ImS.imageData[_ind+2]   = _MB;
+                    }
+
+                    _ind+=4;
+                    n+=4;
+                    n1+=4;
+                } // FIN PARA ANCHO
+
+                k++;
+                k1++;
+
+
+            } // FIN PARA ALTO
+
+
+        }//FIN SI RGB
+
+
+
+        if(AImageRefence.nChannels == 4){ //SI RGBA
+
+
+
+            /* PADDING */
+
+            // Periodic boundary conditions
+            //padding
+
+            for(var k=0;k<_Oheight;k++){
+
+                ImP.imageData.set(AImageRefence.imageData.subarray(_Ow * k, _Ow * (k + 1)), _b + (_Nw * k));
+
+            }
+
+            // ARRIBA Y ABAJO
+
+
+            for(var k=0;k<_KernelHeight;k++){
+
+
+                ImP.imageData.set(AImageRefence.imageData.subarray(k * _Ow, (k * _Ow) + _Ow),_Nw*(_KernelWidth-1-k)+_Kw);
+                ImP.imageData.set(AImageRefence.imageData.subarray((k * _Ow)+_c, (k * _Ow)+_d),_e - _Nw*k);
+
+
+            }
+
+            // DERECHA IZQUIERDA
+
+
+            for(var k=0;k<_Nheight;k++){
+
+                for(var j = 0; j<_Kw;j+=4){
+
+                    // RED
+                    ImP.imageData[(k*_Nw)+_Kw - j - 4] = ImP.imageData[(k*_Nw)+_Kw + j];
+                    ImP.imageData[(k*_Nw)+(_f) + j] = ImP.imageData[(k*_Nw)+(_f) - j-4];
+
+                    //GREEN
+                    ImP.imageData[(k*_Nw)+_Kw - j - 3] = ImP.imageData[(k*_Nw)+_Kw + j +1];
+                    ImP.imageData[(k*_Nw)+(_f) + j+ 1] = ImP.imageData[(k*_Nw)+(_f) - j-3];
+
+                    //BLUE
+                    ImP.imageData[(k*_Nw)+_Kw - j - 2] = ImP.imageData[(k*_Nw)+_Kw + j +2];
+                    ImP.imageData[(k*_Nw)+(_f) + j+ 2] = ImP.imageData[(k*_Nw)+(_f) - j-2];
+
+                }
+
+
+            }
+
+            var newYEnd = _Oheight+_KernelHeight;
+            var newXEnd = (_KernelWidth+ _Owidth)<<2;
+            var newXinit = _KernelWidth<<2;
+            var newYinit = _KernelHeight;
+            var xOff = 0;
+
+            if(AImageRefence.roi != null){
+
+                ImS.imageData.set(AImageRefence.imageData);
+                newYEnd = AImageRefence.roi.height+AImageRefence.roi.yOffset+_KernelHeight;
+                newXEnd = AImageRefence.roi.width+AImageRefence.roi.xOffset+_KernelWidth<<2;
+                newXinit = (AImageRefence.roi.xOffset+_KernelWidth)<<2;
+                newYinit = AImageRefence.roi.yOffset+_KernelHeight;
+                xOff = AImageRefence.roi.xOffset;
+
+
+            }
+
+            //Recorrida global
+
+            var k = newYinit;
+            var k1 = newYinit-_KernelWidth;
+
+            while(k<newYEnd){ //PARA ALTO
+
+                var _y = (k*_Nwidth)<<2;
+                var _y1 = (k1*_Owidth)<<2;
+
+                var n = newXinit;
+                var n1 = xOff<<2;
+
+                while(n < newXEnd){ // PARA ANCHO
+
+                    var _tempR = [];
+                    var _tempG = [];
+                    var _tempB = [];
+
+                    var m = 0;
+
+
+                    while(m < _GlobalPostions.length){ //Local mask
+
+                        _tempR.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m]]);
+                        _tempG.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m]+1]);
+                        _tempB.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m++]+2]);
+
+                    }
+
+                    //filter conditions
+
+                    //////// HERE IS THE STATISTICAL FUNCTION ////////
+
+                    var _MR = _filter(_tempR);
+                    var _MG = _filter(_tempG);
+                    var _MB = _filter(_tempB);
+
+                    // TO HERE
+
+                    if(AImageRefence.roi != null){
+
+                        ImS.imageData[_y1+n1] = _MR;
+                        ImS.imageData[_y1+n1+1] = _MG;
+                        ImS.imageData[_y1+n1+2] = _MB;
+                        ImS.imageData[_y1+n1+3] = ImP.imageData[_y1+n1+3];
+                    }
+
+
+                    if(AImageRefence.roi == null){
+                        //asignacion de pixel
+                        ImS.imageData[_ind]     = _MR;
+                        ImS.imageData[_ind+1]   = _MG;
+                        ImS.imageData[_ind+2]   = _MB;
+                        ImS.imageData[_ind+3]   = ImP.imageData[_ind+3];
+                    }
+
+                    _ind+=4;
+                    n1+=4;
+                    n+=4;
+
+                } // FIN PARA ANCHO
+                k1++;
+                k++
+
+            } // FIN PARA ALTO
+
+
+        } // FIN SI RGBA
+
+
+        return  (ImS);
+    }; // END FUNCTION
 
     /* Private FFT */
 
@@ -776,7 +1282,7 @@ Akimage.namespace('Akimage.Modules');
 
                     for(var x=0; x<imageWidth; x++) {
 
-                        ImS.imageData[(i << 2) + (x << 2)] = re[i + x],
+                        ImS.imageData[(i << 2) + (x << 2)] = re[i + x];
                             ImS.imageData[(i << 2) + (x << 2)+1] = im[i + x];
 
                     }
@@ -1553,7 +2059,7 @@ Akimage.namespace('Akimage.Modules');
                 k++;
                 k1++;
 
-            }; // FIN PARA ALTO
+            } // FIN PARA ALTO
 
 
 
@@ -1706,10 +2212,10 @@ Akimage.namespace('Akimage.Modules');
                 k1++;
 
 
-            }; // FIN PARA ALTO
+            } // FIN PARA ALTO
 
 
-        };//FIN SI RGB
+        }//FIN SI RGB
 
 
 
@@ -1876,491 +2382,73 @@ Akimage.namespace('Akimage.Modules');
     /**	 @function AkNonLinealFilter Return the convolution of the input image by the kernel (ROI supported)
      *
      * @param {Akimage} AImageRefence Input Akimage
-     * @param {Array} _MaskWidth Kernel width (Mask is square)
+     * @param {number} _MaskWidth Kernel width (Mask is square)
      * @param {Array} _Anchor Array Coordenades anchor
-     * @param {number} ToFilter Type of Filter
+     * @param {number} _ToFilter Type of Filter
      * @return {Akimage} ImS Filtered image
      **/
-    _Akontext.AkNonLinealFilter = function(AImageRefence,_MaskWidth,_Anchor,ToFilter) {
 
-        var _KernelWidth = _MaskWidth;
+    _Akontext.AkNonLinealFilter = function(AImageRefence,_MaskWidth,_Anchor,_ToFilter){
 
         if (arguments.length!=4){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
         if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters"; return false;}
-        if(_KernelWidth != (_KernelWidth^0)){AKerrors[10]= true; AKLastError=10;throw "Kernel must be square"; return false;};
-        if((Object.prototype.toString.apply(_Anchor) != '[object Array]') || (_Anchor.length != 2)){AKerrors[11]= true;throw "Anchor must be a 2 elements array"; AKLastError=11;return false;}
-        if(_Anchor[0] * _Anchor[0] >= _KernelWidth*_KernelWidth || _Anchor[1] * _Anchor[1] >= _KernelWidth*_KernelWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel"; return false;};
+         if((Object.prototype.toString.apply(_Anchor) != '[object Array]') || (_Anchor.length != 2)){AKerrors[11]= true;throw "Anchor must be a 2 elements array"; AKLastError=11;return false;}
+        if(_Anchor[0] * _Anchor[0] >= _MaskWidth*_MaskWidth || _Anchor[1] * _Anchor[1] >= _MaskWidth*_MaskWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel"; return false;};
 
 
-        var _filter;
 
-        switch(ToFilter){
+        return _genericFilter(AImageRefence,_MaskWidth,_MaskWidth,_Anchor,_ToFilter);
 
-            case MAXFILTER :_filter = _maxF; break;
-            case MINFILTER : _filter = _minF; break;
-            case MODEFILTER : _filter = _modeF; break;
-            case MEDIANFILTER : _filter = _medianF; break;
-            default :AKerrors[24]= true; AKLastError=24;throw "AkNon Lineal Filter:  Invalid Filter Code"; return false; break;
+    }
 
-        }
 
+    /**	 @function AkDilate
+     * @param {Akimage} AImageRefence Input Akimage
+     * @param {Array} _Kernel Kernel width (Must be square)
+     * @param {Array} _Anchor Array Coordenades anchor
+     * @return {Akimage} ImS Filtered image
+     **/
 
-        var ImS = AkCreateImage([AImageRefence.width, AImageRefence.height], AImageRefence.depth, AImageRefence.nChannels);
-        var ImP = AkCreateImage([AImageRefence.width+(_KernelWidth<<1), AImageRefence.height+(_KernelWidth<<1)], AImageRefence.depth, AImageRefence.nChannels);
+    _Akontext.AkDilate = function(AImageRefence,_Kernel,_Anchor){
 
-        var _Nwidth =  AImageRefence.width+(_KernelWidth<<1);
-        var _Nheight = AImageRefence.height+(_KernelWidth<<1);
-        var _Owidth =  AImageRefence.width;
-        var _Oheight = AImageRefence.height;
+        var _MaskWidth = Math.sqrt(_Kernel.length);
 
-        //ancla incluye la multiplicacion por 4
+        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments";}
+        if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters";}
+        if(Object.prototype.toString.apply(_Kernel) != '[object Array]'){AKerrors[11]= true;throw "Anchor must be a array"; AKLastError=11;}
+        if((Object.prototype.toString.apply(_Anchor) != '[object Array]') || (_Anchor.length != 2)){AKerrors[11]= true;throw "Anchor must be a 2 elements array"; AKLastError=11;}
+        if(_Anchor[0] * _Anchor[0] >= _MaskWidth*_MaskWidth || _Anchor[1] * _Anchor[1] >= _MaskWidth*_MaskWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel"; return false;}
 
-        var _ancla = ((_Nwidth*_Anchor[0])+_Anchor[1])<<2;
 
 
-        var k = 0;
+        return _genericFilter(AImageRefence,_MaskWidth,_MaskWidth,_Anchor,DILATEFILTER,_Kernel);
 
+    }
 
 
-        // Get the global positions of the kernel values in the image
-        var _GlobalPostions = [];
+    /**	 @function AkErode
+     *
+     * @param {Akimage} AImageRefence Input Akimage
+     * @param {Array} _Kernel Kernel width (Must be square)
+     * @param {Array} _Anchor Array Coordenades anchor
+     * @return {Akimage} ImS Filtered image
+     **/
 
-        while(k<(_KernelWidth<<1)){
+    _Akontext.AkErode = function(AImageRefence,_Kernel,_Anchor){
 
-            _GlobalPostions[_GlobalPostions.length] =
-                ((Math.floor(k/_KernelWidth)*_Nwidth)+(k%_KernelWidth))<<2;
+        var _MaskWidth = Math.sqrt(_Kernel.length);
 
+        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments";}
+        if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters";}
+        if(Object.prototype.toString.apply(_Kernel) != '[object Array]'){AKerrors[11]= true;throw "Anchor must be a array"; AKLastError=11;}
+        if((Object.prototype.toString.apply(_Anchor) != '[object Array]') || (_Anchor.length != 2)){AKerrors[11]= true;throw "Anchor must be a 2 elements array"; AKLastError=11;}
+        if(_Anchor[0] * _Anchor[0] >= _MaskWidth*_MaskWidth || _Anchor[1] * _Anchor[1] >= _MaskWidth*_MaskWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel"; return false;}
 
-            k++;
-        }
-        // variables x4
 
-        var _b = ((_Nwidth+1)*_KernelWidth<<2);
 
-        var _Ow = _Owidth<<2;
-        var _Nw = _Nwidth<<2;
-        var _Kw = _KernelWidth<<2;
-        var _c =  _Owidth*(_Oheight-_KernelWidth)<<2;
-        var _d =  _c + _Ow;
-        var _e = (((_Nheight - 1) * _Nwidth) + _KernelWidth)<<2;
-        var _f = _Kw + _Ow;
+        return _genericFilter(AImageRefence,_MaskWidth,_MaskWidth,_Anchor,ERODEFILTER,_Kernel);
 
-
-        //lets convolve
-
-        //detectar canales
-
-
-        var _ind = 0;
-
-        if(AImageRefence.nChannels==1){ // SI CANAL 1
-
-
-            // Periodic boundary conditions
-            /* PADDING */
-
-
-            //padding
-
-            for(var k=0;k<_Oheight;k++){
-
-                ImP.imageData.set(AImageRefence.imageData.subarray(_Ow * k, _Ow * (k + 1)), _b + (_Nw * k));
-            }
-
-            // ARRIBA Y ABAJO
-
-
-            for(var k=0;k<_KernelWidth;k++){
-
-
-                ImP.imageData.set(AImageRefence.imageData.subarray(k * _Ow, (k * _Ow) + _Ow),_Nw*(_KernelWidth-1-k)+_Kw);
-                ImP.imageData.set(AImageRefence.imageData.subarray((k * _Ow)+_c, (k * _Ow)+_d),_e - _Nw*k);
-            }
-
-            // DERECHA IZQUIERDA
-
-            for(var k=0;k<_Nheight;k++){
-
-                for(var j = 0; j<_Kw;j+=4){
-
-                    // RED
-                    ImP.imageData[(k*_Nw)+_Kw - j - 4] = ImP.imageData[(k*_Nw)+_Kw + j];
-                    ImP.imageData[(k*_Nw)+(_f) + j] = ImP.imageData[(k*_Nw)+(_f) - j-4];
-
-                }
-
-
-            }
-
-
-            var newYEnd = _Oheight+_KernelWidth;
-            var newXEnd = (_KernelWidth+ _Owidth)<<2;
-            var newXinit = _KernelWidth<<2;
-            var newYinit = _KernelWidth;
-            var xOff = 0;
-
-
-
-            if(AImageRefence.roi != null){
-
-                ImS.imageData.set(AImageRefence.imageData);
-                newYEnd = AImageRefence.roi.height+AImageRefence.roi.yOffset+_KernelWidth;
-                newXEnd = AImageRefence.roi.width+AImageRefence.roi.xOffset+_KernelWidth<<2;
-                newXinit = (AImageRefence.roi.xOffset+_KernelWidth)<<2;
-                newYinit = AImageRefence.roi.yOffset+_KernelWidth;
-                xOff = AImageRefence.roi.xOffset;
-
-            }
-
-
-            //Recorrida global
-
-            var k = newYinit;
-            var k1 = newYinit-_KernelWidth;
-
-            //for(var k = _KernelWidth; k<_Oheight+_KernelWidth; k++){
-
-            while(k<newYEnd){ //PARA ALTO
-                //Suma global
-
-                var _y = (k*_Nwidth)<<2;
-                var _y1 = (k1*_Owidth)<<2;
-
-
-                var n = newXinit;
-                var n1 = xOff<<2;
-
-                while(n < newXEnd){ // PARA ANCHO
-
-                    //arreglo de elemetos de la mascara
-                    var _temp = [];
-
-                    var m = 0;
-
-
-                    // push in _temp the local value for the mask
-
-                    while(m < _GlobalPostions.length){ //Local mask
-
-                        _temp.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m++]]);
-                    }
-
-                    //filter conditions
-
-                    //////// HERE IS THE STATISTICAL FUNCTION ////////
-
-                    var _M = _filter(_temp);
-
-                    // TO HERE
-
-
-                    if(AImageRefence.roi != null){
-                        ImS.imageData[_y1+n1] = _M;
-                    }
-
-                    if(AImageRefence.roi == null){
-                        ImS.imageData[_ind] = _M;
-                    }
-
-                    _ind+=4;
-                    n+=4;
-                    n1+=4;
-
-                } // FIN PARA ANCHO
-
-
-                k++;
-                k1++;
-
-            }; // FIN PARA ALTO
-
-
-
-        } // FIN SI CANAL 1
-
-        if(AImageRefence.nChannels == 3){ // SI RGB
-
-
-
-            /* PADDING */
-
-            // Periodic boundary conditions
-            //padding
-
-            for(var k=0;k<_Oheight;k++){
-
-                ImP.imageData.set(AImageRefence.imageData.subarray(_Ow * k, _Ow * (k + 1)), _b + (_Nw * k));
-
-            }
-
-            // ARRIBA Y ABAJO
-
-
-            for(var k=0;k<_KernelWidth;k++){
-
-
-                ImP.imageData.set(AImageRefence.imageData.subarray(k * _Ow, (k * _Ow) + _Ow),_Nw*(_KernelWidth-1-k)+_Kw);
-                ImP.imageData.set(AImageRefence.imageData.subarray((k * _Ow)+_c, (k * _Ow)+_d),_e - _Nw*k);
-
-
-            }
-
-            // DERECHA IZQUIERDA
-
-
-            for(var k=0;k<_Nheight;k++){
-
-                for(var j = 0; j<_Kw;j+=4){
-
-                    // RED
-                    ImP.imageData[(k*_Nw)+_Kw - j - 4] = ImP.imageData[(k*_Nw)+_Kw + j];
-                    ImP.imageData[(k*_Nw)+(_f) + j] = ImP.imageData[(k*_Nw)+(_f) - j-4];
-
-                    //GREEN
-                    ImP.imageData[(k*_Nw)+_Kw - j - 3] = ImP.imageData[(k*_Nw)+_Kw + j +1];
-                    ImP.imageData[(k*_Nw)+(_f) + j+ 1] = ImP.imageData[(k*_Nw)+(_f) - j-3];
-
-                    //BLUE
-                    ImP.imageData[(k*_Nw)+_Kw - j - 2] = ImP.imageData[(k*_Nw)+_Kw + j +2];
-                    ImP.imageData[(k*_Nw)+(_f) + j+ 2] = ImP.imageData[(k*_Nw)+(_f) - j-2];
-
-                }
-
-
-            }
-
-            var newYEnd = _Oheight+_KernelWidth;
-            var newXEnd = (_KernelWidth+ _Owidth)<<2;
-            var newXinit = _KernelWidth<<2;
-            var newYinit = _KernelWidth;
-            var xOff = 0;
-
-            if(AImageRefence.roi != null){
-
-                ImS.imageData.set(AImageRefence.imageData);
-                newYEnd = AImageRefence.roi.height+AImageRefence.roi.yOffset+_KernelWidth;
-                newXEnd = AImageRefence.roi.width+AImageRefence.roi.xOffset+_KernelWidth<<2;
-                newXinit = (AImageRefence.roi.xOffset+_KernelWidth)<<2;
-                newYinit = AImageRefence.roi.yOffset+_KernelWidth;
-                xOff = AImageRefence.roi.xOffset;
-
-
-            }
-
-            //Recorrida global
-
-            var k = newYinit;
-            var k1 = newYinit-_KernelWidth;
-
-            while(k<newYEnd){ //PARA ALTO
-
-                var _y = (k*_Nwidth)<<2;
-                var _y1 = (k1*_Owidth)<<2;
-
-                var n = newXinit;
-                var n1 = xOff<<2;
-
-                while(n < newXEnd){ // PARA ANCHO
-
-                    var _tempR = [];
-                    var _tempG = [];
-                    var _tempB = [];
-
-                    var m = 0;
-
-                    while(m < _GlobalPostions.length){ //Local mask
-
-                        _tempR.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m]]);
-                        _tempG.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m]+1]);
-                        _tempB.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m++]+2]);
-
-                    }
-
-                    //filter conditions
-
-                    //////// HERE IS THE STATISTICAL FUNCTION ////////
-
-                    var _MR = _filter(_tempR);
-                    var _MG = _filter(_tempG);
-                    var _MB = _filter(_tempB);
-
-
-                    // TO HERE
-
-                    if(AImageRefence.roi != null){
-
-                        ImS.imageData[_y1+n1] = _MR;
-                        ImS.imageData[_y1+n1+1] = _MG;
-                        ImS.imageData[_y1+n1+2] = _MB;
-                    }
-
-
-                    if(AImageRefence.roi == null){
-                        //asignacion de pixel
-                        ImS.imageData[_ind]     = _MR;
-                        ImS.imageData[_ind+1]   = _MG;
-                        ImS.imageData[_ind+2]   = _MB;
-                    }
-
-                    _ind+=4;
-                    n+=4;
-                    n1+=4;
-                } // FIN PARA ANCHO
-
-                k++;
-                k1++;
-
-
-            }; // FIN PARA ALTO
-
-
-        };//FIN SI RGB
-
-
-
-        if(AImageRefence.nChannels == 4){ //SI RGBA
-
-
-
-            /* PADDING */
-
-            // Periodic boundary conditions
-            //padding
-
-            for(var k=0;k<_Oheight;k++){
-
-                ImP.imageData.set(AImageRefence.imageData.subarray(_Ow * k, _Ow * (k + 1)), _b + (_Nw * k));
-
-            }
-
-            // ARRIBA Y ABAJO
-
-
-            for(var k=0;k<_KernelWidth;k++){
-
-
-                ImP.imageData.set(AImageRefence.imageData.subarray(k * _Ow, (k * _Ow) + _Ow),_Nw*(_KernelWidth-1-k)+_Kw);
-                ImP.imageData.set(AImageRefence.imageData.subarray((k * _Ow)+_c, (k * _Ow)+_d),_e - _Nw*k);
-
-
-            }
-
-            // DERECHA IZQUIERDA
-
-
-            for(var k=0;k<_Nheight;k++){
-
-                for(var j = 0; j<_Kw;j+=4){
-
-                    // RED
-                    ImP.imageData[(k*_Nw)+_Kw - j - 4] = ImP.imageData[(k*_Nw)+_Kw + j];
-                    ImP.imageData[(k*_Nw)+(_f) + j] = ImP.imageData[(k*_Nw)+(_f) - j-4];
-
-                    //GREEN
-                    ImP.imageData[(k*_Nw)+_Kw - j - 3] = ImP.imageData[(k*_Nw)+_Kw + j +1];
-                    ImP.imageData[(k*_Nw)+(_f) + j+ 1] = ImP.imageData[(k*_Nw)+(_f) - j-3];
-
-                    //BLUE
-                    ImP.imageData[(k*_Nw)+_Kw - j - 2] = ImP.imageData[(k*_Nw)+_Kw + j +2];
-                    ImP.imageData[(k*_Nw)+(_f) + j+ 2] = ImP.imageData[(k*_Nw)+(_f) - j-2];
-
-                }
-
-
-            }
-
-            var newYEnd = _Oheight+_KernelWidth;
-            var newXEnd = (_KernelWidth+ _Owidth)<<2;
-            var newXinit = _KernelWidth<<2;
-            var newYinit = _KernelWidth;
-            var xOff = 0;
-
-            if(AImageRefence.roi != null){
-
-                ImS.imageData.set(AImageRefence.imageData);
-                newYEnd = AImageRefence.roi.height+AImageRefence.roi.yOffset+_KernelWidth;
-                newXEnd = AImageRefence.roi.width+AImageRefence.roi.xOffset+_KernelWidth<<2;
-                newXinit = (AImageRefence.roi.xOffset+_KernelWidth)<<2;
-                newYinit = AImageRefence.roi.yOffset+_KernelWidth;
-                xOff = AImageRefence.roi.xOffset;
-
-
-            }
-
-            //Recorrida global
-
-            var k = newYinit;
-            var k1 = newYinit-_KernelWidth;
-
-            while(k<newYEnd){ //PARA ALTO
-
-                var _y = (k*_Nwidth)<<2;
-                var _y1 = (k1*_Owidth)<<2;
-
-                var n = newXinit;
-                var n1 = xOff<<2;
-
-                while(n < newXEnd){ // PARA ANCHO
-
-                    var _tempR = [];
-                    var _tempG = [];
-                    var _tempB = [];
-
-                         var m = 0;
-
-
-                    while(m < _GlobalPostions.length){ //Local mask
-
-                        _tempR.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m]]);
-                        _tempG.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m]+1]);
-                        _tempB.push(ImP.imageData[_y + n + _ancla + _GlobalPostions[m++]+2]);
-
-                   }
-
-                    //filter conditions
-
-                    //////// HERE IS THE STATISTICAL FUNCTION ////////
-
-                    var _MR = _filter(_tempR);
-                    var _MG = _filter(_tempG);
-                    var _MB = _filter(_tempB);
-
-                    // TO HERE
-
-                    if(AImageRefence.roi != null){
-
-                        ImS.imageData[_y1+n1] = _MR;
-                        ImS.imageData[_y1+n1+1] = _MG;
-                        ImS.imageData[_y1+n1+2] = _MB;
-                        ImS.imageData[_y1+n1+3] = ImP.imageData[_y1+n1+3];
-                    }
-
-
-                    if(AImageRefence.roi == null){
-                        //asignacion de pixel
-                        ImS.imageData[_ind]     = _MR;
-                        ImS.imageData[_ind+1]   = _MG;
-                        ImS.imageData[_ind+2]   = _MB;
-                        ImS.imageData[_ind+3]   = ImP.imageData[_ind+3];
-                    }
-
-                    _ind+=4;
-                    n1+=4;
-                    n+=4;
-
-                } // FIN PARA ANCHO
-                k1++;
-                k++
-
-            }; // FIN PARA ALTO
-
-
-        }; // FIN SI RGBA
-
-
-        return  (ImS);
-    }; // END FUNCTION
-
+    }
 
     /**	 @function AkLUT Return the convolution of the input image by the kernel (ROI supported)
      *

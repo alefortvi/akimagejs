@@ -525,6 +525,40 @@
     };
 
 
+    /**
+     * @function {AkResize} Resize an image
+       @param {Akimage} _ImInput Input object
+       @param {number} _Nwidth New Width
+       @param {number} _Nheight New Height
+
+     * @return {Akimage} return a new Akimage with the new size
+     *
+     *
+     **/
+
+    _Akontext.AkResize = function(_ImInput,_Nwidth,_Nheight) {
+
+        if(!AImageRefence.depth == DEPTH_8U){AKerrors[4]= true; AKLastError=4;throw "Size must be a 8 bits depht"; return false;}
+        var _AKcanvasOld = document.createElement("CANVAS");
+        var _AKcanvasNew = document.createElement("CANVAS");
+
+        _AKcanvasNew.width = _Nwidth;
+        _AKcanvasNew.height = _Nheight;
+
+        _AKcanvasOld.width = _ImInput.width;
+        _AKcanvasOld.height = _ImInput.height;
+
+        var objImageData= _AKcanvasOld.getContext('2d').createImageData(_ImInput.width,_ImInput.height);
+        objImageData.data.set(_ImInput.imageData);
+        _AKcanvasOld.getContext('2d').putImageData(objImageData, 0, 0);
+        _AKcanvasNew.getContext("2d").drawImage(_AKcanvasOld,0,0,_Nwidth,_Nheight);
+        var _ImS = AkCreateImage([_Nwidth,_NHeight],AImageRefence.depth,AImageRefence.nChannels);
+        _ImS.imageData =_AKcanvasNew.getContext('2d').getImageData(0, 0,_Nwidth,_Nheight).data;
+
+        return _ImS;
+    };
+
+
     // END CONTEXT
 
 })(this);
