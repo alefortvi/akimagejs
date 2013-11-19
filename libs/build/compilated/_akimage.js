@@ -1299,16 +1299,21 @@ Akimage.namespace('Akimage.Modules');
         var cantCurrent = 1;
 
         while(k < Arr.length){
-            if(Arr[k] == currentValue){
-                cantCurrent++;
-                if(cantCurrent>cantMax){
-                    cantMax = cantCurrent;
-                    maxValue = Arr[k];
-                }
-            }
-           else{
-                cantCurrent = 1;
-                currentValue = Arr[k];
+
+
+            switch(Arr[k]){
+                case (currentValue):
+                    cantCurrent++;
+                    if(cantCurrent>cantMax){
+                        cantMax = cantCurrent;
+                        maxValue = Arr[k];
+                    }
+                break;
+                default :
+                    cantCurrent = 1;
+                    currentValue = Arr[k];
+                break;
+
             }
             k++;
         }

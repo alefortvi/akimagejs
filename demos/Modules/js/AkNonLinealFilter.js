@@ -76,6 +76,6 @@ AkLoadOnCanvas(Ak4,canvas1);
 
 
 
-var Ak5a = AkNonLinealFilter(Ak4,7,[-3,-3],MEDIANFILTER);
+var Ak5a = AkNonLinealFilter(Ak4,7,[-3,-3],MODEFILTER);
 
 AkLoadOnCanvas(Ak5a,canvas2);

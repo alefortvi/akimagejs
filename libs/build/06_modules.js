@@ -38,16 +38,21 @@ Akimage.namespace('Akimage.Modules');
         var cantCurrent = 1;
 
         while(k < Arr.length){
-            if(Arr[k] == currentValue){
-                cantCurrent++;
-                if(cantCurrent>cantMax){
-                    cantMax = cantCurrent;
-                    maxValue = Arr[k];
-                }
-            }
-           else{
-                cantCurrent = 1;
-                currentValue = Arr[k];
+
+
+            switch(Arr[k]){
+                case (currentValue):
+                    cantCurrent++;
+                    if(cantCurrent>cantMax){
+                        cantMax = cantCurrent;
+                        maxValue = Arr[k];
+                    }
+                break;
+                default :
+                    cantCurrent = 1;
+                    currentValue = Arr[k];
+                break;
+
             }
             k++;
         }
@@ -106,7 +111,7 @@ Akimage.namespace('Akimage.Modules');
             case MEDIANFILTER : _filter = _medianF; break;
             case DILATEFILTER : _filter = _dilateF; break;
             case ERODEFILTER : _filter = _erodeF; break;
-            default :AKerrors[24]= true; AKLastError=24;throw "AkNon Lineal Filter:  Invalid Filter Code"; return false; break;
+            default :AKerrors[24]= true; AKLastError=24;throw "AkNon Lineal Filter:  Invalid Filter Code"; break;
 
         }
 
@@ -845,7 +850,7 @@ Akimage.namespace('Akimage.Modules');
      *  			DXT_INVERSE transformacion hacia atras:1
      *  			DXT_SCALE escala el resultado por 1/NN:2
      *  			DXT_ROWS  transforma N dft de 1D:4
-     * @param {boolean}	swaped  true: image shifted, false: image normal
+     * @param {boolean}	shift  true: image shifted, false: image normal
      * @return Akimage Object( This Akimage Object (This object has in the 0 (Red) channel the real values
      * and in the 1 (green) channel the imaginary values
      **/
@@ -854,7 +859,7 @@ Akimage.namespace('Akimage.Modules');
     _Akontext.AkDFT = function (_ImE,_flag,shift){
 
         // Nro de parametros equivocados
-        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incomplete parameters"; return false;}
+        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incomplete parameters";}
 
         /**
          *
@@ -1234,7 +1239,7 @@ Akimage.namespace('Akimage.Modules');
 
                     for(var x=0; x<imageWidth; x++) {
 
-                        ImS.imageData[(i << 2) + (x << 2)] = re[i + x],
+                        ImS.imageData[(i << 2) + (x << 2)] = re[i + x];
                             ImS.imageData[(i << 2) + (x << 2)+1] = im[i + x];
 
                     }
@@ -1332,7 +1337,7 @@ Akimage.namespace('Akimage.Modules');
 
                     for(var x=0; x<imageWidth; x++) {
 
-                        ImS.imageData[(i << 2) + (x << 2)] = re[i + x],
+                        ImS.imageData[(i << 2) + (x << 2)] = re[i + x];
                             ImS.imageData[(i << 2) + (x << 2)+1] = im[i + x];
 
                     }
@@ -1426,7 +1431,7 @@ Akimage.namespace('Akimage.Modules');
 
         if(!(_Adimension & (_Adimension -1 ))){return _Adimension;}
 
-        if(!_Adimension){AKerrors[4]= true; AKLastError=4;throw "invalid parameters"; return false;}
+        if(!_Adimension){AKerrors[4]= true; AKLastError=4;throw "invalid parameters";}
 
 
         while (_Adimension & (_Adimension-1)) {
@@ -1450,12 +1455,11 @@ Akimage.namespace('Akimage.Modules');
 
 
         // Nro de parametros equivocados
-        if (arguments.length!=2){AKerrors[5]= true; AKLastError=5;throw "incomplete parameters"; return false;}
-        if(!_AIn.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters"; return false;}
-        if(!_ANewSize){AKerrors[4]= true; AKLastError=4;throw "invalid parameters"; return false;}
-//		if(_ANewSize>4096){AKerrors[7]= true; AKLastError=7;throw "Padding size, too hight"; return false;}
-        if(_ANewSize<_AIn.width){AKerrors[8]= true; AKLastError=8;throw "new size is lower than old size"; return false;}
-        if(_AIn.width != _AIn.height){AKerrors[9]= true; AKLastError=9;throw "Image must be square"; return false;}
+        if (arguments.length!=2){AKerrors[5]= true; AKLastError=5;throw "incomplete parameters";}
+        if(!_AIn.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters";}
+        if(!_ANewSize){AKerrors[4]= true; AKLastError=4;throw "invalid parameters";}
+        if(_ANewSize<_AIn.width){AKerrors[8]= true; AKLastError=8;throw "new size is lower than old size";}
+        if(_AIn.width != _AIn.height){AKerrors[9]= true; AKLastError=9;throw "Image must be square";}
 
         if(_ANewSize==_AIn.width) {return _AIn;}
 
@@ -1486,9 +1490,9 @@ Akimage.namespace('Akimage.Modules');
 
 
         // Nro de parametros equivocados
-        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incomplete parameters"; return false;};
-        if(!_AIn.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters"; return false;};
-        if(Math.sqrt(_AKernel.length)!=Math.sqrt(_AKernel.length)^0){AKerrors[10]= true; AKLastError=10;throw "Kernel must be square"; return false;};
+        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incomplete parameters"; }
+        if(!_AIn.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters"; }
+        if(Math.sqrt(_AKernel.length)!=Math.sqrt(_AKernel.length)^0){AKerrors[10]= true; AKLastError=10;throw "Kernel must be square";}
 
 
         /* Padding Ain
@@ -1821,11 +1825,11 @@ Akimage.namespace('Akimage.Modules');
 
         var _KernelWidth = Math.sqrt(_AKernel.length);
 
-        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
-        if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters"; return false;}
-        if(_KernelWidth != (_KernelWidth^0)){AKerrors[10]= true; AKLastError=10;throw "Kernel must be square"; return false;};
-        if((Object.prototype.toString.apply(_Anchor) != '[object Array]') || (_Anchor.length != 2)){AKerrors[11]= true;throw "Anchor must be a 2 elements array"; AKLastError=11;return false;}
-        if(_Anchor[0] * _Anchor[0] >= _KernelWidth*_KernelWidth || _Anchor[1] * _Anchor[1] >= _KernelWidth*_KernelWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel"; return false;};
+        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; ;}
+        if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters"; ;}
+        if(_KernelWidth != (_KernelWidth^0)){AKerrors[10]= true; AKLastError=10;throw "Kernel must be square"; ;};
+        if((Object.prototype.toString.apply(_Anchor) != '[object Array]') || (_Anchor.length != 2)){AKerrors[11]= true;throw "Anchor must be a 2 elements array"; AKLastError=11;;}
+        if(_Anchor[0] * _Anchor[0] >= _KernelWidth*_KernelWidth || _Anchor[1] * _Anchor[1] >= _KernelWidth*_KernelWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel"; ;};
 
         //SI EL ANCLA SE VA DEL KERNEL
 
@@ -2369,10 +2373,10 @@ Akimage.namespace('Akimage.Modules');
                 k++;
                 k1++;
 
-            }; // FIN PARA ALTO
+            } // FIN PARA ALTO
 
 
-        }; // FIN SI RGBA
+        } // FIN SI RGBA
 
 
         return  (ImS);
@@ -2390,10 +2394,10 @@ Akimage.namespace('Akimage.Modules');
 
     _Akontext.AkNonLinealFilter = function(AImageRefence,_MaskWidth,_Anchor,_ToFilter){
 
-        if (arguments.length!=4){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
-        if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters"; return false;}
-         if((Object.prototype.toString.apply(_Anchor) != '[object Array]') || (_Anchor.length != 2)){AKerrors[11]= true;throw "Anchor must be a 2 elements array"; AKLastError=11;return false;}
-        if(_Anchor[0] * _Anchor[0] >= _MaskWidth*_MaskWidth || _Anchor[1] * _Anchor[1] >= _MaskWidth*_MaskWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel"; return false;};
+        if (arguments.length!=4){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments";}
+        if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters"; }
+         if((Object.prototype.toString.apply(_Anchor) != '[object Array]') || (_Anchor.length != 2)){AKerrors[11]= true;AKLastError=11;throw "Anchor must be a 2 elements array"; }
+        if(_Anchor[0] * _Anchor[0] >= _MaskWidth*_MaskWidth || _Anchor[1] * _Anchor[1] >= _MaskWidth*_MaskWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel";};
 
 
 
@@ -2417,7 +2421,7 @@ Akimage.namespace('Akimage.Modules');
         if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters";}
         if(Object.prototype.toString.apply(_Kernel) != '[object Array]'){AKerrors[11]= true;throw "Anchor must be a array"; AKLastError=11;}
         if((Object.prototype.toString.apply(_Anchor) != '[object Array]') || (_Anchor.length != 2)){AKerrors[11]= true;throw "Anchor must be a 2 elements array"; AKLastError=11;}
-        if(_Anchor[0] * _Anchor[0] >= _MaskWidth*_MaskWidth || _Anchor[1] * _Anchor[1] >= _MaskWidth*_MaskWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel"; return false;}
+        if(_Anchor[0] * _Anchor[0] >= _MaskWidth*_MaskWidth || _Anchor[1] * _Anchor[1] >= _MaskWidth*_MaskWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel"; }
 
 
 
@@ -2442,7 +2446,7 @@ Akimage.namespace('Akimage.Modules');
         if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters";}
         if(Object.prototype.toString.apply(_Kernel) != '[object Array]'){AKerrors[11]= true;throw "Anchor must be a array"; AKLastError=11;}
         if((Object.prototype.toString.apply(_Anchor) != '[object Array]') || (_Anchor.length != 2)){AKerrors[11]= true;throw "Anchor must be a 2 elements array"; AKLastError=11;}
-        if(_Anchor[0] * _Anchor[0] >= _MaskWidth*_MaskWidth || _Anchor[1] * _Anchor[1] >= _MaskWidth*_MaskWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel"; return false;}
+        if(_Anchor[0] * _Anchor[0] >= _MaskWidth*_MaskWidth || _Anchor[1] * _Anchor[1] >= _MaskWidth*_MaskWidth){AKerrors[14]= true; AKLastError=14;throw "Anchor bigger than Kernel"; }
 
 
 
@@ -2459,9 +2463,9 @@ Akimage.namespace('Akimage.Modules');
      **/
     _Akontext.AkLUT = function(_ImIn,_lut,_scaled) {
 
-        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
-        if (_lut.length!=256){AKerrors[23]= true; AKLastError=23;throw "In AkLUT, lut array must be of 256 elements"; return false;}
-        if (_ImIn.depth != DEPTH_8U){AKerrors[15]= true; AKLastError=23;throw "Akimage depth must be DEPTH_8U"; return false;}
+        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; }
+        if (_lut.length!=256){AKerrors[23]= true; AKLastError=23;throw "In AkLUT, lut array must be of 256 elements"; }
+        if (_ImIn.depth != DEPTH_8U){AKerrors[15]= true; AKLastError=23;throw "Akimage depth must be DEPTH_8U";}
 
 
 
