@@ -538,7 +538,7 @@
 
     _Akontext.AkResize = function(_ImInput,_Nwidth,_Nheight) {
 
-        if(!AImageRefence.depth == DEPTH_8U){AKerrors[4]= true; AKLastError=4;throw "Size must be a 8 bits depht"; return false;}
+        if(!_ImInput.depth == DEPTH_8U){AKerrors[15]= true; AKLastError=15;throw "Size must be a 8 bits depth";}
         var _AKcanvasOld = document.createElement("CANVAS");
         var _AKcanvasNew = document.createElement("CANVAS");
 
@@ -552,7 +552,7 @@
         objImageData.data.set(_ImInput.imageData);
         _AKcanvasOld.getContext('2d').putImageData(objImageData, 0, 0);
         _AKcanvasNew.getContext("2d").drawImage(_AKcanvasOld,0,0,_Nwidth,_Nheight);
-        var _ImS = AkCreateImage([_Nwidth,_NHeight],AImageRefence.depth,AImageRefence.nChannels);
+        var _ImS = AkCreateImage([_Nwidth,_Nheight],_ImInput.depth,_ImInput.nChannels);
         _ImS.imageData =_AKcanvasNew.getContext('2d').getImageData(0, 0,_Nwidth,_Nheight).data;
 
         return _ImS;
