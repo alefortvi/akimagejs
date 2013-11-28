@@ -391,9 +391,9 @@ Akimage.namespace('Akimage.Modules');
 
                     //////// HERE IS THE STATISTICAL FUNCTION ////////
 
-                    var _MR = _filter(_tempR);
-                    var _MG = _filter(_tempG);
-                    var _MB = _filter(_tempB);
+                    var _MR = _filter(_tempR,_kernel);
+                    var _MG = _filter(_tempG,_kernel);
+                    var _MB = _filter(_tempB,_kernel);
 
 
                     // TO HERE
@@ -532,9 +532,9 @@ Akimage.namespace('Akimage.Modules');
 
                     //////// HERE IS THE STATISTICAL FUNCTION ////////
 
-                    var _MR = _filter(_tempR);
-                    var _MG = _filter(_tempG);
-                    var _MB = _filter(_tempB);
+                    var _MR = _filter(_tempR,_kernel);
+                    var _MG = _filter(_tempG,_kernel);
+                    var _MB = _filter(_tempB,_kernel);
 
                     // TO HERE
 

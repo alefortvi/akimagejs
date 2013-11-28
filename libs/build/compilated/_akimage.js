@@ -1652,9 +1652,9 @@ Akimage.namespace('Akimage.Modules');
 
                     //////// HERE IS THE STATISTICAL FUNCTION ////////
 
-                    var _MR = _filter(_tempR);
-                    var _MG = _filter(_tempG);
-                    var _MB = _filter(_tempB);
+                    var _MR = _filter(_tempR,_kernel);
+                    var _MG = _filter(_tempG,_kernel);
+                    var _MB = _filter(_tempB,_kernel);
 
 
                     // TO HERE
@@ -1793,9 +1793,9 @@ Akimage.namespace('Akimage.Modules');
 
                     //////// HERE IS THE STATISTICAL FUNCTION ////////
 
-                    var _MR = _filter(_tempR);
-                    var _MG = _filter(_tempG);
-                    var _MB = _filter(_tempB);
+                    var _MR = _filter(_tempR,_kernel);
+                    var _MG = _filter(_tempG,_kernel);
+                    var _MB = _filter(_tempB,_kernel);
 
                     // TO HERE
 
@@ -4470,7 +4470,7 @@ Akimage.namespace('Akimage.Modules');
 
     _Akontext.AkResize = function(_ImInput,_Nwidth,_Nheight) {
 
-        if(!_ImInput.depth == DEPTH_8U){AKerrors[4]= true; AKLastError=4;throw "Size must be a 8 bits depth";}
+        if(!_ImInput.depth == DEPTH_8U){AKerrors[15]= true; AKLastError=15;throw "Size must be a 8 bits depth";}
         var _AKcanvasOld = document.createElement("CANVAS");
         var _AKcanvasNew = document.createElement("CANVAS");
 

@@ -40,7 +40,9 @@ function init(){
     var canvas31 = document.getElementById('canvas31');
     var canvas32 = document.getElementById('canvas32');
     var canvas33 = document.getElementById('canvas33');
-
+    var canvas34 = document.getElementById('canvas34');
+    var canvas35 = document.getElementById('canvas35');
+    var canvas36 = document.getElementById('canvas36');
 
 
 
@@ -448,10 +450,50 @@ function init(){
     var Ak30 = AkNonLinealFilter(Original,7,[-3,-3],MEDIANFILTER);
     AkLoadOnCanvas(Ak30,canvas30);
 
+    // Filter Dilate
 
+
+    var L = [];
+    for (var k =0;k<256;k++){
+        L[k]=((k/128)^0)*255;
+    }
+
+
+
+
+
+    var BN  = AkLUT(GRAY,L,false);
+    AkLoadOnCanvas(BN,canvas31);
+
+    var Kernel=[0,1,0,1,1,1,0,1,0];
+
+
+    var Ak32 = AkDilate(BN,Kernel,[-1,-1]);
+    AkLoadOnCanvas(Ak32,canvas32);
+
+    // Filter Erode
+
+    var Ak33 = AkErode(BN,Kernel,[-1,-1]);
+    AkLoadOnCanvas(Ak33,canvas33);
+
+    var R1 = AkCreateROI(100,100,100,100);
+    var Ak34 = AkClone(GRAY);
+    Ak34 = AkSetImageROI(Ak34,R1);
+    var Kernel=[0,1,0,1,1,1,0,1,0];
+    var Ak34 = AkDilate(Ak34,Kernel,[-1,-1]);
+    AkLoadOnCanvas(Ak34,canvas34);
+
+    // Resize
+
+    var Ak35 = AkResize(Original,300,300);
+    AkLoadOnCanvas(Ak35,canvas35);
+
+    // Resize
+
+    var Ak36 = AkResize(Original,200,200);
+    AkLoadOnCanvas(Ak36,canvas36);
 
 }
-
 
 //preloader
 
@@ -489,4 +531,4 @@ loader.addCompletionListener(function() {
 }); 
  
 // begin downloading images 
-loader.start(); 
+loader.start();
