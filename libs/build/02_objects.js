@@ -86,11 +86,6 @@ Akimage.namespace('Akimage.AImage');
 
         this.AImage = {
 
-            // priviledged method
-
-            //		metodo_privilegiado:function () {
-            //			return metodo(atributo);
-            //		},
 
             //sizeof(AImage)
             nSize : 0,
