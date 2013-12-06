@@ -25,9 +25,9 @@
 
         /// Salidas rapidas
 
-        if (arguments.length!=2){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
-        if(!_ImE.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
-        if(_ImE.depth != 8){AKerrors[15]= true; AKLastError=15;throw "In AkCvtColor, input depth must be DEPTH_8U"; return false;}
+        if (arguments.length!=2){AKerrors[5]= true; AKLastError=5;if(AkErrorEnable) throw "incorrect numbers of arguments"; return false;}
+        if(!_ImE.imageData){AKerrors[4]= true; AKLastError=4;if(AkErrorEnable) throw "expeted Akimage object in arguments"; return false;}
+        if(_ImE.depth != 8){AKerrors[15]= true; AKLastError=15;if(AkErrorEnable) throw "In AkCvtColor, input depth must be DEPTH_8U"; return false;}
 
 
 
@@ -234,7 +234,7 @@
 
             default:
 
-                AKerrors[16]= true; AKLastError=16;throw "Color code invalid"; return false;
+                AKerrors[16]= true; AKLastError=16;if(AkErrorEnable) throw "Color code invalid"; return false;
 
                 break;
         };

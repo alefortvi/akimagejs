@@ -23,11 +23,11 @@
 
     _Akontext.AkGet = function(AkAImage,_x,_y,_c) {
 
-        //if (arguments.length!=4){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
-        //if(!AkAImage.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
-        //if(_x<0 || _x > AkAImage.width){AKerrors[21]= true; AKLastError=21;throw "In AkGet arguments out of range"; return false;}
-        //if(_y<0 || _y > AkAImage.height){AKerrors[21]= true; AKLastError=21;throw "In AkGet arguments out of range"; return false;}
-        //if(_c<0 && _c > 4){AKerrors[21]= true; AKLastError=21;throw "In AkGet arguments out of range"; return false;}
+        //if (arguments.length!=4){AKerrors[5]= true; AKLastError=5;if(AkErrorEnable) throw "incorrect numbers of arguments"; return false;}
+        //if(!AkAImage.imageData){AKerrors[4]= true; AKLastError=4;if(AkErrorEnable) throw "expeted Akimage object in arguments"; return false;}
+        //if(_x<0 || _x > AkAImage.width){AKerrors[21]= true; AKLastError=21;if(AkErrorEnable) throw "In AkGet arguments out of range"; return false;}
+        //if(_y<0 || _y > AkAImage.height){AKerrors[21]= true; AKLastError=21;if(AkErrorEnable) throw "In AkGet arguments out of range"; return false;}
+        //if(_c<0 && _c > 4){AKerrors[21]= true; AKLastError=21;if(AkErrorEnable) throw "In AkGet arguments out of range"; return false;}
 
         return (AkAImage.imageData[(((AkAImage.width * _y)+(_x))<<2)+_c])
 

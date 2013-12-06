@@ -18,6 +18,10 @@ Akimage.namespace('Akimage.Constants');
      * Constants Depth
      * */
 
+
+    _Akontext.Kont = 10;
+
+
     // 0 - 255 (integer)
     _Akontext.DEPTH_8U = 8;
     // -128 - 127 (integer)

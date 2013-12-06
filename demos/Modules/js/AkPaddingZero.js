@@ -21,7 +21,7 @@ var canvas1 = document.getElementById('canvas1');
 var canvas2 = document.getElementById('canvas2');
 
 var img = new Image();
-img.src = './../../images/lenna200.jpg';
+img.src = './../../images/lenna_dispar.jpg';
 	
 
 	
@@ -31,8 +31,12 @@ var Ak4 = AkLoadImage(img,0);
 
 AkLoadOnCanvas(Ak4,canvas1);
 
+var max = Ak4.width;
+if(Ak4.height>max){
+    max = Ak4.height;
+}
 
-var newSize = AkGetOptimalDFTSize(Ak4.width);
+var newSize = AkGetOptimalDFTSize(max);
 var Ak5 = AkPaddingZero(Ak4,newSize);
 
 

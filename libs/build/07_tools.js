@@ -30,10 +30,10 @@
     _Akontext.AkMerge = function(_AChannel0, _AChannel1, _AChannel2, _AChannel3, _OutputModel){
 
         // Nro de parametros equivocados
-        if (arguments.length!=5){AKerrors[5]= true; AKLastError=5;throw "incomplete parameters"; return false;}
+        if (arguments.length!=5){AKerrors[5]= true; AKLastError=5;if(AkErrorEnable) throw "incomplete parameters"; return false;}
         // Tipo de parametro equivocado
 
-        if(!_OutputModel.imageData){AKerrors[4]= true; AKLastError=4;throw "invalid parameters"; return false;}
+        if(!_OutputModel.imageData){AKerrors[4]= true; AKLastError=4;if(AkErrorEnable) throw "invalid parameters"; return false;}
 
         // If the arrays have different dimension
         var _c1 = (_AChannel0.length) || 1,
@@ -45,26 +45,26 @@
 
         var min = Math.min((_c1==1)?max:_c1,(_c2==1)?max:_c2,(_c3==1)?max:_c3,(_c4==1)?max:_c4);
 
-        if(max != min){AKerrors[6]= true; AKLastError=6;throw "array whit different dimension"; return false; }
+        if(max != min){AKerrors[6]= true; AKLastError=6;if(AkErrorEnable) throw "array whit different dimension"; return false; }
 
-        var ImS = AkCreateImage([_OutputModel.width, _OutputModel.height], _OutputModel.depth, _OutputModel.nChannels);
+        //var ImS = AkCreateImage([_OutputModel.width, _OutputModel.height], _OutputModel.depth, _OutputModel.nChannels);
 
-        for(var y=0; y<ImS.height; y++) {
-            var i = y*ImS.width;
+        for(var y=0; y<_OutputModel.height; y++) {
+            var i = y*_OutputModel.width;
 
 
-            for(var x=0; x<ImS.width; x++) {
+            for(var x=0; x<_OutputModel.width; x++) {
 
-                ImS.imageData[(i << 2) + (x << 2)]   = _AChannel0[i + x] || 0,
-                    ImS.imageData[(i << 2) + (x << 2)+1] = _AChannel1[i + x] || 0,
-                    ImS.imageData[(i << 2) + (x << 2)+2] = _AChannel2[i + x] || 0,
-                    ImS.imageData[(i << 2) + (x << 2)+3] = _AChannel3[i + x] || 0;
+                _OutputModel.imageData[(i << 2) + (x << 2)]   = _AChannel0[i + x] || 0,
+                    _OutputModel.imageData[(i << 2) + (x << 2)+1] = _AChannel1[i + x] || 0,
+                    _OutputModel.imageData[(i << 2) + (x << 2)+2] = _AChannel2[i + x] || 0,
+                    _OutputModel.imageData[(i << 2) + (x << 2)+3] = _AChannel3[i + x] || 0;
 
             }
         }
 
 
-        return ImS;
+        return _OutputModel;
 
     };
 
@@ -191,8 +191,8 @@
 
     _Akontext.AkConvertScale = function(_ImIn,_newDepth, _scale){
 
-        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
-        if(!_ImIn.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
+        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;if(AkErrorEnable) throw "incorrect numbers of arguments"; return false;}
+        if(!_ImIn.imageData){AKerrors[4]= true; AKLastError=4;if(AkErrorEnable) throw "expeted Akimage object in arguments"; return false;}
 
 
 
@@ -210,7 +210,7 @@
             case (DEPTH_32F):
             case (DEPTH_64F): _scale = false; break;
             default:
-                AKerrors[17]= true; AKLastError=17;throw "Depth code invalid"; return false;
+                AKerrors[17]= true; AKLastError=17;if(AkErrorEnable) throw "Depth code invalid"; return false;
                 break;
         }
 
@@ -317,9 +317,9 @@
 
     _Akontext.AkCrop = function(_ImIn){
 
-        if (arguments.length!=1){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
-        if(!_ImIn.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
-        if(!_ImIn.roi == null){AKerrors[18]= true; AKLastError=18;throw "No ROI defined"; return false;}
+        if (arguments.length!=1){AKerrors[5]= true; AKLastError=5;if(AkErrorEnable) throw "incorrect numbers of arguments"; return false;}
+        if(!_ImIn.imageData){AKerrors[4]= true; AKLastError=4;if(AkErrorEnable) throw "expeted Akimage object in arguments"; return false;}
+        if(!_ImIn.roi == null){AKerrors[18]= true; AKLastError=18;if(AkErrorEnable) throw "No ROI defined"; return false;}
 
 
         var _ImO = AkCreateImage([_ImIn.roi.width,_ImIn.roi.height],_ImIn.depth,_ImIn.nChannels);
@@ -370,9 +370,9 @@
     _Akontext.AkAddWeighted = function(_Im_1, Weight_1, _Im_2, Weight_2,Cst){
 
 
-        if (arguments.length<4 || arguments.length>5){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
-        if(!_Im_1.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
-        if(!_Im_2.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
+        if (arguments.length<4 || arguments.length>5){AKerrors[5]= true; AKLastError=5;if(AkErrorEnable) throw "incorrect numbers of arguments"; return false;}
+        if(!_Im_1.imageData){AKerrors[4]= true; AKLastError=4;if(AkErrorEnable) throw "expeted Akimage object in arguments"; return false;}
+        if(!_Im_2.imageData){AKerrors[4]= true; AKLastError=4;if(AkErrorEnable) throw "expeted Akimage object in arguments"; return false;}
 
         Cst = Cst || 0;
 
@@ -516,7 +516,7 @@
 
     _Akontext.AkClone = function(AImageRefence) {
 
-        if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
+        if(!AImageRefence.imageData){AKerrors[4]= true; AKLastError=4;if(AkErrorEnable) throw "expeted Akimage object in arguments"; return false;}
 
         var _ImS = AkCreateImage([AImageRefence.width,AImageRefence.height],AImageRefence.depth,AImageRefence.nChannels);
         _ImS.imageData.set(AImageRefence.imageData);
@@ -538,7 +538,7 @@
 
     _Akontext.AkResize = function(_ImInput,_Nwidth,_Nheight) {
 
-        if(!_ImInput.depth == DEPTH_8U){AKerrors[15]= true; AKLastError=15;throw "Size must be a 8 bits depth";}
+        if(!_ImInput.depth == DEPTH_8U){AKerrors[15]= true; AKLastError=15;if(AkErrorEnable) throw "Size must be a 8 bits depth";}
         var _AKcanvasOld = document.createElement("CANVAS");
         var _AKcanvasNew = document.createElement("CANVAS");
 

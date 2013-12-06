@@ -357,9 +357,9 @@
 
     _Akontext.AkCreateROI = function(_xOffset,_yOffset, _Width, _Height) {
 
-        if (arguments.length!=4) {AKerrors[5]= true; AKLastError=5; throw "invalid number of arguments";return false;}
+        if (arguments.length!=4) {AKerrors[5]= true; AKLastError=5; if(AkErrorEnable) throw "invalid number of arguments";return false;}
 
-        if (_xOffset < 0 || _yOffset <0|| _Width <1|| _Height<1) {AKerrors[4]= true; AKLastError=4; throw "invalid value of argument" ;return false;}
+        if (_xOffset < 0 || _yOffset <0|| _Width <1|| _Height<1) {AKerrors[4]= true; AKLastError=4; if(AkErrorEnable) throw "invalid value of argument" ;return false;}
 
 
 
@@ -392,8 +392,8 @@
 
     _Akontext.AkCreateHist = function(_bins){
 
-        if (arguments.length!=1) {AKerrors[5]= true; AKLastError=5; throw "invalid number of arguments";return false;}
-        if (!(Object.prototype.toString.apply(_bins) === '[object Array]')) {AKerrors[19]= true; throw "In Histogram array expeted"; AKLastError=19; return false;}
+        if (arguments.length!=1) {AKerrors[5]= true; AKLastError=5; if(AkErrorEnable) throw "invalid number of arguments";return false;}
+        if (!(Object.prototype.toString.apply(_bins) === '[object Array]')) {AKerrors[19]= true; if(AkErrorEnable) throw "In Histogram array expeted"; AKLastError=19; return false;}
 
         var multi = false;
         if(_bins[0][0] != undefined) {multi = true;}
@@ -409,7 +409,7 @@
         if(!multi){
 
             if(_bins[1]<_bins[0])
-            {AKerrors[20]= true; AKLastError=20; throw "in Histogram invalid hight value is low than low value";return false;}
+            {AKerrors[20]= true; AKLastError=20; if(AkErrorEnable) throw "in Histogram invalid hight value is low than low value";return false;}
 
 
             // desde primer valor hasta segundo
@@ -439,7 +439,7 @@
 
 
                 if(_bins[p][1]<_bins[p][0])
-                {AKerrors[20]= true; AKLastError=20; throw "in Histogram invalid hight value is low than low value";return false;}
+                {AKerrors[20]= true; AKLastError=20; if(AkErrorEnable) throw "in Histogram invalid hight value is low than low value";return false;}
 
                 //dentro del invervalor, desde el primer valor hasta el segundo
                 for(var k = _bins[p][0]; k<_bins[p][1];k++){

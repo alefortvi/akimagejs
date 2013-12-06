@@ -25,9 +25,9 @@
     _Akontext.AkCalcHist = function(_ImIn, _Hist,_Hcode) {
 
 
-        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
-        if(!_ImIn.imageData){AKerrors[4]= true; AKLastError=4;throw "expeted Akimage object in arguments"; return false;}
-        if(!_Hist.bins){AKerrors[22]= true; AKLastError=22;throw "expeted AkHistogram object in arguments"; return false;}
+        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;if(AkErrorEnable) throw "incorrect numbers of arguments"; return false;}
+        if(!_ImIn.imageData){AKerrors[4]= true; AKLastError=4;if(AkErrorEnable) throw "expeted Akimage object in arguments"; return false;}
+        if(!_Hist.bins){AKerrors[22]= true; AKLastError=22;if(AkErrorEnable) throw "expeted AkHistogram object in arguments"; return false;}
 
 
 
@@ -208,8 +208,8 @@
     _Akontext.AkHist2Akimage = function(AkHist,_channels,_width,_height,_fill,_color) {
 
 
-        if (arguments.length!=6){AKerrors[5]= true; AKLastError=5;throw "incorrect numbers of arguments"; return false;}
-        if(!AkHist.bins){AKerrors[22]= true; AKLastError=22;throw "expeted AkHistogram object in arguments"; return false;}
+        if (arguments.length!=6){AKerrors[5]= true; AKLastError=5;if(AkErrorEnable) throw "incorrect numbers of arguments"; return false;}
+        if(!AkHist.bins){AKerrors[22]= true; AKLastError=22;if(AkErrorEnable) throw "expeted AkHistogram object in arguments"; return false;}
 
 
 

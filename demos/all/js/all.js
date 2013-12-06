@@ -68,13 +68,17 @@ function init(){
 
 	var RGB = AkSplit(Original);
 
-	var R = RGB[0];
-	var G = RGB[1];
-	var B = RGB[2];
+	var R_ = RGB[0];
+	var G_ = RGB[1];
+	var B_ = RGB[2];
 
-	R = AkMerge(R,0,0,0,OneC);
-	G = AkMerge(G,0,0,0,OneC);
-	B = AkMerge(B,0,0,0,OneC);
+    var R = AkCreateImage([256,256],8,1);
+    var G = AkCreateImage([256,256],8,1);
+    var B = AkCreateImage([256,256],8,1);
+
+	AkMerge(R_,0,0,0,R);
+	AkMerge(G_,0,0,0,G);
+	AkMerge(B_,0,0,0,B);
 
 	AkLoadOnCanvas(R,canvas2);
 	AkLoadOnCanvas(G,canvas3);
@@ -86,13 +90,17 @@ function init(){
 
 	var HSV = AkSplit(Ak5);
 
-	var H = HSV[0];
-	var S = HSV[1];
-	var V = HSV[2];
+	var H_ = HSV[0];
+	var S_ = HSV[1];
+	var V_ = HSV[2];
 
-	H = AkMerge(H,0,0,0,OneC);
-	S = AkMerge(S,0,0,0,OneC);
-	V = AkMerge(V,0,0,0,OneC);
+    var H = AkCreateImage([256,256],8,1);
+    var S = AkCreateImage([256,256],8,1);
+    var V = AkCreateImage([256,256],8,1);
+
+	AkMerge(H_,0,0,0,H);
+	AkMerge(S_,0,0,0,S);
+	AkMerge(V_,0,0,0,V);
 
 	AkLoadOnCanvas(H,canvas5);
 	AkLoadOnCanvas(S,canvas6);
@@ -127,7 +135,7 @@ function init(){
 	}
 
 	//mezclo en un objeto Akimage
-	Ak8 = AkMerge(_real,_real,_real,0,Ak8);
+	AkMerge(_real,_real,_real,0,Ak8);
 
 
 	AkLoadOnCanvas(Ak8,canvas8);
@@ -161,7 +169,7 @@ function init(){
     }
 
     //mezclo en un objeto Akimage
-    Ak9 = AkMerge(_real,_real,_real,0,Ak8);
+    AkMerge(_real,_real,_real,0,Ak9);
 
 
     AkLoadOnCanvas(Ak9,canvas9);

@@ -24,9 +24,13 @@ Akimage.namespace('Akimage.AKontrol');
 
     /*** Akimage controls variables ****/
 
+    _Akontext.AkErrorEnable = true;
+
     _Akontext.AKerrors = [];
 
     _Akontext.AKLastError = "";
+
+
 
 
 })(this);

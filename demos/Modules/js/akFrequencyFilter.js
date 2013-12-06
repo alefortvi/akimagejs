@@ -45,9 +45,7 @@ AkLoadOnCanvas(Ak4,canvas1);
 
 var Ak5 = AkFrequencyFilter(Ak4,kernel,false);
 
-AkLoadOnCanvas(Ak4,canvas1);
-
-var Ak5 = AkFrequencyFilter(Ak4,kernel,false);
 
 
 AkLoadOnCanvas(Ak5[0],canvas2);
+
