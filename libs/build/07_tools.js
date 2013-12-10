@@ -182,7 +182,7 @@
 
 
     /**
-     * @function {AkConvertScale} Change the depth from an object to other depth value
+     * @function {AkConvertScale} Change the Struct depth to another depth value
      * @param {Akimage} _ImIn Imput Akimage object
      * @param {number} _newDepth new depth
      * @param {boolean} _scale mapping the old value to the new scale

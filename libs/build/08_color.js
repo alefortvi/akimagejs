@@ -11,7 +11,7 @@
 
 
     /**
-     * @function {AkCvtColor} Convert and image from one color model to another
+     * @function {AkCvtColor} Convert an image from one color model to another
      * @param {Akimage}_ImE Input image reference
      * @param {int}_Ccode Model output color code
      * @return {Akimage}
