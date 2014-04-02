@@ -51,7 +51,7 @@ AkLoadOnCanvas(Ak4,canvas1);
 
 var Kernel=[0,1,0,1,1,1,0,1,0];
 
-var Ak5a = AkDilate(Ak4,Kernel,[-1,-1]);
+var Ak5a = AkDilate(Ak4,Kernel,[-1,-1]); //prueba de git
 
 
 var Ak5a = AkFilter2D(Ak5a,Kernel,[-2,-2]);
