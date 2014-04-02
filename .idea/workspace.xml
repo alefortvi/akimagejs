@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e92a8ad4-6936-4f78-9199-3d861a412cf7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/Wonderful_Wizard_of_Oz_7_Cover_by_skottieyoung (Copia en conflicto de PC 2014-02-24).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/demos/ROI/js/ROI.js" />
-      <change type="DELETED" beforePath="C:\wamp\www\Dropbox\akimage\project\images\Wonderful_Wizard_of_Oz_7_Cover_by_skottieyoung.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/build/01_constants.js" afterPath="$PROJECT_DIR$/libs/build/01_constants.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/build/07_tools.js" afterPath="$PROJECT_DIR$/libs/build/07_tools.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/build/compilated/akimage.js" afterPath="$PROJECT_DIR$/libs/build/compilated/akimage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demos/pruebas/js/prueba.js" afterPath="$PROJECT_DIR$/demos/pruebas/js/prueba.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="project.iws" />
@@ -35,7 +28,8 @@
       <file leaf-file-name="02_objects.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/libs/build/02_objects.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="144" column="6" selection-start="3057" selection-end="3057" vertical-scroll-proportion="0.0" vertical-offset="2592" max-vertical-offset="3240">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2592" max-vertical-offset="3240">
+              <caret line="144" column="6" selection-start-line="144" selection-start-column="6" selection-end-line="144" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -44,7 +38,8 @@
       <file leaf-file-name="03_constructors.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/libs/build/03_constructors.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="0" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="8460">
+            <state vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="8460">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -53,7 +48,8 @@
       <file leaf-file-name="ROI.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demos/ROI/js/ROI.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="11" selection-start="271" selection-end="271" vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="846">
+            <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="846">
+              <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -62,7 +58,8 @@
       <file leaf-file-name="06_modules.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/libs/build/06_modules.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="0" selection-start="1389" selection-end="1389" vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="48924">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="48924">
+              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -71,7 +68,8 @@
       <file leaf-file-name="01_constants.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/libs/build/01_constants.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="86" column="13" selection-start="1635" selection-end="1635" vertical-scroll-proportion="0.0" vertical-offset="1548" max-vertical-offset="2016">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1548" max-vertical-offset="2016">
+              <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -80,7 +78,8 @@
       <file leaf-file-name="AkNonLinealFilter.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demos/Modules/js/AkNonLinealFilter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="0" selection-start="789" selection-end="789" vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="1548">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="1548">
+              <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -89,7 +88,8 @@
       <file leaf-file-name="akimage.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/libs/build/compilated/akimage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="10" selection-start="188" selection-end="188" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="93276">
+            <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="93276">
+              <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -98,7 +98,8 @@
       <file leaf-file-name="AkErode.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/demos/Modules/js/AkErode.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="0" selection-start="511" selection-end="511" vertical-scroll-proportion="0.962069" vertical-offset="0" max-vertical-offset="1224">
+            <state vertical-scroll-proportion="0.591623" vertical-offset="651" max-vertical-offset="1224">
+              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -107,7 +108,8 @@
       <file leaf-file-name="all.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demos/all/js/all.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="34" selection-start="910" selection-end="910" vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="9864">
+            <state vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="9864">
+              <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -116,7 +118,8 @@
       <file leaf-file-name="AkCrop.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demos/Tools/AkCrop.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="720">
+            <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="720">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -203,7 +206,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -323,22 +326,27 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
       <setting name="configLocationType" value="CONFIG_FILE" />
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
-      <setting name="preferredDebugBrowser" value="CHROME" />
+      <setting name="preferredDebugBrowser" value="Chrome" />
       <method />
     </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
-      <browser start="false" url="" with-js-debugger="false" />
       <method />
     </configuration>
     <configuration default="false" name="filter2D.html" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true" uri="http://127.0.0.1/Dropbox/akimage/project/demos/Modules/filter2D.html">
@@ -351,22 +359,8 @@
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <option name="IGNORE_EXTERNALS" value="false" />
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  <component name="SvnConfiguration" myUseAcceleration="nothing">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -374,6 +368,11 @@
       <created>1381002451462</created>
       <updated>1381002451462</updated>
     </task>
+    <task id="LOCAL-00001" summary="commit&#10;">
+      <created>1396400783610</created>
+      <updated>1396400783610</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -404,7 +403,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327212" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24944155" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17026022" sideWeight="0.6705491" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1688988" sideWeight="0.6705491" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39767054" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329582" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -422,7 +421,10 @@
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
-    <option name="RECENTLY_FILTERED_USERS">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
   </component>
@@ -433,7 +435,8 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="commit&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -441,242 +444,404 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/libs/build/02_objects.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="6" selection-start="3057" selection-end="3057" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3240">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/build/03_constructors.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="8460">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/demos/ROI/js/ROI.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="11" selection-start="271" selection-end="271" vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="846">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/build/06_modules.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="0" selection-start="1389" selection-end="1389" vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="48924">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/build/01_constants.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="13" selection-start="1635" selection-end="1635" vertical-scroll-proportion="0.0" vertical-offset="1548" max-vertical-offset="2016">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/demos/Modules/js/AkNonLinealFilter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="0" selection-start="789" selection-end="789" vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="1548">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="1548">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/build/compilated/akimage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="10" selection-start="188" selection-end="188" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="93276">
+        <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="93276">
+          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/Modules/js/AkErode.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="1224">
+        <state vertical-scroll-proportion="0.0" vertical-offset="558" max-vertical-offset="1224">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/all/js/all.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="34" selection-start="910" selection-end="910" vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="9864">
+        <state vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="9864">
+          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/Tools/AkCrop.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="720">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="720">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/build/02_objects.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="6" selection-start="3057" selection-end="3057" vertical-scroll-proportion="0.0" vertical-offset="2592" max-vertical-offset="3240">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2592" max-vertical-offset="3240">
+          <caret line="144" column="6" selection-start-line="144" selection-start-column="6" selection-end-line="144" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/build/03_constructors.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="8460">
+        <state vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="8460">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/ROI/js/ROI.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="11" selection-start="271" selection-end="271" vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="846">
+        <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="846">
+          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/build/06_modules.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="0" selection-start="1389" selection-end="1389" vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="48924">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="48924">
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/build/01_constants.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="13" selection-start="1635" selection-end="1635" vertical-scroll-proportion="0.0" vertical-offset="1548" max-vertical-offset="2016">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1548" max-vertical-offset="2016">
+          <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/Modules/js/AkNonLinealFilter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="0" selection-start="789" selection-end="789" vertical-scroll-proportion="0.0" vertical-offset="865" max-vertical-offset="1548">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="1548">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/build/compilated/akimage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="10" selection-start="188" selection-end="188" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="93276">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="93276">
+          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/Modules/js/AkErode.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="49" selection-start="301" selection-end="301" vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="1224">
+        <state vertical-scroll-proportion="0.0" vertical-offset="558" max-vertical-offset="1224">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/all/js/all.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="34" selection-start="910" selection-end="910" vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="9864">
+        <state vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="9864">
+          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/Tools/AkCrop.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="720">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="720">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/build/02_objects.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3240">
+          <caret line="144" column="6" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/build/03_constructors.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="8460">
+          <caret line="13" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demos/ROI/js/ROI.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="846">
+          <caret line="23" column="11" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/build/06_modules.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="48924">
+          <caret line="77" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/build/01_constants.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1548" max-vertical-offset="2016">
+          <caret line="86" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demos/Modules/js/AkNonLinealFilter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="1548">
+          <caret line="58" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/build/compilated/akimage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="93276">
+          <caret line="15" column="10" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demos/Modules/js/AkErode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="1224">
+          <caret line="31" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demos/all/js/all.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="9864">
+          <caret line="24" column="34" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demos/Tools/AkCrop.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="720">
+          <caret line="10" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/build/02_objects.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2592" max-vertical-offset="3240">
+          <caret line="144" column="6" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/build/03_constructors.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="8460">
+          <caret line="13" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demos/ROI/js/ROI.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="846">
+          <caret line="23" column="11" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/build/06_modules.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="48924">
+          <caret line="77" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/build/01_constants.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1548" max-vertical-offset="2016">
+          <caret line="86" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demos/Modules/js/AkNonLinealFilter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="865" max-vertical-offset="1548">
+          <caret line="58" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/build/compilated/akimage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="93276">
+          <caret line="15" column="10" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demos/Modules/js/AkErode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="1224">
+          <caret line="19" column="49" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demos/all/js/all.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="9864">
+          <caret line="24" column="34" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demos/Tools/AkCrop.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="720">
+          <caret line="10" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/Tools/AkConvertScale.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="51" selection-start="348" selection-end="348" vertical-scroll-proportion="0.4606947" vertical-offset="0" max-vertical-offset="547" />
+        <state vertical-scroll-proportion="0.4606947" vertical-offset="0" max-vertical-offset="547">
+          <caret line="14" column="51" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/Tools/js/AkConvertScale.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="42" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
+          <caret line="17" column="42" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/Color/js/AkCvtColor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="0" selection-start="1133" selection-end="1133" vertical-scroll-proportion="0.0" vertical-offset="1063" max-vertical-offset="1692" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1063" max-vertical-offset="1692">
+          <caret line="86" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/Modules/js/filter2D.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="0" selection-start="747" selection-end="747" vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="1494" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="1494">
+          <caret line="62" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/build/04_ROI.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="27" selection-start="297" selection-end="297" vertical-scroll-proportion="0.31130436" vertical-offset="145" max-vertical-offset="720" />
+        <state vertical-scroll-proportion="0.31130436" vertical-offset="145" max-vertical-offset="720">
+          <caret line="18" column="27" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/all/all.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="40" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.6885246" vertical-offset="216" max-vertical-offset="918" />
+        <state vertical-scroll-proportion="0.6885246" vertical-offset="216" max-vertical-offset="918">
+          <caret line="33" column="40" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/Tools/AkCrop.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="680">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="720">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/build/03_constructors.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="7990">
+        <state vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="8460">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/ROI/js/ROI.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="11" selection-start="271" selection-end="271" vertical-scroll-proportion="0.0" vertical-offset="203" max-vertical-offset="799">
+        <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="846">
+          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/all/js/all.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="34" selection-start="910" selection-end="910" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="8466">
+        <state vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="9864">
+          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/build/02_objects.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="6" selection-start="3057" selection-end="3057" vertical-scroll-proportion="0.0" vertical-offset="2592" max-vertical-offset="3240">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2592" max-vertical-offset="3240">
+          <caret line="144" column="6" selection-start-line="144" selection-start-column="6" selection-end-line="144" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/build/01_constants.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="13" selection-start="1635" selection-end="1635" vertical-scroll-proportion="0.0" vertical-offset="1548" max-vertical-offset="2016">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1548" max-vertical-offset="2016">
+          <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/build/06_modules.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="0" selection-start="1389" selection-end="1389" vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="48924">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="48924">
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/Modules/js/AkNonLinealFilter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="0" selection-start="789" selection-end="789" vertical-scroll-proportion="0.0" vertical-offset="865" max-vertical-offset="1548">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="1548">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/build/compilated/akimage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="10" selection-start="188" selection-end="188" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="93276">
+        <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="93276">
+          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demos/Modules/js/AkErode.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="511" selection-end="511" vertical-scroll-proportion="0.962069" vertical-offset="0" max-vertical-offset="1224">
+        <state vertical-scroll-proportion="0.591623" vertical-offset="651" max-vertical-offset="1224">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
           <folding />
         </state>
       </provider>
