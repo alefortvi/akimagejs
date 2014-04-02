@@ -51,9 +51,6 @@ Akimage.namespace('Akimage.Constants');
      * */
 
 
-    _Akontext.Kont = 10;
-
-
     // 0 - 255 (integer)
     _Akontext.DEPTH_8U = 8;
     // -128 - 127 (integer)
@@ -4158,7 +4155,7 @@ Akimage.namespace('Akimage.Modules');
 
 
     /**
-     * @function {AkConvertScale} Change the depth from an object to other depth value
+     * @function {AkConvertScale} Change the Struct depth to another depth value
      * @param {Akimage} _ImIn Imput Akimage object
      * @param {number} _newDepth new depth
      * @param {boolean} _scale mapping the old value to the new scale
@@ -4514,6 +4511,7 @@ Akimage.namespace('Akimage.Modules');
 
     _Akontext.AkResize = function(_ImInput,_Nwidth,_Nheight) {
 
+        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;if(AkErrorEnable) throw "incorrect numbers of arguments"; return false;}
         if(!_ImInput.depth == DEPTH_8U){AKerrors[15]= true; AKLastError=15;if(AkErrorEnable) throw "Size must be a 8 bits depth";}
         var _AKcanvasOld = document.createElement("CANVAS");
         var _AKcanvasNew = document.createElement("CANVAS");
@@ -4552,7 +4550,7 @@ Akimage.namespace('Akimage.Modules');
 
 
     /**
-     * @function {AkCvtColor} Convert and image from one color model to another
+     * @function {AkCvtColor} Convert an image from one color model to another
      * @param {Akimage}_ImE Input image reference
      * @param {int}_Ccode Model output color code
      * @return {Akimage}

@@ -538,6 +538,7 @@
 
     _Akontext.AkResize = function(_ImInput,_Nwidth,_Nheight) {
 
+        if (arguments.length!=3){AKerrors[5]= true; AKLastError=5;if(AkErrorEnable) throw "incorrect numbers of arguments"; return false;}
         if(!_ImInput.depth == DEPTH_8U){AKerrors[15]= true; AKLastError=15;if(AkErrorEnable) throw "Size must be a 8 bits depth";}
         var _AKcanvasOld = document.createElement("CANVAS");
         var _AKcanvasNew = document.createElement("CANVAS");

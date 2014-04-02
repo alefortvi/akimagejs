@@ -1,38 +1,27 @@
 
-var OriginalCanvas1 = document.getElementById('canvas1');
-var OriginalCanvas2 = document.getElementById('canvas2');
-var AddingResult = document.getElementById('canvas3');
+var OriginalCanvas = document.getElementById('canvas1');
+var NewSizeCanvas= document.getElementById('canvas2');
+
 
 
 
 
 var img = new Image();
 img.src = './../../images/lenna256.jpg';
-var img1 = new Image();
-img1.src = './../../images/colores.jpg';
 
-//first image
-var Ak1 = AkLoadImage(img,LOAD_IMAGE_COLOR);
-AkLoadOnCanvas(Ak1,OriginalCanvas1);
-//second image
-var Ak2 = AkLoadImage(img1,LOAD_IMAGE_COLOR);
-AkLoadOnCanvas(Ak2,OriginalCanvas2);
 
-//ROI for the first image
-var R1 = AkCreateROI(100,100,100,100);
-//ROI for the second image
-var R2 = AkCreateROI(50,150,100,100);
 
-AkSetImageROI(Ak1,R1);
-AkSetImageROI(Ak2,R2);
+//original image
+var Ak = AkLoadImage(img,LOAD_IMAGE_COLOR);
+AkLoadOnCanvas(Ak,OriginalCanvas);
 
-//weights
-var w1 = 0.3;
-var w2 = 0.7;
+AkErrorEnable = false;
 
-var AkResult = AkAddWeighted(Ak1,w1,Ak2,w2);
+var Ak1 = AkResize(Ak,320);
+console.log("error "+AKLastError);
 
-AkLoadOnCanvas(AkResult,AddingResult);
+var Ak1 = AkResize(Ak,320,320);
+AkLoadOnCanvas(Ak1,NewSizeCanvas);
 
 
 
