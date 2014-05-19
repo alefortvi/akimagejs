@@ -17,6 +17,7 @@
     /**	 * @function AkSetImageROI set a ROI in the Akimage passed by arguments
      * @param {Akimage} ImageReference Object
      * @param  {AROI} Region of interest
+     * @autor Ake
      **/
 
 

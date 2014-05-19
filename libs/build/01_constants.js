@@ -92,10 +92,11 @@ Akimage.namespace('Akimage.Constants');
      * Constants AkHistogram
      * */
 
-    _Akontext.HIST_IND = 1;
-    _Akontext.HIST_ALLIN1 = 0;
 
-    _Akontext.HIST_CHANNEL = 1;
+    _Akontext.HIST_IND = 1;     //single channel
+    _Akontext.HIST_ALLIN1 = 0;  // channel accumulation
+
+    _Akontext.HIST_CHANNEL = 1; //gray level imagen
     _Akontext.HIST_RED = 1;
     _Akontext.HIST_GREEN = 2;
     _Akontext.HIST_BLUE = 4;

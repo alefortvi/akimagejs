@@ -15,6 +15,8 @@
      * @param {Akimage}_ImE Input image reference
      * @param {int}_Ccode Model output color code
      * @return {Akimage}
+     *
+     * @autor Ake
      **/
 
 

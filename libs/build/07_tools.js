@@ -25,6 +25,7 @@
      * @param {Array} _AChannel3 Array of channel 3
      * @param {Akimage} _OutputModel Akimage object model for make the object return (could be void object)
      * @return {Akimage} Merged image object
+     * @autor Ake
      **/
 
     _Akontext.AkMerge = function(_AChannel0, _AChannel1, _AChannel2, _AChannel3, _OutputModel){
@@ -73,6 +74,7 @@
      * @function AkSplit:Split the input image Object in its 4 channel
      * @param {Akimage} Object to be spliteds
      * @return {Akimage} An Object with 4 array, one for channel
+     * @autor Ake
      **/
 
     _Akontext.AkSplit = function(_InputObject){
@@ -115,6 +117,7 @@
      * @param {Akimage} Akimage object to be powered
      * @param {number} exponent
      * @return {Akimage} An Object with the same struct of the InputModel powered for the seted exponent
+     * @autor Ake
      **/
 
     _Akontext.AkPow = function(_InputObject,_Exponent){
@@ -187,6 +190,7 @@
      * @param {number} _newDepth new depth
      * @param {boolean} _scale mapping the old value to the new scale
      * @return {Akimage} return a new Akimage object with the new depth
+     * @autor Ake
      **/
 
     _Akontext.AkConvertScale = function(_ImIn,_newDepth, _scale){
@@ -313,6 +317,7 @@
      * @function {AkCrop} Crop part of and imagen
      * @param {Akimage} _ImIn Imput Akimage object whit a ROI define in it
      * @return {Akimage} return a new Akimage object result of the new croped
+     * @autor Ake
      **/
 
     _Akontext.AkCrop = function(_ImIn){
@@ -356,6 +361,8 @@
      * @param {number} Cst Constant for the addition
 
      * @return {Akimage} return a new Akimage object result of the addition
+     *
+     * @autor Ake
      *
      * The both source must have the same depth, size and channel. If the two image have ROI, both of then must have
      * the same size, in this case, the rest of the image is the same of the first source
@@ -511,7 +518,7 @@
 
      * @return {Akimage} return a new Akimage cloned by the argument object
      *
-     *
+     *@autor Ake
      **/
 
     _Akontext.AkClone = function(AImageRefence) {
@@ -533,7 +540,7 @@
 
      * @return {Akimage} return a new Akimage with the new size
      *
-     *
+     *@autor Ake
      **/
 
     _Akontext.AkResize = function(_ImInput,_Nwidth,_Nheight) {

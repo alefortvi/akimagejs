@@ -530,13 +530,35 @@ function init(){
 }); 
 */
 
+
+var t_0;
+var t_1;
+var inicia = true;
+
+loader.addProgressListener(function(e) {
+
+    if(inicia){
+        inicia = false;
+        t_0 = new Date().getTime();
+    }
+
+
+});
+
+
 loader.addCompletionListener(function() { 
-    document.getElementById("preloader").innerHTML = "";
+
 	
 	init();
-	
+    t_1 = new Date().getTime();
+
+    var tf = t_1 - t_0;
+    document.getElementById("preloader").innerHTML = tf+" ms";
 	
 }); 
  
-// begin downloading images 
+// begin downloading images
+
+
+
 loader.start();

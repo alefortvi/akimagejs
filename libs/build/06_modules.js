@@ -17,17 +17,27 @@ Akimage.namespace('Akimage.Modules');
     /*
      Local functions for non linear filters
      */
-
+/**
+    @autor Ake
+ **/
 
     var _maxF = function (Arr){
         return Math.max.apply( Math, Arr )
 
     };
 
+    /**
+     @autor Ake
+     **/
+
     var _minF = function (Arr){
         return Math.min.apply( Math, Arr )
 
     };
+
+    /**
+     @autor Ake
+     **/
 
     var _modeF = function (Arr){
         Arr.sort();
@@ -59,11 +69,19 @@ Akimage.namespace('Akimage.Modules');
         return(maxValue);
     };
 
+    /**
+     @autor Ake
+     **/
+
     var _medianF = function (Arr){
         Arr.sort();
         return (Arr[(Arr.length*.5)^0]);
 
     };
+
+    /**
+     @autor Ake
+     **/
 
     var _dilateF = function (Arr,_K){
 
@@ -79,6 +97,10 @@ Akimage.namespace('Akimage.Modules');
         return (_Max);
 
     };
+
+    /**
+     @autor Ake
+     **/
 
     var _erodeF = function (Arr,_K){
 
@@ -98,6 +120,10 @@ Akimage.namespace('Akimage.Modules');
 
 
     /*Generic filter*/
+
+    /**
+     @autor Ake
+     **/
 
     var _genericFilter = function(AImageRefence,_KernelWidth,_KernelHeight,_Anchor,ToFilter,_kernel){
 
@@ -574,6 +600,12 @@ Akimage.namespace('Akimage.Modules');
 
     /* Private FFT */
 
+    /**
+     * @autor wellflat
+     * @link https://github.com/wellflat/javascript-labs/tree/master/cv/fft
+     *
+     * **/
+
     var _FFT = function(re,im,_nn,inv,swap){
 
 
@@ -853,6 +885,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {boolean}	shift  true: image shifted, false: image normal
      * @return Akimage Object( This Akimage Object (This object has in the 0 (Red) channel the real values
      * and in the 1 (green) channel the imaginary values
+     * @autor Ake & Wellflat
      **/
 
 
@@ -1424,6 +1457,7 @@ Akimage.namespace('Akimage.Modules');
         /**	 @function AkGetOptimalDFTSize: Get the near optimal value size
          * @param {number}_Adimension: Dimension of the Akimage objeto (width or height)
          * @return {number} optimal Dft value
+         * @autor Ake
          **/
     };//End Context
 
@@ -1448,6 +1482,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Akimage}_AIn  Dimension of the Akimage objeto (width or height)
      * @param {number}_ANewSize  Dimension of the Akimage objeto (width or height)
      * @return {Akimage} optimal Dft value
+     * @autor Ake
      **/
 
     _Akontext.AkPaddingZero = function(_AIn, _ANewSize) {
@@ -1483,6 +1518,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Array}_AKernel Kernel
      * @param {boolean}_swap swap kernel
      * @return {Akimage}:Convolute image
+     * @autor Ake
      **/
 
 
@@ -1814,6 +1850,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Array} _AKernel Kernel
      * @param {Array} _Anchor Array Coordenades anchor
      * @return {Akimage} ImS Convolute image
+     * @autor Ake
      **/
     _Akontext.AkFilter2D = function(AImageRefence,_AKernel,_Anchor) {
 
@@ -2392,6 +2429,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Array} _Anchor Array Coordenades anchor
      * @param {number} _ToFilter Type of Filter
      * @return {Akimage} ImS Filtered image
+     * @autor Ake
      **/
 
     _Akontext.AkNonLinealFilter = function(AImageRefence,_MaskWidth,_Anchor,_ToFilter){
@@ -2413,6 +2451,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Array} _Kernel Kernel width (Must be square)
      * @param {Array} _Anchor Array Coordenades anchor
      * @return {Akimage} ImS Filtered image
+     * @autor Ake
      **/
 
     _Akontext.AkDilate = function(AImageRefence,_Kernel,_Anchor){
@@ -2438,6 +2477,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Array} _Kernel Kernel width (Must be square)
      * @param {Array} _Anchor Array Coordenades anchor
      * @return {Akimage} ImS Filtered image
+     * @autor Ake
      **/
 
     _Akontext.AkErode = function(AImageRefence,_Kernel,_Anchor){
@@ -2462,6 +2502,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Array} _lut Lut array, with 256 value
      * @param {Boolean} _scaled If true LUT is scaled to 0-255, if false LUT keep the originals values
      * @return {Akimage} ImS Resulting Akimage object
+     * @autor Ake
      **/
     _Akontext.AkLUT = function(_ImIn,_lut,_scaled) {
 
@@ -2680,6 +2721,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {boolean}	shift  true: image shifted, false: image normal
      * @return Akimage Object( This Akimage Object (This object has in the 0 (Red) channel the real values
      * and in the 1 (green) channel the imaginary values
+     * @autor Ake
      **/
 
 

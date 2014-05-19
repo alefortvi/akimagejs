@@ -124,10 +124,11 @@ Akimage.namespace('Akimage.Constants');
      * Constants AkHistogram
      * */
 
-    _Akontext.HIST_IND = 1;
-    _Akontext.HIST_ALLIN1 = 0;
 
-    _Akontext.HIST_CHANNEL = 1;
+    _Akontext.HIST_IND = 1;     //single channel
+    _Akontext.HIST_ALLIN1 = 0;  // channel accumulation
+
+    _Akontext.HIST_CHANNEL = 1; //gray level imagen
     _Akontext.HIST_RED = 1;
     _Akontext.HIST_GREEN = 2;
     _Akontext.HIST_BLUE = 4;
@@ -320,6 +321,7 @@ Akimage.namespace('Akimage.AImage');
  * 		@Methods
  {AkLoadImage}
  */
+
 /**	 * @loadImage
  * @param {Imagereference}{isColor} object reference, color model
  **/
@@ -333,7 +335,10 @@ Akimage.namespace('Akimage.AImage');
     /**	 * @function AkLoadImage
      * @param {object} ImageReference: Object
      * @param  {number} isColor: Color code
+     * @return {AImage}
+     * @autor Ake
      **/
+
     /*
      * ImageReference can be
      * 		Image URL source file
@@ -345,12 +350,14 @@ Akimage.namespace('Akimage.AImage');
      * */
 
     /*
-     * isColor
+     *      isColor
      * 		0: Grey Scale
      * 		1: rgb model
      * 		4: rgba
      *
      * */
+
+
 
     _Akontext.AkLoadImage = function(ImageReference,isColor) {
 
@@ -580,7 +587,8 @@ Akimage.namespace('Akimage.AImage');
      * 		@param {array} size: Image Size array
      * 		@param {number} depth: bit depth
      * 		@param {number} channels: number of channels
-     *      @return {akimage}
+     *      @return {AImage}
+     *      @autor Ake
      * */
 
     _Akontext.AkCreateImage = function(size,depth,channels) {
@@ -664,6 +672,7 @@ Akimage.namespace('Akimage.AImage');
      * 	@param {number} _Width X offset
      * 	@param {number} _Height X offset
      *      @return {AIROI}
+     *      @autor Ake
      * */
 
 
@@ -699,6 +708,7 @@ Akimage.namespace('Akimage.AImage');
      * 	@param {number} _Width X offset
      * 	@param {number} _Height X offset
      *      @return {AIROI}
+     *      @autor Ake
      * */
 
 
@@ -793,6 +803,7 @@ Akimage.namespace('Akimage.AImage');
     /**	 * @function AkSetImageROI set a ROI in the Akimage passed by arguments
      * @param {Akimage} ImageReference Object
      * @param  {AROI} Region of interest
+     * @autor Ake
      **/
 
 
@@ -829,6 +840,7 @@ Akimage.namespace('Akimage.AImage');
      * @param  {AkHistogram} _Hist Histogram object
      * @param  {number} _Hcode if 3 channel
      * @return {AkHistrogram}
+     * @autor Ake
      **/
 
 
@@ -1011,6 +1023,7 @@ Akimage.namespace('Akimage.AImage');
      *
      *
      * @return Akimage object with a AkHistogram
+     * @autor Ake
      **/
 
 
@@ -1278,17 +1291,27 @@ Akimage.namespace('Akimage.Modules');
     /*
      Local functions for non linear filters
      */
-
+/**
+    @autor Ake
+ **/
 
     var _maxF = function (Arr){
         return Math.max.apply( Math, Arr )
 
     };
 
+    /**
+     @autor Ake
+     **/
+
     var _minF = function (Arr){
         return Math.min.apply( Math, Arr )
 
     };
+
+    /**
+     @autor Ake
+     **/
 
     var _modeF = function (Arr){
         Arr.sort();
@@ -1320,11 +1343,19 @@ Akimage.namespace('Akimage.Modules');
         return(maxValue);
     };
 
+    /**
+     @autor Ake
+     **/
+
     var _medianF = function (Arr){
         Arr.sort();
         return (Arr[(Arr.length*.5)^0]);
 
     };
+
+    /**
+     @autor Ake
+     **/
 
     var _dilateF = function (Arr,_K){
 
@@ -1340,6 +1371,10 @@ Akimage.namespace('Akimage.Modules');
         return (_Max);
 
     };
+
+    /**
+     @autor Ake
+     **/
 
     var _erodeF = function (Arr,_K){
 
@@ -1359,6 +1394,10 @@ Akimage.namespace('Akimage.Modules');
 
 
     /*Generic filter*/
+
+    /**
+     @autor Ake
+     **/
 
     var _genericFilter = function(AImageRefence,_KernelWidth,_KernelHeight,_Anchor,ToFilter,_kernel){
 
@@ -1835,6 +1874,12 @@ Akimage.namespace('Akimage.Modules');
 
     /* Private FFT */
 
+    /**
+     * @autor wellflat
+     * @link https://github.com/wellflat/javascript-labs/tree/master/cv/fft
+     *
+     * **/
+
     var _FFT = function(re,im,_nn,inv,swap){
 
 
@@ -2114,6 +2159,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {boolean}	shift  true: image shifted, false: image normal
      * @return Akimage Object( This Akimage Object (This object has in the 0 (Red) channel the real values
      * and in the 1 (green) channel the imaginary values
+     * @autor Ake & Wellflat
      **/
 
 
@@ -2685,6 +2731,7 @@ Akimage.namespace('Akimage.Modules');
         /**	 @function AkGetOptimalDFTSize: Get the near optimal value size
          * @param {number}_Adimension: Dimension of the Akimage objeto (width or height)
          * @return {number} optimal Dft value
+         * @autor Ake
          **/
     };//End Context
 
@@ -2709,6 +2756,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Akimage}_AIn  Dimension of the Akimage objeto (width or height)
      * @param {number}_ANewSize  Dimension of the Akimage objeto (width or height)
      * @return {Akimage} optimal Dft value
+     * @autor Ake
      **/
 
     _Akontext.AkPaddingZero = function(_AIn, _ANewSize) {
@@ -2744,6 +2792,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Array}_AKernel Kernel
      * @param {boolean}_swap swap kernel
      * @return {Akimage}:Convolute image
+     * @autor Ake
      **/
 
 
@@ -3075,6 +3124,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Array} _AKernel Kernel
      * @param {Array} _Anchor Array Coordenades anchor
      * @return {Akimage} ImS Convolute image
+     * @autor Ake
      **/
     _Akontext.AkFilter2D = function(AImageRefence,_AKernel,_Anchor) {
 
@@ -3653,6 +3703,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Array} _Anchor Array Coordenades anchor
      * @param {number} _ToFilter Type of Filter
      * @return {Akimage} ImS Filtered image
+     * @autor Ake
      **/
 
     _Akontext.AkNonLinealFilter = function(AImageRefence,_MaskWidth,_Anchor,_ToFilter){
@@ -3674,6 +3725,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Array} _Kernel Kernel width (Must be square)
      * @param {Array} _Anchor Array Coordenades anchor
      * @return {Akimage} ImS Filtered image
+     * @autor Ake
      **/
 
     _Akontext.AkDilate = function(AImageRefence,_Kernel,_Anchor){
@@ -3699,6 +3751,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Array} _Kernel Kernel width (Must be square)
      * @param {Array} _Anchor Array Coordenades anchor
      * @return {Akimage} ImS Filtered image
+     * @autor Ake
      **/
 
     _Akontext.AkErode = function(AImageRefence,_Kernel,_Anchor){
@@ -3723,6 +3776,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Array} _lut Lut array, with 256 value
      * @param {Boolean} _scaled If true LUT is scaled to 0-255, if false LUT keep the originals values
      * @return {Akimage} ImS Resulting Akimage object
+     * @autor Ake
      **/
     _Akontext.AkLUT = function(_ImIn,_lut,_scaled) {
 
@@ -3941,6 +3995,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {boolean}	shift  true: image shifted, false: image normal
      * @return Akimage Object( This Akimage Object (This object has in the 0 (Red) channel the real values
      * and in the 1 (green) channel the imaginary values
+     * @autor Ake
      **/
 
 
@@ -3998,6 +4053,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Array} _AChannel3 Array of channel 3
      * @param {Akimage} _OutputModel Akimage object model for make the object return (could be void object)
      * @return {Akimage} Merged image object
+     * @autor Ake
      **/
 
     _Akontext.AkMerge = function(_AChannel0, _AChannel1, _AChannel2, _AChannel3, _OutputModel){
@@ -4046,6 +4102,7 @@ Akimage.namespace('Akimage.Modules');
      * @function AkSplit:Split the input image Object in its 4 channel
      * @param {Akimage} Object to be spliteds
      * @return {Akimage} An Object with 4 array, one for channel
+     * @autor Ake
      **/
 
     _Akontext.AkSplit = function(_InputObject){
@@ -4088,6 +4145,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {Akimage} Akimage object to be powered
      * @param {number} exponent
      * @return {Akimage} An Object with the same struct of the InputModel powered for the seted exponent
+     * @autor Ake
      **/
 
     _Akontext.AkPow = function(_InputObject,_Exponent){
@@ -4160,6 +4218,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {number} _newDepth new depth
      * @param {boolean} _scale mapping the old value to the new scale
      * @return {Akimage} return a new Akimage object with the new depth
+     * @autor Ake
      **/
 
     _Akontext.AkConvertScale = function(_ImIn,_newDepth, _scale){
@@ -4286,6 +4345,7 @@ Akimage.namespace('Akimage.Modules');
      * @function {AkCrop} Crop part of and imagen
      * @param {Akimage} _ImIn Imput Akimage object whit a ROI define in it
      * @return {Akimage} return a new Akimage object result of the new croped
+     * @autor Ake
      **/
 
     _Akontext.AkCrop = function(_ImIn){
@@ -4329,6 +4389,8 @@ Akimage.namespace('Akimage.Modules');
      * @param {number} Cst Constant for the addition
 
      * @return {Akimage} return a new Akimage object result of the addition
+     *
+     * @autor Ake
      *
      * The both source must have the same depth, size and channel. If the two image have ROI, both of then must have
      * the same size, in this case, the rest of the image is the same of the first source
@@ -4484,7 +4546,7 @@ Akimage.namespace('Akimage.Modules');
 
      * @return {Akimage} return a new Akimage cloned by the argument object
      *
-     *
+     *@autor Ake
      **/
 
     _Akontext.AkClone = function(AImageRefence) {
@@ -4506,7 +4568,7 @@ Akimage.namespace('Akimage.Modules');
 
      * @return {Akimage} return a new Akimage with the new size
      *
-     *
+     *@autor Ake
      **/
 
     _Akontext.AkResize = function(_ImInput,_Nwidth,_Nheight) {
@@ -4554,6 +4616,8 @@ Akimage.namespace('Akimage.Modules');
      * @param {Akimage}_ImE Input image reference
      * @param {int}_Ccode Model output color code
      * @return {Akimage}
+     *
+     * @autor Ake
      **/
 
 
@@ -4808,6 +4872,9 @@ Akimage.namespace('Akimage.Modules');
 
      *
      * @return Return a pixel value from the Akimage object
+     *
+     * @autor Ake
+     *
      **/
 
     _Akontext.AkGet = function(AkAImage,_x,_y,_c) {
@@ -4832,6 +4899,9 @@ Akimage.namespace('Akimage.Modules');
 
      *
      * @return Return a pixel value from the Akimage object
+     *
+     * @autor Ake
+     *
      **/
 
     _Akontext.AkSet = function(AkAImage,_x,_y,_c,_value) {
@@ -4843,6 +4913,9 @@ Akimage.namespace('Akimage.Modules');
      * @param {Akimage} AkAImage Akimage reference
      * @param {CANVAS} CANVASReference Canvas object reference
      * @return Canvas father reference object
+     *
+     * @autor Ake
+     *
      **/
 
     _Akontext.AkLoadOnCanvas = function(AkAImage,CANVASReference) {

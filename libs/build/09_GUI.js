@@ -19,6 +19,9 @@
 
      *
      * @return Return a pixel value from the Akimage object
+     *
+     * @autor Ake
+     *
      **/
 
     _Akontext.AkGet = function(AkAImage,_x,_y,_c) {
@@ -43,6 +46,9 @@
 
      *
      * @return Return a pixel value from the Akimage object
+     *
+     * @autor Ake
+     *
      **/
 
     _Akontext.AkSet = function(AkAImage,_x,_y,_c,_value) {
@@ -54,6 +60,9 @@
      * @param {Akimage} AkAImage Akimage reference
      * @param {CANVAS} CANVASReference Canvas object reference
      * @return Canvas father reference object
+     *
+     * @autor Ake
+     *
      **/
 
     _Akontext.AkLoadOnCanvas = function(AkAImage,CANVASReference) {

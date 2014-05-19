@@ -8,6 +8,7 @@
  * 		@Methods
  {AkLoadImage}
  */
+
 /**	 * @loadImage
  * @param {Imagereference}{isColor} object reference, color model
  **/
@@ -21,7 +22,10 @@
     /**	 * @function AkLoadImage
      * @param {object} ImageReference: Object
      * @param  {number} isColor: Color code
+     * @return {AImage}
+     * @autor Ake
      **/
+
     /*
      * ImageReference can be
      * 		Image URL source file
@@ -33,12 +37,14 @@
      * */
 
     /*
-     * isColor
+     *      isColor
      * 		0: Grey Scale
      * 		1: rgb model
      * 		4: rgba
      *
      * */
+
+
 
     _Akontext.AkLoadImage = function(ImageReference,isColor) {
 
@@ -268,7 +274,8 @@
      * 		@param {array} size: Image Size array
      * 		@param {number} depth: bit depth
      * 		@param {number} channels: number of channels
-     *      @return {akimage}
+     *      @return {AImage}
+     *      @autor Ake
      * */
 
     _Akontext.AkCreateImage = function(size,depth,channels) {
@@ -352,6 +359,7 @@
      * 	@param {number} _Width X offset
      * 	@param {number} _Height X offset
      *      @return {AIROI}
+     *      @autor Ake
      * */
 
 
@@ -387,6 +395,7 @@
      * 	@param {number} _Width X offset
      * 	@param {number} _Height X offset
      *      @return {AIROI}
+     *      @autor Ake
      * */
 
 

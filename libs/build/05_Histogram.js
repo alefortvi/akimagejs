@@ -19,6 +19,7 @@
      * @param  {AkHistogram} _Hist Histogram object
      * @param  {number} _Hcode if 3 channel
      * @return {AkHistrogram}
+     * @autor Ake
      **/
 
 
@@ -201,6 +202,7 @@
      *
      *
      * @return Akimage object with a AkHistogram
+     * @autor Ake
      **/
 
 
