@@ -2,7 +2,7 @@
 /**
  * Akimage. A JavaScript image processing library
  * autor Ake
- * last compilated version: 2014_05_19
+ * last compilated version: 2014_08_10
  *
 
  The MIT License (MIT)

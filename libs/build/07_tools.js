@@ -56,7 +56,7 @@
 
             for(var x=0; x<_OutputModel.width; x++) {
 
-                _OutputModel.imageData[(i << 2) + (x << 2)]   = _AChannel0[i + x] || 0,
+                    _OutputModel.imageData[(i << 2) + (x << 2)]   = _AChannel0[i + x] || 0,
                     _OutputModel.imageData[(i << 2) + (x << 2)+1] = _AChannel1[i + x] || 0,
                     _OutputModel.imageData[(i << 2) + (x << 2)+2] = _AChannel2[i + x] || 0,
                     _OutputModel.imageData[(i << 2) + (x << 2)+3] = _AChannel3[i + x] || 0;

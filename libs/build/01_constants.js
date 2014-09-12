@@ -1,5 +1,5 @@
 /**
- @AKontrol {An GUI for manage and debug errors}
+ @AKontrol {A GUI for manage and debug errors}
  @AIROI {Class Region Of Interest}
  @AImage {Main objects}
 
