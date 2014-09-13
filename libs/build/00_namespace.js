@@ -4,6 +4,8 @@
  * autor Ake
  * last compilated version: 2014_08_10
  *
+ *
+ *
 
  The MIT License (MIT)
 
@@ -28,7 +30,8 @@
  SOFTWARE.
 
 
-
+ Special thanks
+ * To my friend, Franco V. For the help and technical support.
 
  * **/
 
