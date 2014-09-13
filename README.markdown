@@ -1,7 +1,7 @@
 akimage(.js)
 ============
 
-A javascript image processing library. Based in the OpeCV interphase.
+A javascript image processing library. Based in the OpenCV interphase.
 
 ###Documentation
 
