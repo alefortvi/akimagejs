@@ -72,7 +72,7 @@
 
     /**
      * @function AkSplit:Split the input image Object in its 4 channel
-     * @param {Akimage} Object to be spliteds
+     * @param {Akimage} Object to be splited
      * @return {Akimage} An Object with 4 array, one for channel
      * @autor Ake
      **/
