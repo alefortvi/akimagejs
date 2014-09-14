@@ -21,3 +21,6 @@ Some demos
 
 [https://github.com/alefortvi/akimagejs/tree/master/Demos](https://github.com/alefortvi/akimagejs/tree/master/Demos "")
 
+####Contact
+
+alefortvi[at]akimagejs[dot].com
