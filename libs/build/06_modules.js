@@ -885,7 +885,7 @@ Akimage.namespace('Akimage.Modules');
      * @param {boolean}	shift  true: image shifted, false: image normal
      * @return Akimage Object( This Akimage Object (This object has in the 0 (Red) channel the real values
      * and in the 1 (green) channel the imaginary values
-     * @autor Ake & Wellflat
+     * @autor Wellflat (modificated by Ake)
      **/
 
 
