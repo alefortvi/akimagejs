@@ -23,4 +23,4 @@ Some demos
 
 ####Contact
 
-alefortvi[at]akimagejs[dot].com
+alefortvi[at]akimagejs[dot]com
