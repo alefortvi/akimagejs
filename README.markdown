@@ -19,7 +19,7 @@ An Akimage Object must receive an input image or a dimension. The image can be l
 
 .html
 
-```
+```HTML
 <!-- From a IMG element -->
 <img id="myImage" src="../../images/myimage.jpg"/>
 
@@ -27,7 +27,7 @@ An Akimage Object must receive an input image or a dimension. The image can be l
 
 .js
 
-```
+```Javascript
 var img = document.getElementById('myImage');
 
 // and create the Akimage Object RGB color
@@ -43,14 +43,14 @@ Example, change color model to HSV and show individuals component
 
 HTML
 
-```
+```HTML
 <canvas id="canvas1"></canvas>
 <canvas id="canvas2"></canvas>
 <canvas id="canvas3"></canvas>
 
 ```
 
-```
+```Javascript
 // Change RGB to HSV
 
 var img = new Image();
@@ -98,12 +98,9 @@ Original
 ![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/lenna256.jpg "")
 
 
-| Tables        | Are           | Cool  |
+| Hue        | Saturation           |  Value  |
 | ------------- |:-------------:| -----:|
-| ![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/lenna256.jpg "")
-      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| ![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/Hue.png "") |![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/Sat.png "")  |![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/Val.png "") 
 
 
 ## Documentation ⚙️
