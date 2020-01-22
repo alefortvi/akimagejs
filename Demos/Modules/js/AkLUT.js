@@ -27,7 +27,7 @@ img.src = './../../images/lenna256.jpg';
 
 var Ak = AkLoadImage(img,LOAD_IMAGE_COLOR);
 
-AkLoadOnCanvas(Ak,OriginalCanvas);
+// AkLoadOnCanvas(Ak,OriginalCanvas);
 
 var R1 = AkCreateROI(70,70,100,100);
 AkSetImageROI(Ak,R1);

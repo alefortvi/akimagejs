@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="stuff, to, help, search, engines, not" name="keywords">
+    <meta content="What this page is about." name="description">
+    <meta content="Display Webcam Stream" name="title">
+    <title>Display Webcam Stream</title>
+
+    <style>
+        #Supercontainer {
+            margin: 0 auto;
+            width: 300px;
+            left: 50%;
+
+        }
+        #container {
+            width: 256px;
+            height: 256px;
+            border: 15px #333 solid;
+        }
+        #videoElement {
+            width: 256px;
+            height: 256px;
+            background-color: #666;
+        }
+        #containerV {
+            width: 256px;
+            height: 256px;
+            border: 15px #333 solid;
+            background-color: #666;
+        }
+        #repuesto {
+        /*    width: 256px;
+            height: 256px;
+
+         */   background-color: #666;
+            margin-top: 32px;
+        }
+
+
+        #containerSnap {
+            width: 256px;
+            height: 256px;
+            border: 15px #333 solid;
+            background-color: #666;
+        }
+        #snapCANVAS {
+            width: 256px;
+            height: 256px;
+            background-color: #666;
+        }
+        #imagen {
+            width: 110px;
+            height: 25px;
+        }
+        #Akimage{
+            position: relative;
+            float: right;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div id="Akimage">
+    <img id="imagen" src="Akimage_logo_2.png">
+    <p>AKimage(.js) is a JavaScript image processing library.</br>
+    It is still in alpha stage.</br>
+
+    </p>
+    <p>You can fork me at github <a href="http://github.com/alefortvi/akimagejs">here</a>.
+    </p>
+    
+</div>
+<div id ="Supercontainer">
+
+
+
+<div id="container">
+    <video autoplay="true" id="videoElement">
+
+    </video>
+
+</div>
+
+
+
+<div id="ContVideo">
+
+    <div id="clickVideo"></div>
+</div>
+
+<div id="containerV">
+<canvas  id="repuesto" style="height: 192px; width: 256px;"></canvas>
+    <!--<input type="button" value="SNAP!" id="snap">-->
+</div>
+
+<!--<div id="containerSnap">
+<canvas  id="snapCANVAS"></canvas>
+</div>
+-->
+
+</div>
+<canvas id="c"></canvas>
+
+
+
+
+
+<div style="position: absolute; left: 10px; top:10px; width: 500px;">
+
+    ROI
+    <input type="checkbox" id="ROI" value="ROI">
+
+    <br/><br/>
+
+    x: <input type="text" value = 50 id="Rx" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    y: <input type="text" value = 50 id="Ry" size="2"></br>
+    ancho: <input type="text" value = 100 id="Rw" size="2">&nbsp;&nbsp;&nbsp;&nbsp;
+    alto: <input type="text" value = 100 id="Rh" size="2"></br>
+
+    <br/><br/>
+<input type="text" value = 33 id="fps" style= "display:none" >
+
+<p id="asd"></p>
+<input type="button" value="Sobel horizontal" id="1"></br>
+<input type="button" value="Sobel vertical" id="9"></br>
+<input type="button" value="Sobel suma" id="10"></br>
+<input type="button" value="Sobel suma y umbral" id="11"></br>
+umbral de corte: <input type="text" value = 60 id="US"> (0 - 255)</br>
+<input type="button" value="blurring por promediado" id="2"></br>
+<input type="button" value="Blanco y negro" id="3"></br>
+umbral de corte: <input type="text" value = 60 id="UBW"> (0 - 255)</br>
+<input type="button" value="gris" id="4"></br>
+<input type="button" value="RGB" id="5"></br>
+<input type="button" value="LUT inverso" id="6"></br>
+<input type="button" value="filtrado frecuencial PA" id="7"></br>
+<input type="button" value="filtrado frecuencial PB" id="8"></br></br>
+
+color del pixel:
+<div id="colorDIV" style="height: 50px; width: 100px; background-color: #FFF; border: solid 1px;"> </div>
+<p id = "Texto"></p>
+
+
+</div>
+
+
+
+<script src="eventos.js" type="text/javascript"></script>
+<script src="akimage.js" type="text/javascript"></script>
+<script src="muestreo.js" type="text/javascript"></script>
+<script src="video.js" type="text/javascript"></script>
+
+</body>
+</html>
