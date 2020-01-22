@@ -43,7 +43,7 @@ With the Akimage object you can do the processing you want
  
 Changing color model to HSV and show individuals component
 
-####HTML
+#### HTML
 
 ```HTML
 <canvas id="canvas1"></canvas>
@@ -51,7 +51,7 @@ Changing color model to HSV and show individuals component
 <canvas id="canvas3"></canvas>
 ```
 
-####JS
+#### JS
 
 ```Javascript
 // Change RGB to HSV
