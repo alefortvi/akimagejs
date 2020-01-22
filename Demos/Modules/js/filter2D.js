@@ -18,9 +18,11 @@ Array.min = function( array ){
 
 
 var canvas1 = document.getElementById('canvas1');
+var canvas2 = document.getElementById('canvas2');
+var canvas3 = document.getElementById('canvas3');
 
 var img = new Image();
-img.src = './../../images/lenna256.jpg';
+img.src = './../../images/lenna512.jpg';
 	
 
 	
@@ -41,7 +43,7 @@ var Ak4 = AkLoadImage(img,1);
 
 
 
-//AkLoadOnCanvas(Ak4,canvas1);
+AkLoadOnCanvas(Ak4,canvas1);
 
 
 var a = -1;
@@ -75,4 +77,4 @@ var Ak5a = AkFilter2D(Ak4,Kernel,[-1,-1]);
 //var Ak5b = AkFilter2D(Ak4,Kernel,[-2,-2]);
 
 
-AkLoadOnCanvas(Ak5a,canvas1);
+AkLoadOnCanvas(Ak5a,canvas2);

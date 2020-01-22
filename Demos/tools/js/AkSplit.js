@@ -8,7 +8,7 @@
 
 	
 	var Ak1 = AkLoadImage(img,1);
-	AkLoadOnCanvas(Ak1,canvas1);
+	// AkLoadOnCanvas(Ak1,canvas1);
 	var Channels = AkSplit(Ak1);
 
 //Channel is an array with 4 array in it. One for channel

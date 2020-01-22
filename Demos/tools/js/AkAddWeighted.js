@@ -2,8 +2,8 @@
 /**********************************************/
 // Split
 
-	var canvas1 = document.getElementById('canvas1');
-    var canvas2 = document.getElementById('canvas2');
+	// var canvas1 = document.getElementById('canvas1');
+    // var canvas2 = document.getElementById('canvas2');
     var canvas3 = document.getElementById('canvas3');
 
 	var img = new Image();
@@ -18,8 +18,8 @@
 
 
 
-    AkLoadOnCanvas(Ak1,canvas1);
-    AkLoadOnCanvas(Ak2,canvas2);
+    // AkLoadOnCanvas(Ak1,canvas1);
+    // AkLoadOnCanvas(Ak2,canvas2);
 
 var R1 = AkCreateROI(100,100,100,100);
 
