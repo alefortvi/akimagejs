@@ -17,7 +17,7 @@ img.src = './../../images/lenna256.jpg';
 //
 var Ak4 = AkLoadImage(img,1);
 
-var Ak = AkCreateImage([Ak4.width,Ak4.height],8,1);
+var Ak = AkCreateImage([Ak4.width,Ak4.height],8,0);
 
 
 
@@ -70,9 +70,9 @@ var H_ = HSV[0];
 var S_ = HSV[1];
 var V_ = HSV[2];
 
-var H = AkCreateImage([256,256],8,1);
-var S = AkCreateImage([256,256],8,1);
-var V = AkCreateImage([256,256],8,1);
+var H = AkCreateImage([256,256],DEPTH_8U,1);
+var S = AkCreateImage([256,256],DEPTH_8U,1);
+var V = AkCreateImage([256,256],DEPTH_8U,1);
 
 AkMerge(H_,0,0,0,H);
 AkMerge(S_,0,0,0,S);
