@@ -5,14 +5,14 @@ A javascript image processing library. Based in the OpenCV interphase.
 Akimage is coded on ES5 standard. No npm, or package management.
 I'm working in the version 2 in with TypeScript and RxJs 
 
-### Installation 🔧
+## Installation 🔧
 
 Just include akimage.js to your project. (libs/build/compilated)
 ```HTML
 <script type="text/javascript" src="../../libs/build/compilated/akimage.js"> </script>
 ```
 
-### Usage 🔧
+## Usage 🔧
 
 
 An Akimage Object must receive an input image or a dimension. The image can be loaded dynamically or from an HTML element such as CANVAS or IMG
@@ -39,7 +39,7 @@ var Ak = AkLoadImage(img,LOAD_IMAGE_COLOR);
 
 With the Akimage object you can do the processing you want
 
-#### Example
+## Example
  
 Changing color model to HSV and show individuals component
 
