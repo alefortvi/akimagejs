@@ -3,7 +3,7 @@
 
 A javascript image processing library. Based in the OpenCV interphase. 
 Akimage is coded on ES5 standard. No npm, or package management.
-                                                                       I'm working in the version 2 in with TypeScript and RxJs 
+I'm working in the version 2 in with TypeScript and RxJs 
 
 ### Installation 🔧
 
@@ -17,7 +17,7 @@ Just include akimage.js to your project. (libs/build/compilated)
 
 An Akimage Object must receive an input image or a dimension. The image can be loaded dynamically or from an HTML element such as CANVAS or IMG
 
-####HTML
+#### HTML
 
 ```HTML
 <!-- From a IMG element -->
@@ -25,7 +25,7 @@ An Akimage Object must receive an input image or a dimension. The image can be l
 
 ```
 
-####JS
+#### JS
 
 ```Javascript
 var img = document.getElementById('myImage');
