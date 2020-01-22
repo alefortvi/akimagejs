@@ -8,7 +8,7 @@ Akimage is coded on ES5 standard. No npm, or package management.
 ### Installation 🔧
 
 Just include akimage.js to your project. (libs/build/compilated)
-```
+```HTML
 <script type="text/javascript" src="../../libs/build/compilated/akimage.js"> </script>
 ```
 
@@ -17,7 +17,7 @@ Just include akimage.js to your project. (libs/build/compilated)
 
 An Akimage Object must receive an input image or a dimension. The image can be loaded dynamically or from an HTML element such as CANVAS or IMG
 
-.html
+####HTML
 
 ```HTML
 <!-- From a IMG element -->
@@ -25,7 +25,7 @@ An Akimage Object must receive an input image or a dimension. The image can be l
 
 ```
 
-.js
+####JS
 
 ```Javascript
 var img = document.getElementById('myImage');
@@ -39,16 +39,19 @@ var Ak = AkLoadImage(img,LOAD_IMAGE_COLOR);
 
 With the Akimage object you can do the processing you want
 
-Example, change color model to HSV and show individuals component
+#### Example
+ 
+Changing color model to HSV and show individuals component
 
-HTML
+####HTML
 
 ```HTML
 <canvas id="canvas1"></canvas>
 <canvas id="canvas2"></canvas>
 <canvas id="canvas3"></canvas>
-
 ```
+
+####JS
 
 ```Javascript
 // Change RGB to HSV
@@ -92,7 +95,7 @@ AkLoadOnCanvas(S,canvas2);
 AkLoadOnCanvas(V,canvas3);
 
 ```
-### Result️
+#### Result️
 Original
 
 ![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/lenna256.jpg "")
