@@ -9,7 +9,7 @@ var FFPB = document.getElementById("8");
 var S1 = document.getElementById("9");
 var S2 = document.getElementById("10");
 var S3 = document.getElementById("11");
-var SNAP = document.getElementById("snap");
+SNAP = document.getElementById("snap");
 
 var tipo = 1;
 

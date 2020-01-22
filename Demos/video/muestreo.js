@@ -308,7 +308,9 @@ rep.addEventListener('mousemove', function(evt) {
 
 }, false);
 
-
+if (SNAP === null || SNAP === undefined){
+    SNAP = document.getElementById("snap");
+}
 SNAP.addEventListener('click', function(){
 
     SnapCANVAS = document.getElementById("snapCANVAS");
