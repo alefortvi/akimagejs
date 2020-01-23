@@ -101,9 +101,9 @@ Original
 ![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/lenna256.jpg "")
 
 
-| Hue        | Saturation           |  Value  |
-| ------------- |:-------------:| -----:|
-| ![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/Hue.png "") |![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/Sat.png "")  |![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/Val.png "") 
+|Hue|Saturation|Value|
+|-------------|-------------|-------------|
+|![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/Hue.png "") |![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/Sat.png "")  |![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/Val.png "") 
 
 
 ## Documentation ⚙️
