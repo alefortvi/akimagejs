@@ -106,6 +106,10 @@ Original
 |![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/Hue.png "") |![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/Sat.png "")  |![alt text](https://raw.githubusercontent.com/alefortvi/akimagejs/master/images/Val.png "") 
 
 
+## Live Webcam Demo 
+You must allow webcam 
+https://alefortvi.github.io/
+
 ## Documentation ⚙️
 
 Documentation? Well... 
